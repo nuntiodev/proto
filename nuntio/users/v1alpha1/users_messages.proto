@@ -1,0 +1,338 @@
+syntax = "proto3";
+
+package nuntio.users.v1alpha1;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+
+option go_package = "./nuntio/users/v1alpha1";
+option csharp_namespace = "nuntio.users.v1alpha1";
+option java_multiple_files = true;
+option java_package = "nuntio.users.v1alpha1";
+option php_namespace = "Nuntio\\Users\\v1alpha1";
+
+
+enum GenderType {
+    GENDER_TYPE_UNSPECIFIED = 0;
+    GENDER_TYPE_MALE = 1;
+    GENDER_TYPE_FEMALE = 2;
+    GENDER_TYPE_OTHER = 3;
+}
+  
+enum CountryCode {
+    COUNTRY_CODE_UNSPECIFIED = 0;
+    COUNTRY_CODE_DK = 1;
+    COUNTRY_CODE_FR = 2;
+}
+
+enum LoginType {
+    LOGIN_TYPE_UNSPECIFIED = 0;
+    LOGIN_TYPE_EMAIL_PASSWORD = 1;
+    LOGIN_TYPE_PHONE_PASSWORD = 2;
+    LOGIN_TYPE_USERNAME_PASSWORD = 3;
+    LOGIN_TYPE_OAUTH2 = 4;
+    LOGIN_TYPE_ID_PASSWORD = 5;
+    LOGIN_TYPE_EMAIL_MAGIC_LINK = 6;
+    LOGIN_TYPE_PHONE_MAGIC_LINK = 7;
+}
+
+enum HashingAlgorithm {
+    HASHING_ALGORITHM_UNSPECIFIED = 0;
+    HASHING_ALGORITHM_BCRYPT = 1;
+    HASHING_ALGORITHM_SCRYPT = 2;
+}
+
+enum VerificationType {
+    VERIFICATION_TYPE_UNSPECIFIED = 0;
+    VERIFICATION_TYPE_EMAIL = 1;
+    VERIFICATION_TYPE_TEXT = 2;
+    VERIFICATION_TYPE_RESET_PASSWORD = 3;
+    VERIFICATION_TYPE_EMAIL_MAGIC_LINK = 4;
+    VERIFICATION_TYPE_PHONE_MAGIC_LINK = 5;
+}
+
+enum TokenType {
+    TOKEN_TYPE_UNSPECIFIED = 0;
+    TOKEN_TYPE_ACCESS_TOKEN = 1;
+    TOKEN_TYPE_REFRESH_TOKEN = 2;
+}
+
+enum EmailProviderType {
+    EMAIL_PROVIDER_TYPE_UNSPECIFIED = 0;
+    EMAIL_PROVIDER_TYPE_SMTP = 1;
+    EMAIL_PROVIDER_TYPE_MAILJET = 2;
+    EMAIL_PROVIDER_TYPE_MOCKEMAIL = 3;
+}
+  
+enum TextProviderType {
+    TEXT_PROVIDER_TYPE_UNSPECIFIED = 0;
+    TEXT_PROVIDER_TYPE_TWILIO = 1;
+    TEXT_PROVIDER_TYPE_MOCKTEXT = 2;
+}
+
+enum LoginStatus {
+    LOGIN_STATUS_UNSPECIFIED = 0;
+    LOGIN_STATUS_AUTHENTICATED = 1;
+    LOGIN_STATUS_NOT_AUTHENTICATED = 2;
+    LOGIN_STATUS_EMAIL_IS_NOT_VERIFIED = 3;
+    LOGIN_STATUS_PHONE_IS_NOT_VERIFIED = 4;
+}
+  
+message Image {
+    string url = 1;
+    google.protobuf.Timestamp expires_at = 2;
+    bool expires = 3;
+    string key = 4;
+}
+
+message VerificationCode {
+    Hash code = 1;
+    google.protobuf.Timestamp sent_at = 2;
+    google.protobuf.Timestamp expires_at = 3;
+    int32 attempts = 4;
+    google.protobuf.Timestamp last_attempt = 5;
+    VerificationType type = 6;
+    string user_id = 7;
+  }
+
+message Profile{
+    optional Image profile_image = 1;
+    optional string first_name = 2;
+    optional string last_name = 3;
+    optional google.protobuf.Timestamp birthdate = 4;
+    optional CountryCode preferred_language = 5;
+    optional string country = 6;
+    optional string address = 7;
+    optional string city = 8;
+    optional string postal_code = 9;
+    optional GenderType gender = 10;
+    optional string ssn = 11;
+    optional Image cover_image = 12;
+}
+
+message Contact {
+    string id = 1;
+    string from_user_id = 2;
+    string to_user_id = 3;
+    User from = 4;
+    User to = 5;
+    bool accepted = 6;
+    google.protobuf.Timestamp accepted_at = 7;
+    google.protobuf.Timestamp sent_at = 8;
+}
+  
+message ContactInfo{
+    optional string email = 1;
+    optional string phone = 2;
+}
+
+message UserIdentifier {
+    string email = 1;
+    string phone = 2;
+    string username = 3;
+    string id = 4;
+}
+
+message Bcrypt {
+    int32 cost = 1;
+  }
+  
+message Scrypt {
+    string signer_key = 1;
+    string salt_separator = 2;
+    int32 rounds = 3;
+    int32 mem_cost = 4;
+    int32 p = 5;
+    int32 key_len = 6;
+}
+
+enum TemplateType {
+    TEMPLATE_TYPE_UNSPECIFIED = 0;
+    TEMPLATE_TYPE_EMAIL_VERIFICATION = 1;
+    TEMPLATE_TYPE_EMAIL_RESET_PASSWORD = 2;
+    TEMPLATE_TYPE_EMAIL_MAGIC_LINK = 3;
+    TEMPLATE_TYPE_TEXT_VERIFICATION = 4;
+    TEMPLATE_TYPE_TEXT_RESET_PASSWORD = 5;
+    TEMPLATE_TYPE_TEXT_MAGIC_LINK = 6;
+}
+
+enum OauthProviderType {
+    OAUTH_PROVIDER_TYPE_UNSPECIFIED = 0;
+    OAUTH_PROVIDER_TYPE_NUNTIO_PROVIDER = 1;
+    OAUTH_PROVIDER_TYPE_GOOGLE_PROVIDER = 2;
+    OAUTH_PROVIDER_TYPE_GITHUB_PROVIDER = 3;
+}  
+  
+
+message Template {
+    string body = 1;
+    TemplateType type = 2;
+    string subject = 3;
+    bool enabled = 4;
+    repeated string format = 5;
+}
+
+message OAuthProvider {
+    string id = 1;
+    OauthProviderType type = 2;
+    string secret = 3;
+    string logo = 4;
+    string name = 5;
+    bool enabled = 6;
+    string url = 7;
+    repeated string scopes = 8;
+    string redirect_url = 9;
+  }
+
+message Namespace {
+    optional string name = 1;
+    optional Image logo = 2;
+    optional bool enable_signup = 3;
+    optional bool enable_login = 4;
+    google.protobuf.Timestamp created_at = 5;
+    google.protobuf.Timestamp updated_at = 6;
+    optional bool validate_password = 7;
+    optional string public_key = 8;
+    HashingAlgorithm hashing_algorithm = 9;
+    optional Bcrypt bcrypt = 10;
+    optional Scrypt scrypt = 11;
+    repeated LoginType supported_login_mechanisms = 12;
+    map<string, Template> templates = 13;
+    optional int32 access_token_ttl = 14;
+    optional int32 refresh_token_ttl = 15;
+    optional int32 verification_code_ttl = 16;
+    repeated string callbacks = 17;
+    string id = 18;
+    map<string, OAuthProvider> oauth_providers = 19;
+    EmailProvider email_provider = 20;
+    TextProvider text_provider = 21;
+}
+
+message Group {
+    string id = 1;
+    string name = 2;
+    google.protobuf.Timestamp created_at = 3;
+    google.protobuf.Timestamp updated_at = 4;
+    int64 amount = 5;
+}
+
+message UserMeta {
+    LoginType registration_type = 1;
+    google.protobuf.Timestamp created_at = 2;
+    google.protobuf.Timestamp updated_at = 3;
+    bool is_phone_verified = 4;
+    bool is_email_verified = 5;
+}
+
+message Hash {
+    HashingAlgorithm variant = 1;
+    string body = 2;
+    map<string, string> params = 3;
+}
+
+message User {
+    string id = 1;
+    optional string username = 2;
+    optional Hash password = 3;
+    repeated Group groups = 4;
+    ContactInfo contact_info = 5;
+    Profile profile = 6;
+    UserMeta meta = 7;
+}
+
+message TokenMeta {
+    string id = 1;
+    string logged_in_from = 2;
+    LoginType login_type = 3;
+    string user_id = 4;
+    google.protobuf.Timestamp blocked_at = 5;
+    google.protobuf.Timestamp created_at = 6;
+    OauthProviderType oauth_provider = 7;
+    bool blocked = 8;
+    google.protobuf.Timestamp expires_at = 9;
+    google.protobuf.Timestamp used_at = 10;
+}
+
+message AccessToken {
+    string refresh_token_id = 1;
+    string jwt = 2;
+    TokenMeta meta = 3;
+}
+
+message RefreshToken {
+    string jwt = 1;
+    TokenMeta meta = 2;
+}
+
+message TokenPair {
+    AccessToken access_token = 1;
+    RefreshToken refresh_token = 2;
+}
+
+message Null {}
+
+message File {
+    string name = 1;
+    google.protobuf.Timestamp created_at = 2;
+    string url = 3;
+    string content_type = 5;
+    string path = 6;
+    google.protobuf.Duration duration = 7;
+    int64 size = 8;
+    bytes data = 9;
+}
+
+message Filter {
+    enum SortBy {
+      SORT_BY_UNSPECIFIED = 0;
+      SORT_BY_CREATED_AT = 1;
+      SORT_BY_UPDATE_AT = 2;
+    }
+    enum Order {
+      ORDER_UNSPECIFIED = 0;
+      ORDER_INC = 1;
+      ORDER_DEC = 2;
+    }
+    int32 from = 1;
+    int32 to = 2;
+    SortBy sort = 3;
+    Order order = 4;
+    string search = 5;
+    optional string group_id = 6;
+    optional bool accepted = 7;
+  }
+
+
+message Folder {
+    string path = 1;
+    repeated File files = 2;
+    repeated Folder folders = 3;
+    string name = 4;
+}
+  
+message EmailProvider {
+    EmailProviderType type = 1;
+    string public_key = 2;
+    string private_key = 3;
+    string from = 4;
+}
+  
+message TextProvider {
+    TextProviderType type = 1;
+    string account_id = 2;
+    string auth_token = 3;
+    string from = 4;
+}
+
+message Object {
+    string id = 1;
+    string type = 2;
+}
+
+message Releation {
+
+}
+
+message RelationTuple {
+
+}

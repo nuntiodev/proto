@@ -1,0 +1,252 @@
+syntax = "proto3";
+
+package nuntio.projects.v1alpha1;
+
+import "nuntio/projects/v1alpha1/projects_messages.proto";
+
+option go_package = "./nuntio/projects/v1alpha1";
+option csharp_namespace = "nuntio.projects.v1alpha1";
+option java_multiple_files = true;
+option java_package = "nuntio.projects.v1alpha1";
+option php_namespace = "Nuntio\\projects\\v1alpha1";
+
+
+service APIService {
+  // Ping checks if a service is live
+  rpc Ping(APIServicePingRequest) returns (APIServicePingResponse) {}
+  // CreateAPIKey inserts a new API key in the database used to auth requests
+  rpc CreateAPIKey(APIServiceCreateAPIKeyRequest) returns (APIServiceCreateAPIKeyResponse) {}
+  // DeleteAllAPIKeys deletes all api keys in a namespace
+  rpc DeleteAllAPIKeys(APIServiceDeleteAllAPIKeysRequest) returns (APIServiceDeleteAllAPIKeysResponse) {}
+  // DeleteAPIKey deletes an API key
+  rpc DeleteAPIKey(APIServiceDeleteAPIKeyRequest) returns (APIServiceDeleteAPIKeyResponse) {}
+  // GenerateAccessToken uses an API key to generate a short lived access token
+  rpc GenerateAccessToken(APIServiceGenerateAccessTokenRequest) returns (APIServiceGenerateAccessTokenResponse) {}
+  // GetAPIKey returns the requested API key to the user
+  rpc GetAPIKey(APIServiceGetAPIKeyRequest) returns (APIServiceGetAPIKeyResponse) {}
+  // ListAPIKeys returns the requested API key to the user
+  rpc ListAPIKeys(APIServiceListAPIKeysRequest) returns (APIServiceListAPIKeysResponse) {}
+  // PublicKey returns the requested public key used to generate access tokens
+  rpc PublicKey(APIServicePublicKeyRequest) returns (APIServicePublicKeyResponse) {}
+  // ValidateAccessToken validates the requested acces token with the public key
+  rpc ValidateAccessToken(APIServiceValidateAccessTokenRequest) returns (APIServiceValidateAccessTokenResponse) {}
+  // EnableMongoAccess configures the api key to work with the Mongo database
+  rpc EnableMongoAccess(APIServiceEnableMongoAccessRequest) returns (APIServiceEnableMongoAccessResponse) {}
+  // DisableMongoAccess remove access to the Mongo database for the api key
+  rpc DisableMongoAccess(APIServiceDisableMongoAccessRequest) returns (APIServiceDisableMongoAccessResponse) {}
+  // EnableMongoAccess configures the api key to work with the Mongo database
+  rpc EnablePostgresAccess(APIServiceEnablePostgresAccessRequest) returns (APIServiceEnablePostgresAccessResponse) {}
+  // DisableMongoAccess remove access to the Mongo database for the api key
+  rpc DisablePostgresAccess(APIServiceDisablePostgresAccessRequest) returns (APIServiceDisablePostgresAccessResponse) {}
+  // EnableStorageAccess configures the api key to work with the storage provider
+  rpc EnableStorageAccess(APIServiceEnableStorageAccessRequest) returns (APIServiceEnableStorageAccessResponse) {}
+  // DisableStorageAccess remove access to the storage provider for the api key
+  rpc DisableStorageAccess(APIServiceDisableStorageAccessRequest) returns (APIServiceDisableStorageAccessResponse) {}
+  // EnableUsersAccess configures the api key to work with Nuntio/Hera
+  rpc EnableUsersAccess(APIServiceEnableUsersAccessRequest) returns (APIServiceEnableUsersAccessResponse) {}
+  // DisableUsersAccess remove access to Nuntio/Hera for the api key
+  rpc DisableUsersAccess(APIServiceDisableUsersAccessRequest) returns (APIServiceDisableUsersAccessResponse) {}
+}
+
+// The request of a API.Ping RPC
+message APIServicePingRequest {}
+
+// The response of a API.Ping RPC
+message APIServicePingResponse {}
+
+// The request of a API.CreateAPIKey RPC
+message APIServiceCreateAPIKeyRequest {
+    // the id of the api key
+    string id = 1;
+    // the project id related to the api key
+    string project_id = 2;
+    // init mongo access
+    bool configure_mongo = 3;
+    // init postgres access
+    bool configure_postgres = 4;
+    // init storage access
+    bool configure_storage = 5;
+    // init users access
+    bool configure_users = 6;
+}
+
+// The response of a API.CreateAPIKey RPC
+message APIServiceCreateAPIKeyResponse {
+    APIKey api_key = 1;
+}
+
+
+// The request of a API.DeleteAPIKey RPC
+message APIServiceDeleteAPIKeyRequest {
+    // the id of the api key
+    string id = 1;
+}
+
+// The response of a API.DeleteAPIKey RPC
+message APIServiceDeleteAPIKeyResponse {
+    // the id of the api key
+    string id = 1;
+}
+
+
+// The request of a API.DeleteAllAPIKey RPC
+message APIServiceDeleteAllAPIKeysRequest {
+    // the project id related to the api key
+    string project_id = 1;
+}
+
+// The response of a API.DeleteAllAPIKey RPC
+message APIServiceDeleteAllAPIKeysResponse {}
+
+// The request of a API.GenerateAccessToken RPC
+message APIServiceGenerateAccessTokenRequest {
+    // the id of the api key to generate
+    string id = 1;
+    // the secret to validate
+    string api_key = 2;
+}
+
+// The response of a API.GenerateAccessToken RPC
+message APIServiceGenerateAccessTokenResponse {
+    AccessToken access_token = 1;
+}
+
+
+// The request of a API.GetAPIKey RPC
+message APIServiceGetAPIKeyRequest {
+    // the id of the api key
+    string id = 1;
+}
+
+// The response of a API.GetAPIKey RPC
+message APIServiceGetAPIKeyResponse {
+    APIKey api_key = 1;
+}
+
+
+// The request of a API.ListAPIKeys RPC
+message APIServiceListAPIKeysRequest {
+    // the project id related to the api key
+    string project_id = 1;
+    // where to stop fetching api keys to
+    int32 from = 2;
+    // where to start fetching api keys from
+    int32 to = 3;
+}
+
+// The response of a API.ListAPIKeys RPC
+message APIServiceListAPIKeysResponse {
+    // the result of list
+    repeated APIKey api_keys = 1;
+    // total amount of api keys in system
+    int64 amount = 2;
+}
+
+// The request of a API.PublicKey RPC
+message APIServicePublicKeyRequest {
+    // the project id related to the api key
+    string project_id = 1;
+}
+
+
+// The response of a API.PublicKey RPC
+message APIServicePublicKeyResponse {
+    // The id of the namespace
+    string public_key = 1;
+    // the project id related to the api key
+    string project_id = 2;
+}
+
+// The request of a API.ValidateAccessToken RPC
+message APIServiceValidateAccessTokenRequest {
+    string jwt = 1;
+}
+
+// The response of a API.ValidateAccessToken RPC
+message APIServiceValidateAccessTokenResponse {
+    AccessToken access_token = 1;
+}
+
+
+// The request of a API.EnableMongoAccess RPC
+message APIServiceEnableMongoAccessRequest {
+    // the api key secret value
+    string api_key = 1;
+    // id of the api key
+    string id = 2;
+}
+
+// The response of a API.EnableMongoAccess RPC
+message APIServiceEnableMongoAccessResponse {}
+
+// The response of a API.DisableMongoAccess RPC
+message APIServiceDisableMongoAccessResponse {}
+
+
+// The request of a API.DisableMongoAccess RPC
+message APIServiceDisableMongoAccessRequest {
+    // id of the api key
+    string id = 1;
+}
+
+// The request of a API.EnablePostgresAccess RPC
+message APIServiceEnablePostgresAccessRequest {
+    // the api key secret value
+    string api_key = 1;
+    // id of the api key
+    string id = 2;
+}
+
+// The response of a API.EnablePostgresAccess RPC
+message APIServiceEnablePostgresAccessResponse {}
+
+// The request of a API.DisablePostgresAccess RPC
+message APIServiceDisablePostgresAccessRequest {
+    // id of the api key
+    string id = 1;
+}
+
+// The response of a API.DisablePostgresAccess RPC
+message APIServiceDisablePostgresAccessResponse {}
+
+// The request of a API.EnableStorageAccess RPC
+message APIServiceEnableStorageAccessRequest {
+    // the api key secret value
+    string api_key = 1;
+    // id of the api key
+    string id = 2;
+}
+
+// The response of a API.EnableStorageAccess RPC
+message APIServiceEnableStorageAccessResponse {}
+
+// The request of a API.DisableStorageAccess RPC
+message APIServiceDisableStorageAccessRequest {
+    // id of the api key
+    string id = 1;
+}
+
+// The response of a API.DisableStorageAccess RPC
+message APIServiceDisableStorageAccessResponse {}
+
+
+// The request of a API.EnableUsersAccess RPC
+message APIServiceEnableUsersAccessRequest {
+    // the api key secret value
+    string api_key = 1;
+    // id of the api key
+    string id = 2;
+}
+
+// The response of a API.EnableUsersAccess RPC
+message APIServiceEnableUsersAccessResponse {}
+
+
+// The request of a API.DisableUsersAccess RPC
+message APIServiceDisableUsersAccessRequest {
+    // id of the api key
+    string id = 1;
+}
+
+// The response of a API.DisableUsersAccess RPC
+message APIServiceDisableUsersAccessResponse {}

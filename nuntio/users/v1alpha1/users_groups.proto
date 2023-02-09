@@ -1,0 +1,131 @@
+syntax = "proto3";
+
+package nuntio.users.v1alpha1;
+
+import "nuntio/users/v1alpha1/users_messages.proto";
+
+option go_package = "./nuntio/users/v1alpha1";
+option csharp_namespace = "nuntio.users.v1alpha1";
+option java_multiple_files = true;
+option java_package = "nuntio.users.v1alpha1";
+option php_namespace = "Nuntio\\Users\\v1alpha1";
+
+// The service to manage groups in Users
+service GroupsService {
+    rpc Ping(GroupsServicePingRequest) returns (GroupsServicePingResponse) {}
+    // Create a new group
+    rpc Create(GroupsServiceCreateRequest) returns (GroupsServiceCreateResponse) {}
+    // Remove user from group
+    rpc Remove(GroupsServiceRemoveRequest) returns (GroupsServiceRemoveResponse) {}
+    // Add user to group
+    rpc Add(GroupsServiceAddRequest) returns (GroupsServiceAddResponse) {}
+    // Delete group
+    rpc Delete(GroupsServiceDeleteRequest) returns (GroupsServiceDeleteResponse) {}
+    // List groups
+    rpc List(GroupsServiceListRequest) returns (GroupsServiceListResponse) {}
+    // Update group
+    rpc Update(GroupsServiceUpdateRequest) returns (GroupsServiceUpdateResponse) {}
+    // Get group
+    rpc Get(GroupsServiceGetRequest) returns (GroupsServiceGetResponse) {}
+}
+
+// The request of a Groups.Ping RPC
+message GroupsServicePingRequest {}
+
+// The response of a Groups.Ping RPC
+message GroupsServicePingResponse {}
+
+// The request of a Groups.Create RPC
+message GroupsServiceCreateRequest {
+    // The group to be created
+    Group group = 1;
+    // The namespace to perform action in
+    string namespace = 2;
+}
+
+// The response of a Groups.Create RPC
+message GroupsServiceCreateResponse {
+    Group group = 1;
+}
+
+
+// The request of a Groups.Remove RPC
+message GroupsServiceRemoveRequest {
+    // The group to delete
+    string group_id = 1;
+    // The user identifier to fetch the user
+    UserIdentifier identifier = 2;
+    // The namespace to perform action in
+    string namespace = 3;
+}
+
+// The response of a Groups.Remove RPC
+message GroupsServiceRemoveResponse {}
+
+// The request of a Groups.Add RPC
+message GroupsServiceAddRequest {
+    // The group to delete
+    string group_id = 1;
+    // The user identifier to fetch the user
+    UserIdentifier identifier = 2;
+    // The namespace to perform action in
+    string namespace = 3;
+}
+
+
+// The response of a Groups.Add RPC
+message GroupsServiceAddResponse {}
+
+
+// The request of a Groups.List RPC
+message GroupsServiceListRequest {
+    // where to begin fetching from
+    int32 from = 1;
+    // where to stop fetching to
+    int32 to = 2;
+    // the namespace to search within
+    string namespace = 3;
+}
+
+// The response of a Groups.List RPC
+message GroupsServiceListResponse {
+    // list of groups
+    repeated Group groups = 1;
+}
+
+// The request of a Group.Delete RPC
+message GroupsServiceDeleteRequest {
+    // The group to delete
+    string group_id = 1;
+    // The namespace to perform action in
+    string namespace = 2;
+}
+
+// The response of a Group.Delete RPC
+message GroupsServiceDeleteResponse {}
+
+// The request of a Groups.Update RPC
+message GroupsServiceUpdateRequest {
+    // The new name of the group
+    string name = 1;
+    // The namespace to perform action in
+    string namespace = 2;
+    // The group id
+    string group_id = 3;
+}
+
+// The response of a Groups.Update RPC
+message GroupsServiceUpdateResponse {}
+
+// The request of a Groups.Get RPC
+message GroupsServiceGetRequest {
+    // The group id
+    string group_id = 1;
+    // The namespace to perform action in
+    string namespace = 2;
+}
+
+// The response of a Groups.Get RPC
+message GroupsServiceGetResponse {
+    Group group = 1;
+}

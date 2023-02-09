@@ -1,0 +1,433 @@
+syntax = "proto3";
+
+package nuntio.users.v1alpha1;
+
+import "nuntio/users/v1alpha1/users_messages.proto";
+
+option go_package = "./nuntio/users/v1alpha1";
+option csharp_namespace = "nuntio.users.v1alpha1";
+option java_multiple_files = true;
+option java_package = "nuntio.users.v1alpha1";
+option php_namespace = "Nuntio\\Users\\v1alpha1";
+
+// The service to manage authentication in Users
+service AuthenticationService {
+    // Updates a specific OAuth2 Provider
+    rpc Ping(AuthenticationServicePingRequest) returns (AuthenticationServicePingResponse) {}
+    // Updates a specific OAuth2 Provider
+    rpc UpdateOAuth2Provider(AuthenticationServiceUpdateOAuth2ProviderRequest) returns (AuthenticationServiceUpdateOAuth2ProviderResponse) {}
+    // Update allowed callbacks in Users
+    rpc UpdateCallbacks(AuthenticationServiceUpdateCallbacksRequest) returns (AuthenticationServiceUpdateCallbacksResponse) {}
+    // Set default hashing algorithm
+    rpc UpdateHashingAlgorithm(AuthenticationServiceUpdateHashingAlgorithmRequest) returns (AuthenticationServiceUpdateHashingAlgorithmResponse) {}
+    // Set supported login mechanisms
+    rpc UpdateLoginMechanisms(AuthenticationServiceUpdateLoginMechanismsRequest) returns (AuthenticationServiceUpdateLoginMechanismsResponse) {}
+    // Update token settings (eg. ttl)
+    rpc UpdateTokenSettings(AuthenticationServiceUpdateTokenSettingsRequest)returns (AuthenticationServiceUpdateTokenSettingsResponse) {}
+    // Update email or text template
+    rpc UpdateTemplate(AuthenticationServiceUpdateTemplateRequest) returns (AuthenticationServiceUpdateTemplateResponse) {}
+    // Validate user credentials
+    rpc ValidateCredentials(AuthenticationServiceValidateCredentialsRequest) returns (AuthenticationServiceValidateCredentialsResponse) {}
+    // Create token pair for user
+    rpc CreateTokenPair(AuthenticationServiceCreateTokenPairRequest) returns (AuthenticationServiceCreateTokenPairResponse) {}
+    // Validate a token
+    rpc ValidateToken(AuthenticationServiceValidateTokenRequest) returns (AuthenticationServiceValidateTokenResponse) {}
+    // Block a token
+    rpc BlockToken(AuthenticationServiceBlockTokenRequest) returns (AuthenticationServiceBlockTokenResponse) {}
+    // Send a reset password email
+    rpc SendResetPasswordEmail(AuthenticationServiceSendResetPasswordEmailRequest) returns (AuthenticationServiceSendResetPasswordEmailResponse) {}
+    // Send a reset password text
+    rpc SendResetPasswordText(AuthenticationServiceSendResetPasswordTextRequest) returns (AuthenticationServiceSendResetPasswordTextResponse) {}
+    // Send a verification email to validate email
+    rpc SendVerificationEmail(AuthenticationServiceSendVerificationEmailRequest) returns (AuthenticationServiceSendVerificationEmailResponse) {}
+    // Send a verification text to validate number
+    rpc SendVerificationText(AuthenticationServiceSendVerificationTextRequest) returns (AuthenticationServiceSendVerificationTextResponse) {}
+    // Verify email with code
+    rpc VerifyEmail(AuthenticationServiceVerifyEmailRequest) returns (AuthenticationServiceVerifyEmailResponse) {}
+    // Verify phone with code
+    rpc VerifyPhone(AuthenticationServiceVerifyPhoneRequest) returns (AuthenticationServiceVerifyPhoneResponse) {}
+    // Reset password with code and new password
+    rpc ResetPassword(AuthenticationServiceResetPasswordRequest) returns (AuthenticationServiceResetPasswordResponse) {}
+    // Continue with OAuth2 provider
+    rpc ContinueWith(AuthenticationServiceContinueWithRequest) returns (AuthenticationServiceContinueWithResponse) {}
+    // Logout blocks tokens of a given session
+    rpc Logout(AuthenticationServiceLogoutRequest) returns (AuthenticationServiceLogoutResponse) {}
+    // Login issues a token pair after validating credentials
+    rpc Login(AuthenticationServiceLoginRequest) returns (AuthenticationServiceLoginResponse) {}
+    // Refreshes the access token and issues new refresh token
+    rpc RefreshToken(AuthenticationServiceRefreshTokenRequest) returns (AuthenticationServiceRefreshTokenResponse) {}
+    // Initialize auth returns auth information to frontend client
+    rpc InitializeAuth(AuthenticationServiceInitializeAuthRequest)  returns (AuthenticationServiceInitializeAuthResponse) {}
+    // SendMagicEmail sends a code to your email to login
+    rpc SendMagicEmail(AuthenticationServiceSendMagicEmailRequest)  returns (AuthenticationServiceSendMagicEmailResponse) {}
+    // SendMagicEmail sends a code to your phone to login
+    rpc SendMagicText(AuthenticationServiceSendMagicTextRequest)  returns (AuthenticationServiceSendMagicTextResponse) {}
+    // Verifies a code and returns a set of tokens
+    rpc VerifyMagicCode(AuthenticationServiceVerifyMagicCodeRequest) returns (AuthenticationServiceVerifyMagicCodeResponse) {}
+}
+
+// The request of a Authentication.Ping RPC
+message AuthenticationServicePingRequest {}
+
+// The response of a Authentication.Ping RPC
+message AuthenticationServicePingResponse {}
+
+// The request of a Authentication.UpdateOAuth2Provider RPC
+message AuthenticationServiceUpdateOAuth2ProviderRequest {
+    // The provider to be updated
+    OAuthProvider provider = 1;
+    // The namespace to perform action in
+    string namespace = 2;
+}
+
+// The response of a Authentication.UpdateOAuth2Provider RPC
+message AuthenticationServiceUpdateCallbacksResponse {}
+
+// The response of a Authentication.UpdateOAuth2Provider RPC
+message AuthenticationServiceUpdateOAuth2ProviderResponse {}
+
+// The request of a Authentication.UpdateCallbacks RPC
+message AuthenticationServiceUpdateCallbacksRequest {
+    // The callbacks to be updated
+    repeated string callbacks = 1;
+    // The namespace to perform action in
+    string namespace = 2;
+}
+
+// The request of a Authentication.UpdateHashingAlgorithm RPC
+message AuthenticationServiceUpdateHashingAlgorithmRequest {
+    // The hashing algorithm to use as default
+    HashingAlgorithm algorithm = 1;
+    // The Bcrypt values to update
+    Bcrypt bcrypt = 2;
+    // The Scrypt values to update
+    Scrypt scrypt = 3;
+    // The namespace to perform action in
+    string namespace = 4;
+}
+
+// The response of a Authentication.UpdateHashingAlgorithm RPC
+message AuthenticationServiceUpdateHashingAlgorithmResponse {}
+
+// The request of a Authentication.UpdateTokenSettings RPC
+message AuthenticationServiceUpdateTokenSettingsRequest {
+    // Defines for how long the access token lives
+    int32 access_token_ttl = 1;
+    // Defines for how long the access refresh lives
+    int32 refresh_token_ttl = 2;
+    // Defines for how long the verification code is valid
+    int32 verification_code_ttl = 3;
+    // The namespace to perform action in
+    string namespace = 4;
+}
+
+// The response of a Authentication.UpdateTokenSettings RPC
+message AuthenticationServiceUpdateTokenSettingsResponse {}
+
+// The request of a Authentication.UpdateTemplate RPC
+message AuthenticationServiceUpdateTemplateRequest {
+    // The template to update
+    Template template = 1;
+    // The namespace to perform action in
+    string namespace = 2;
+}
+
+// The response of a Authentication.UpdateTemplate RPC
+message AuthenticationServiceUpdateTemplateResponse {}
+
+
+// The request of a Authentication.ValidateCredentials RPC
+message AuthenticationServiceValidateCredentialsRequest {
+    // The user identifier to fetch the user
+    UserIdentifier identifier = 1;
+    // The password to validate
+    string password = 2;
+    // The namespace to perform action in
+    string namespace = 3;
+}
+
+// The response of a Authentication.ValidateCredentials RPC
+message AuthenticationServiceValidateCredentialsResponse {}
+
+
+// The request of a Authentication.CreateTokenPair RPC
+message AuthenticationServiceCreateTokenPairRequest {
+    // The user identifier to fetch the user
+    UserIdentifier identifier = 1;
+    // The namespace to perform action in
+    string namespace = 2;
+}
+
+// The response of a Authentication.CreateTokenPair RPC
+message AuthenticationServiceCreateTokenPairResponse {
+    // The result of the method
+    TokenPair token_pair = 1;
+}
+
+
+// The request of a Authentication.ValidateToken RPC
+message AuthenticationServiceValidateTokenRequest {
+    // The access token to validate
+    string access_token = 1;
+    // The refresh token to validate
+    string refresh_token = 2;
+    // The namespace to perform action in
+    string namespace = 3;
+    // Specifies if to check status in db (blocked)
+    bool validate_db = 4;
+}
+
+// The response of a Authentication.ValidateToken RPC
+message AuthenticationServiceValidateTokenResponse {
+    // Return the user contained by the jwt
+    User user = 1;
+    // Return the namespace contained in the jwt
+    string namespace = 2;
+}
+
+// The request of a Authentication.SendResetPasswordEmail RPC
+message AuthenticationServiceSendResetPasswordEmailRequest {
+    // The email to send the reset-password-email to
+    string email = 1;
+    // The namespace to perform action in
+    string namespace = 2;
+}
+
+// The response of a Authentication.SendResetPasswordEmail RPC
+message AuthenticationServiceSendResetPasswordEmailResponse {
+    // The result container the hashed code
+    VerificationCode verification_code = 1;
+}
+
+// The request of a Authentication.SendResetPasswordText RPC
+message AuthenticationServiceSendResetPasswordTextRequest {
+    // The phone number to send the reset-password-text to
+    string phone_number = 1;
+    // The namespace to perform action in
+    string namespace = 2;
+}
+
+// The response of a Authentication.SendResetPasswordText RPC
+message AuthenticationServiceSendResetPasswordTextResponse {
+    // The result container the hashed code
+    VerificationCode verification_code = 1;
+}
+
+// The request of a Authentication.SendResetPasswordEmail RPC
+message AuthenticationServiceSendVerificationEmailRequest {
+    // The email to send the reset-password-email to
+    string email = 1;
+    // The namespace to perform action in
+    string namespace = 2;
+}
+
+// The response of a Authentication.SendResetPasswordEmail RPC
+message AuthenticationServiceSendVerificationEmailResponse {
+    // The result container the hashed code
+    VerificationCode verification_code = 1;
+}
+
+// The request of a Authentication.SendResetPasswordText RPC
+message AuthenticationServiceSendVerificationTextRequest {
+    // The phone number to send the reset-password-text to
+    string phone_number = 1;
+    // The namespace to perform action in
+    string namespace = 2;
+}
+
+// The response of a Authentication.SendResetPasswordText RPC
+message AuthenticationServiceSendVerificationTextResponse {
+    // The result container the hashed code
+    VerificationCode verification_code = 1;
+}
+
+
+// The request of a Authentication.VerifyEmail RPC
+message AuthenticationServiceVerifyEmailRequest {
+    // The email that was sent a code to
+    string email = 1;
+    // The code sent to the email
+    string code = 2;
+    // The namespace to perform action in
+    string namespace = 3;
+}
+
+// The response of a Authentication.VerifyEmail RPC
+message AuthenticationServiceVerifyEmailResponse {}
+
+
+// The request of a Authentication.VerifyPhone RPC
+message AuthenticationServiceVerifyPhoneRequest {
+    // The phone numnber that was sent a code to
+    string phone_number = 1;
+    // The code sent to the phone
+    string code = 2;
+    // The namespace to perform action in
+    string namespace = 3;
+}
+
+// The response of a Authentication.VerifyPhone RPC
+message AuthenticationServiceVerifyPhoneResponse {}
+
+// The request of a Authentication.ResetPassword RPC
+message AuthenticationServiceResetPasswordRequest {
+    // The user identifier to fetch the user
+    UserIdentifier identifier = 1;
+    // The new password
+    string password = 2;
+    // The code sent to the phone
+    string code = 3;
+    // The namespace to perform action in
+    string namespace = 4;
+}
+
+// The response of a Authentication.ResetPassword RPC
+message AuthenticationServiceResetPasswordResponse {}
+
+// The request of a Authentication.ContinueWith RPC
+message AuthenticationServiceContinueWithRequest {
+    // The code sent to the phone
+    string code = 1;
+    // The namespace to perform action in
+    string namespace = 2;
+    // The OAuth provider used for "login with x"
+    OauthProviderType provider_type = 3;
+    // The requested redirect addr
+    string redirect_addr = 4;
+}
+
+// The response of a Authentication.ContinueWith RPC
+message AuthenticationServiceContinueWithResponse {
+    TokenPair token_pair = 1;
+    LoginStatus status = 2;
+}
+
+// The request of a Authentication.Logout RPC
+message AuthenticationServiceLogoutRequest {
+    // ID of the access token to logout
+    string access_token_id = 1;
+    // The jwt of the access token to logout
+    string jwt = 2;
+    // The namespace to perform action in
+    string namespace = 3;
+}
+
+// The response of a Authentication.Logout RPC
+message AuthenticationServiceLogoutResponse {}
+
+// The request of a Authentication.Login RPC
+message AuthenticationServiceLoginRequest {
+    // The user identifier to fetch the user
+    UserIdentifier identifier = 1;
+    // The password of the user
+    string password = 2;
+    // The namespace to perform action in
+    string namespace = 3;
+}
+
+// The response of a Authentication.Login RPC
+message AuthenticationServiceLoginResponse {
+    TokenPair token_pair = 1;
+    LoginStatus status = 2;
+}
+
+// The request of a Authentication.RefreshToken RPC
+message AuthenticationServiceRefreshTokenRequest {
+    // The refresh token used to generate new pair
+    string refresh_token = 1;
+}
+
+// The request of a Authentication.RefreshToken RPC
+message AuthenticationServiceRefreshTokenResponse {
+    TokenPair token_pair = 1;
+    LoginStatus status = 2;
+}
+
+// The request of a Authentication.AuthenticationServiceInitializeAuthRequest RPC
+message AuthenticationServiceInitializeAuthRequest {
+    // The namespace to perform action in
+    string namespace = 1;
+    // Optional redirect address for OAuth2
+    optional string redirect_addr = 2;
+}
+
+// The response of a Authentication.AuthenticationServiceInitializeAuthRequest RPC
+message AuthenticationServiceInitializeAuthResponse {
+    // The name of the namespace
+    string name = 1;
+    // The logo of the namespace
+    string logo = 2;
+    // If signup is enabled
+    bool enable_signup = 3;
+    // If login is enabled
+    bool enable_login = 4;
+    // If to validate password
+    bool validate_password = 5;
+    // The public key of Users
+    string public_key = 6;
+    // Array of supported login types
+    repeated LoginType supported_login_mechanisms = 7;   
+    // Array of callbacks
+    repeated string callbacks = 8;
+    // Map of oauth2 providers
+    map<string, OAuthProvider> oauth_providers = 9;
+}
+
+// The request of a Authentication.BlockToken RPC
+message AuthenticationServiceBlockTokenRequest {
+    // token id to block
+    optional string token_id = 1;
+    // The namespace to perform action in
+    string namespace = 2;
+}
+
+// The response of a Authentication.BlockToken RPC
+message AuthenticationServiceBlockTokenResponse {}
+
+// The request of a Authentication.UpdateLoginMechanisms RPC
+message AuthenticationServiceUpdateLoginMechanismsRequest {
+    // Array of supported login types
+    repeated LoginType supported_login_mechanisms = 1;  
+    // The namespace to perform action in
+    string namespace = 2;
+}
+
+// The request of a Authentication.UpdateLoginMechanisms RPC
+message AuthenticationServiceUpdateLoginMechanismsResponse {}
+
+// The request of a Authentication.SendMagicEmail RPC
+message AuthenticationServiceSendMagicEmailRequest {
+    // The namespace to perform action in
+    string namespace = 1;
+    // The email to send the magic code to
+    string email = 2;
+}
+
+// The response of a Authentication.SendMagicEmail RPC
+message AuthenticationServiceSendMagicEmailResponse {
+    VerificationCode verification_code = 1;
+}
+
+// The request of a Authentication.SendMagicText RPC
+message AuthenticationServiceSendMagicTextRequest {
+    // The namespace to perform action in
+    string namespace = 1;
+    // The phone number to send the magic code to
+    string phone_number = 2;
+}
+
+// The response of a Authentication.SendMagicText RPC
+message AuthenticationServiceSendMagicTextResponse {
+    VerificationCode verification_code = 1;
+}
+
+// The request of a Authentication.VerifyMagicCode RPC
+message AuthenticationServiceVerifyMagicCodeRequest {
+    // The namespace to perform action in
+    string namespace = 1;
+}
+
+// The response of a Authentication.VerifyMagicCode RPC
+message AuthenticationServiceVerifyMagicCodeResponse {
+    TokenPair token_pair = 1;
+}

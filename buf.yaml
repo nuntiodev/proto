@@ -1,0 +1,11 @@
+version: v1
+name: buf.build/nuntioapis/nuntioapis
+build:
+  excludes:
+    - node_modules
+lint:
+  use:
+    - DEFAULT
+breaking:
+  use:
+    - FILE

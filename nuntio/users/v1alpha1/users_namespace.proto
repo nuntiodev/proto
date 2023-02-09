@@ -1,0 +1,86 @@
+syntax = "proto3";
+
+package nuntio.users.v1alpha1;
+
+import "nuntio/users/v1alpha1/users_messages.proto";
+
+option go_package = "./nuntio/users/v1alpha1";
+option csharp_namespace = "nuntio.users.v1alpha1";
+option java_multiple_files = true;
+option java_package = "nuntio.users.v1alpha1";
+option php_namespace = "Nuntio\\Users\\v1alpha1";
+
+// The service to manage your namespace in Users
+service NamespaceService {
+    // Ping a server to check if it is live
+    rpc Ping(NamespaceServicePingRequest) returns (NamespaceServicePingResponse) {}
+    // Create namespace
+    rpc Create(NamespaceServiceCreateRequest) returns (NamespaceServiceCreateResponse) {}
+    // Delete namespace (everything in Users)
+    rpc Delete(NamespaceServiceDeleteRequest) returns (NamespaceServiceDeleteResponse) {}
+    // Get namespace config
+    rpc Get(NamespaceServiceGetRequest) returns (NamespaceServiceGetResponse) {}
+    // Get public key of system
+    rpc PublicKey(NamespaceServicePublicKeyRequest) returns (NamespaceServicePublicKeyResponse) {}
+  }
+
+// The request of a Namespace.Ping RPC
+message NamespaceServicePingRequest {}
+
+// The request of a Namespace.Ping RPC
+message NamespaceServicePingResponse {}
+
+// The request of a Namespace.Create RPC
+message NamespaceServiceCreateRequest {
+    // The id of the namespace
+    string namespace = 1;
+    // The name of the namespace
+    string name = 2;
+    // The logo of the namespace
+    string logo = 3;
+    // The supported login mechanisms
+    repeated LoginType login_mechanisms = 4;
+    // Email provider
+    EmailProvider email_provider = 5;
+    // Text provider
+    TextProvider text_provider = 6;
+}
+
+// The response of a Namespace.Create RPC
+message NamespaceServiceCreateResponse {
+    Namespace namespace = 1;
+}
+
+// The request of a Namespace.Delete RPC
+message NamespaceServiceDeleteRequest {
+    // The id of the namespace
+    string namespace = 1;
+}
+
+// The response of a Namespace.Delete RPC
+message NamespaceServiceDeleteResponse {}
+
+// The request of a Namespace.Get RPC
+message NamespaceServiceGetRequest {
+    // The id of the namespace
+    string namespace = 1;
+}
+
+// The response of a Namespace.Get RPC
+message NamespaceServiceGetResponse {
+    Namespace namespace = 1;
+}
+
+// The request of a Namespace.PublicKey RPC
+message NamespaceServicePublicKeyRequest {
+    // The id of the namespace
+    string namespace = 1;
+}
+
+// The response of a Namespace.PublicKey RPC
+message NamespaceServicePublicKeyResponse {
+    // The id of the namespace
+    string public_key = 1;
+    // The id of the namespace
+    string namespace = 2;
+}

@@ -1,0 +1,117 @@
+syntax = "proto3";
+
+package nuntio.users.v1alpha1;
+
+option go_package = "./nuntio/users/v1alpha1";
+option java_multiple_files = true;
+option java_package = "nuntio.users.v1alpha1";
+
+import "nuntio/users/v1alpha1/users_messages.proto";
+
+option csharp_namespace = "nuntio.users.v1alpha1";
+option php_namespace = "Nuntio\\Users\\v1alpha1";
+
+// The service to manage public endpoints in Users
+service PublicService {
+  // Login a user from the frontend
+  rpc Login(PublicServiceLoginRequest) returns (PublicServiceLoginResponse) {}
+  // Get the logged in user
+  rpc Get(PublicServiceGetRequest) returns (PublicServiceGetResponse) {}
+  // Create a user
+  rpc Create(PublicServiceCreateRequest) returns (PublicServiceCreateResponse) {}
+  // Send reset password email to the user
+  rpc SendResetPasswordEmail(PublicServiceSendResetPasswordEmailRequest) returns (PublicServiceSendResetPasswordEmailResponse) {}
+  // Send reset password text to the user
+  rpc SendResetPasswordText(PublicServiceSendResetPasswordTextRequest) returns (PublicServiceSendResetPasswordTextResponse) {}
+  // Reset password of the user
+  rpc ResetPassword(PublicServiceResetPasswordRequest) returns (PublicServiceResetPasswordResponse) {}
+  // Delete logged in user
+  rpc Delete(PublicServiceDeleteRequest) returns (PublicServiceDeleteResponse) {}
+  // Refresh logged in token pair
+  rpc RefreshToken(PublicServiceRefreshTokenRequest) returns (PublicServiceRefreshTokenResponse) {}
+}
+
+// The request of a Public.Login RPC
+message PublicServiceLoginRequest {
+  UserIdentifier identifier = 1;
+  string password = 2;
+  string namespace = 3;
+}
+
+// The response of a Public.Delete RPC
+message PublicServiceLoginResponse {
+    TokenPair token_pair = 1;
+}
+
+// The request of a Public.Get RPC
+message PublicServiceGetRequest {
+    // The access token of the user
+    string access_token = 1;
+}
+
+// The response of a Public.Get RPC
+message PublicServiceGetResponse {
+  User user = 1;
+}
+
+// The request of a Public.Create RPC
+message PublicServiceCreateRequest {
+  User user = 1;
+  string namespace = 2;
+}
+
+// The response of a Public.Create RPC
+message PublicServiceCreateResponse {}
+
+// The request of a Public.SendResetPasswordEmail RPC
+message PublicServiceSendResetPasswordEmailRequest {
+  string email = 1;
+  string namespace = 2;
+}
+
+// The response of a Public.SendResetPasswordEmail RPC
+message PublicServiceSendResetPasswordEmailResponse {
+  VerificationCode verification_code = 1;
+}
+
+// The request of a Public.SendResetPasswordText RPC
+message PublicServiceSendResetPasswordTextRequest {
+  string phone_number = 1;
+  string namespace = 2;
+}
+
+// The response of a Public.SendResetPasswordText RPC
+message PublicServiceSendResetPasswordTextResponse {
+  VerificationCode verification_code = 1;
+}
+
+// The request of a Public.ResetPassword RPC
+message PublicServiceResetPasswordRequest {
+  UserIdentifier identifier = 1;
+  string code = 2;
+  string new_password = 3;
+  string namespace = 4;
+}
+
+// The response of a Public.ResetPassword RPC
+message PublicServiceResetPasswordResponse {}
+
+// The request of a Public.Delete RPC
+message PublicServiceDeleteRequest {
+    // The access token of the user
+    string access_token = 1;
+}
+
+// The response of a Public.Delete RPC
+message PublicServiceDeleteResponse {}
+
+// The request of a Public.Delete RPC
+message PublicServiceRefreshTokenRequest {
+  // The access token of the user
+  string refresh_token = 1;
+}
+
+// The response of a Public.Delete RPC
+message PublicServiceRefreshTokenResponse {
+  TokenPair token_pair = 1;
+}

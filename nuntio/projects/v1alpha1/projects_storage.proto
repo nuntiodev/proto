@@ -1,0 +1,155 @@
+syntax = "proto3";
+
+package nuntio.projects.v1alpha1;
+
+import "nuntio/projects/v1alpha1/projects_messages.proto";
+
+option go_package = "./nuntio/projects/v1alpha1";
+option csharp_namespace = "nuntio.projects.v1alpha1";
+option java_multiple_files = true;
+option java_package = "nuntio.projects.v1alpha1";
+option php_namespace = "Nuntio\\projects\\v1alpha1";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+
+service AdminStorageService {
+   // Ping returns an empty response used to check if the server is live
+   rpc Ping(AdminStorageServicePingRequest) returns (AdminStorageServicePingResponse) {}
+  // CreateNamespace initializes the storage interface for a given namespace
+  rpc CreateNamespace(AdminStorageServiceCreateNamespaceRequest) returns (AdminStorageServiceCreateNamespaceResponse) {}
+  // DeleteNamespace removes the storage ressources for a given namespace
+  rpc DeleteNamespace(AdminStorageServiceDeleteNamespaceRequest) returns (AdminStorageServiceDeleteNamespaceResponse) {}
+  // IsConfigured check if the storage interface is configured
+  rpc IsConfigured(AdminStorageServiceIsConfiguredRequest) returns (AdminStorageServiceIsConfiguredResponse) {}
+}
+
+service PublicStorageService {
+   // Ping returns an empty response used to check if the server is live
+   rpc Ping(PublicStorageServicePingRequest) returns (PublicStorageServicePingResponse) {}
+  // Delete deletes requested file
+  rpc Delete(PublicStorageServiceDeleteRequest) returns (PublicStorageServiceDeleteResponse) {}
+  // GenerateLink geneates a link to a specific file
+  rpc GenerateLink(GenerateLinkRequest) returns (GenerateLinkResponse) {}
+  // Upload uploads a file to the server
+  rpc Upload(stream PublicStorageServiceUploadRequest) returns (PublicStorageServiceUploadResponse) {}
+  // List returns a list of all folders and files in a path
+  rpc List(PublicStorageServiceListRequest) returns (PublicStorageServiceListResponse) {}
+  // DownloadFile returns the butes of a file
+  rpc DownloadFile(PublicStorageServiceDownloadFileRequest) returns (PublicStorageServiceDownloadFileResponse) {}
+}
+
+// The request of a AdminStorage.Ping RPC
+message AdminStorageServicePingRequest {}
+
+// The response of a AdminStorage.Ping RPC
+message AdminStorageServicePingResponse {}
+
+// The request of a PublicStorage.Ping RPC
+message PublicStorageServicePingRequest {}
+
+// The response of a PublicStorage.Ping RPC
+message PublicStorageServicePingResponse {}
+
+// The request of a AdminStorage.CreateNamespace RPC
+message AdminStorageServiceCreateNamespaceRequest {
+    // the id of the namespace
+    string namespace = 1;
+}
+
+// The response of a AdminStorage.CreateNamespace RPC
+message AdminStorageServiceCreateNamespaceResponse {}
+
+// The request of a AdminStorage.DeleteNamespace RPC
+message AdminStorageServiceDeleteNamespaceRequest {
+    // the id of the namespace
+    string namespace = 1;
+}
+
+// The response of a AdminStorage.DeleteNamespace RPC
+message AdminStorageServiceDeleteNamespaceResponse {}
+
+
+// The request of a PublicStorage.Delete RPC
+message PublicStorageServiceDeleteRequest {
+    // the id of the namespace
+    string namespace = 1;
+    // the file key
+    string key = 2;
+}
+
+// The response of a PublicStorage.Delete RPC
+message PublicStorageServiceDeleteResponse {}
+
+
+// The request of a PublicStorage.GenerateLink RPC
+message GenerateLinkRequest {
+    // the id of the namespace
+    string namespace = 1;
+    // the file key
+    string key = 2;
+    // for how long the link is valid
+    google.protobuf.Duration duration = 3;
+}
+
+// The response of a PublicStorage.GenerateLink RPC
+message GenerateLinkResponse {
+    // the url to the file
+    string url = 1;
+    // when the link expires
+    google.protobuf.Timestamp expires_at = 2;
+}
+
+// The request of a PublicStorage.Upload RPC
+message PublicStorageServiceUploadRequest {
+    // The bytes of data to upload
+    bytes data = 1;
+    // The namespace to perform action in
+    string namespace = 2;
+    // The path to upload the file to
+    string path = 3;
+}
+
+// The response of a PublicStorage.Upload RPC
+message PublicStorageServiceUploadResponse {}
+
+
+// The request of a PublicStorage.List RPC
+message PublicStorageServiceListRequest {
+    // The namespace to perform action in
+    string namespace = 1;
+    // The namespace to perform action in
+    string path = 2;
+}
+
+// The response of a PublicStorage.List RPC
+message PublicStorageServiceListResponse {
+    Folder folder = 1;
+}
+
+
+// The request of a PublicStorage.DownloadFile RPC
+message PublicStorageServiceDownloadFileRequest {
+    // The namespace to perform action in
+    string namespace = 1;
+    // the file key
+    string key = 2;
+}
+
+// The response of a PublicStorage.DownloadFile RPC
+message PublicStorageServiceDownloadFileResponse {
+    // The data in the file
+    bytes data = 1;
+}
+
+// The request of a AdinStorage.IsConfigured RPC
+message AdminStorageServiceIsConfiguredRequest {
+    // The namespace to perform action in
+    string namespace = 1;
+}
+
+// The response of a AdminStorage.DownloadFile RPC
+message AdminStorageServiceIsConfiguredResponse {
+    // The data in the file
+    bool configured = 1;
+}

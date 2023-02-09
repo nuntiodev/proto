@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+package nuntio.projects.v1alpha1;
+
+import "nuntio/projects/v1alpha1/projects_messages.proto";
+
+option go_package = "./nuntio/projects/v1alpha1";
+option csharp_namespace = "nuntio.projects.v1alpha1";
+option java_multiple_files = true;
+option java_package = "nuntio.projects.v1alpha1";
+option php_namespace = "Nuntio\\projects\\v1alpha1";
+
+
+service MemberService {
+  // Ping checks if a service is live
+  rpc Ping(MemberServicePingRequest) returns (MemberServicePingResponse) {}
+  // AddMember adds a member to a namespace
+  rpc Add(MemberServiceAddRequest) returns (MemberServiceAddResponse) {}
+  // RemoveMember removes a member from a namespace
+  rpc Remove(MemberServiceRemoveRequest) returns (MemberServiceRemoveResponse) {}
+  // AddProject adds a project to a members list of projects
+  rpc AddProject(MemberServiceAddProjectRequest) returns (MemberServiceAddProjectResponse) {}
+  // ListMembers returns a list of claimed and unclaimed members
+  rpc ListMembers(MemberServiceListMembersRequest) returns (MemberServiceListMembersResponse) {}
+}
+
+// The request of a Member.Ping RPC
+message MemberServicePingRequest {}
+
+// The response of a Member.Ping RPC
+message MemberServicePingResponse {}
+
+// The request of a Member.AddMember RPC
+message MemberServiceAddRequest {
+    // the email of the user (to auto send request)
+    string email = 1;
+    // the namespace to add
+    string namespace = 2;
+}
+
+// The response of a Member.AddMember RPC
+message MemberServiceAddResponse {
+    // the code used to add a namespace
+    string code = 1;
+}
+
+// The request of a Member.RemoveMember RPC
+message MemberServiceRemoveRequest {
+    // the id of the member
+    string id = 1;
+    // the id of the namespace
+    string namespace = 2;
+} 
+
+// The response of a Member.RemoveMember RPC
+message MemberServiceRemoveResponse {} 
+
+
+// The request of a Member.AddProject RPC
+message MemberServiceAddProjectRequest {
+    // the id of the namespace
+    string namespace = 1;
+    // your secret code to add the project
+    string code = 2;
+}
+
+// The response of a Member.AddProject RPC
+message MemberServiceAddProjectResponse {}
+
+
+// The request of a Member.ListMembers RPC
+message MemberServiceListMembersRequest {
+    // the id of the namespace
+    string namespace = 1;
+}
+
+// The response of a Member.ListMembers RPC
+message MemberServiceListMembersResponse {
+    // the result of List Members
+    repeated Member members = 1;
+}

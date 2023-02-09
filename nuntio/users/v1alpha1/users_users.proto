@@ -1,0 +1,302 @@
+syntax = "proto3";
+
+package nuntio.users.v1alpha1;
+
+import "nuntio/users/v1alpha1/users_messages.proto";
+
+option go_package = "./nuntio/users/v1alpha1";
+option csharp_namespace = "nuntio.users.v1alpha1";
+option java_multiple_files = true;
+option java_package = "nuntio.users.v1alpha1";
+option php_namespace = "Nuntio\\Users\\v1alpha1";
+
+// The service to manage users in Users
+service UsersService {
+  // Ping a server to check if it is live
+  rpc Ping(UsersServicePingRequest) returns (UsersServicePingResponse) {}
+  // Create a new user  
+  rpc Create(UsersServiceCreateRequest) returns (UsersServiceCreateResponse) {}
+  // Update a users password
+  rpc UpdatePassword(UsersServiceUpdatePasswordRequest) returns (UsersServiceUpdatePasswordResponse) {}
+  // Update a users profile
+  rpc UpdateProfile(UsersServiceUpdateProfileRequest) returns (UsersServiceUpdateProfileResponse) {}
+  // Update a users contact info
+  rpc UpdateContactInfo(UsersServiceUpdateContactInfoRequest) returns (UsersServiceUpdateContactInfoResponse) {}
+  // Uploads a new profile image with a client side stream
+  rpc UploadProfileImage(stream UsersServiceUploadProfileImageRequest) returns (UsersServiceUploadProfileImageResponse) {}
+  // Uploads a new profile image with a client side stream
+  rpc UploadCoverImage(stream UsersServiceUploadCoverImageRequest) returns (UsersServiceUploadCoverImageResponse) {}
+  // Fetches a users token info
+  rpc GetTokens(UsersServiceGetTokensRequest) returns (UsersServiceGetTokensResponse) {}
+  // Searches for one or more users
+  rpc Search(UsersServiceSearchRequest) returns (UsersServiceSearchResponse) {}
+  // Get a specific user
+  rpc Get(UsersServiceGetRequest) returns (UsersServiceGetResponse) {}
+  // Get multiple specific users
+  rpc GetMany(UsersServiceGetManyRequest) returns (UsersServiceGetManyResponse) {}
+  // List users
+  rpc List(UsersServiceListRequest) returns (UsersServiceListResponse) {}
+  // Add a contact to a user
+  rpc AddContact(UsersServiceAddContactRequest) returns (UsersServiceAddContactResponse) {}
+  // Remove a contact form a user
+  rpc RemoveContact(UsersServiceRemoveContactRequest) returns (UsersServiceRemoveContactResponse) {}
+  // Accept a contact request from a user
+  rpc AcceptContact(UsersServiceAcceptContactRequest) returns (UsersServiceAcceptContactResponse) {}
+  // Get a users contacts
+  rpc GetContacts(UsersServiceGetContactsRequest) returns (UsersServiceGetContactsResponse) {}
+  // Delete a specific user
+  rpc Delete(UsersServiceDeleteRequest) returns (UsersServiceDeleteResponse) {}
+  // Delete many specific users
+  rpc DeleteMany(UsersServiceDeleteManyRequest) returns (UsersServiceDeleteManyResponse) {}
+}
+
+// The request of a Users.Ping RPC
+message UsersServicePingRequest {}
+
+// The response of a Users.Ping RPC
+message UsersServicePingResponse {}
+
+// The request of a Users.Create RPC
+message UsersServiceCreateRequest {
+    // The user to be created
+    User user = 1;
+    // The namespace to perform action in
+    string namespace = 2;
+}
+
+// The response of a Users.Create RPC
+message UsersServiceCreateResponse {
+    // The user to be created
+    User user = 1;
+}
+
+// The request of a Users.UpdatePassword RPC
+message UsersServiceUpdatePasswordRequest {
+    // The user identifier to fetch the user
+    UserIdentifier identifier = 1;
+    // The namespace to perform action in
+    string namespace = 2;
+    // The new password of the user
+    string password = 3;
+}
+
+// The response of a Users.UpdatePassword RPC
+message UsersServiceUpdatePasswordResponse {}
+
+// The request of a Users.UpdateProfile RPC
+message UsersServiceUpdateProfileRequest {
+    // The user identifier to fetch the user
+    UserIdentifier identifier = 1;
+    // The namespace to perform action in
+    string namespace = 2;
+    // The profile information to update. Leave optinal fields to keep fields the same
+    User update = 3;
+}
+
+// The response of a Users.UpdateProfile RPC
+message UsersServiceUpdateProfileResponse {}
+
+// The request of a Users.UpdateContactInfo RPC
+message UsersServiceUpdateContactInfoRequest {
+    // The user identifier to fetch the user
+    UserIdentifier identifier = 1;
+    // The namespace to perform action in
+    string namespace = 2;
+    // The profile information to update. Leave optinal fields to keep fields the same
+    User update = 3;
+}
+
+// The response of a Users.UpdateContactInfo RPC
+message UsersServiceUpdateContactInfoResponse {}
+
+// The request of an Users.UploadProfileImage RPC
+message UsersServiceUploadProfileImageRequest {
+    // The bytes of data to upload
+    bytes data = 1;
+    // The namespace to perform action in
+    string namespace = 2;
+    // The user to upload a profile image to.
+    UserIdentifier identifier = 3;
+}
+
+// The response of an Users.UploadProfileImage RPC
+message UsersServiceUploadProfileImageResponse {
+    string url = 1;
+}
+
+// The request of an Users.UploadCoverImage RPC
+message UsersServiceUploadCoverImageRequest {
+    // The bytes of data to upload
+    bytes data = 1;
+    // The namespace to perform action in
+    string namespace = 2;
+    // The user to upload a cover image to.
+    UserIdentifier identifier = 3;
+}
+
+// The response of an Users.UploadCoverImage RPC
+message UsersServiceUploadCoverImageResponse {
+    string url = 1;
+}
+
+// The request of an Users.Get RPC
+message UsersServiceGetRequest {
+    // The user identifier to fetch the user
+    UserIdentifier identifier = 1;
+    // The namespace to perform action in
+    string namespace = 2;
+}
+
+// The response of an Users.Get RPC
+message UsersServiceGetResponse {
+    User user = 1;
+}
+
+// The request of an Users.GetTokens RPC
+message UsersServiceGetTokensRequest {
+    // The user identifier to fetch the user
+    string user_id = 1;
+    // The namespace to perform action in
+    string namespace = 2;
+}
+
+// The request of an Users.GetContacts RPC
+message UsersServiceGetContactsRequest {
+    // The user identifier to fetch the user
+    string user_id = 1;
+    // The namespace to perform action in
+    string namespace = 2;
+    // Where to start getting contacts from
+    int32 from = 3;
+    // Where to stop getting contacts to
+    int32 to = 4;
+    // Set to true to only include accepted or false to only include not accepted
+    optional bool accepted = 5;
+
+}
+
+// The request of an Users.Delete RPC
+message UsersServiceDeleteRequest {
+    // The user identifier to fetch the user
+    UserIdentifier identifier = 1;
+    // The namespace to perform action in
+    string namespace = 2;
+}
+
+// The response of an Users.Delete RPC
+message UsersServiceDeleteResponse {}
+
+// The response of a Users.GetTokens RPC
+message UsersServiceGetTokensResponse {
+    // An array of token meta data
+    repeated TokenMeta tokens = 1;
+}
+
+// The response of a Users.List RPC
+message UsersServiceListResponse {
+    // The users returned
+    repeated User users = 1;
+    // Return number of users in database
+    int64 count = 2;
+}
+
+// The response of a Users.GetMany RPC
+message UsersServiceGetManyResponse {
+    // The users returned
+    repeated User users = 1;
+    // Return number of users in database
+    int64 count = 2;
+}
+
+// The response of a Users.Search RPC
+message UsersServiceSearchResponse {
+    // The users returned
+    repeated User users = 1;
+    // Return number of users in database
+    int64 count = 2;
+}
+
+// The request of a Users.Search RPC
+message UsersServiceSearchRequest {
+    // The query to search for
+    string query = 1;
+    // The namespace to perform action in
+    string namespace = 2;
+    // Where to start getting contacts from
+    int32 from = 3;
+    // Where to stop getting contacts to
+    int32 to = 4;
+    // To list only within a group
+    optional string group_id = 5;
+
+    
+}
+
+// The request of a Users.GetMany RPC
+message UsersServiceGetManyRequest {
+    repeated UserIdentifier identifiers = 1;
+    // The namespace to perform action in
+    string namespace = 2;
+}
+
+// The request of a Users.DeleteMany RPC
+message UsersServiceDeleteManyRequest {
+    repeated UserIdentifier identifiers = 1;
+    // The namespace to perform action in
+    string namespace = 2;
+}
+
+// The response of a Users.DeleteMany RPC
+message UsersServiceDeleteManyResponse {}
+
+// The request of a Users.List RPC
+message UsersServiceListRequest {
+    // the namespace you want to search within
+    string namespace = 1;
+    // Where to start getting contacts from
+    int32 from = 2;
+    // Where to stop getting contacts to
+    int32 to = 3;
+    // To list only within a group
+    optional string group_id = 4;
+}
+
+// The request of a Users.AddContact RPC
+message UsersServiceAddContactRequest {
+    Contact contact = 1;
+    string namespace = 2;
+}
+
+// The response of a Users.AddContact RPC
+message UsersServiceAddContactResponse {
+    Contact contact = 1;
+}
+
+
+// The request of a Users.RemoveContact RPC
+message UsersServiceRemoveContactRequest {
+    string contact_id = 1;
+    string namespace = 2;
+    string user_id = 3;
+}
+
+// The response of a Users.RemoveContact RPC
+message UsersServiceRemoveContactResponse {}
+
+
+// The request of a Users.AcceptContact RPC
+message UsersServiceAcceptContactRequest {
+    string contact_id = 1;
+    string namespace = 2;
+    string user_id = 3;
+}
+
+// The response of a Users.AcceptContact RPC
+message UsersServiceAcceptContactResponse {}
+
+// The request of a Users.GetContacts RPC
+message UsersServiceGetContactsResponse {
+    repeated Contact contacts = 1;
+    // Return number of users in database
+    int64 count = 2;
+}

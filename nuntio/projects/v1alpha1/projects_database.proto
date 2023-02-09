@@ -1,0 +1,85 @@
+syntax = "proto3";
+
+package nuntio.projects.v1alpha1;
+
+option go_package = "./nuntio/projects/v1alpha1";
+option csharp_namespace = "nuntio.projects.v1alpha1";
+option java_multiple_files = true;
+option java_package = "nuntio.projects.v1alpha1";
+option php_namespace = "Nuntio\\projects\\v1alpha1";
+
+service MongoService {
+  // Ping checks if a service is live
+  rpc Ping(MongoServicePingRequest) returns (MongoServicePingResponse) {}
+  // CreateNamespace initializes the storage interface for a given namespace
+  rpc CreateNamespace(MongoServiceCreateNamespaceRequest) returns (MongoServiceCreateNamespaceResponse) {}
+  // DeleteNamespace removes the storage ressources for a given namespace
+  rpc DeleteNamespace(MongoServiceDeleteNamespaceRequest) returns (MongoServiceDeleteNamespaceResponse) {}
+  // IsConfigured check if the storage interface is configured
+  rpc IsConfigured(MongoServiceIsConfiguredRequest) returns (MongoServiceIsConfiguredResponse) {}
+  // AddUser adds a user to a bucket
+  rpc AddUser(MongoServiceAddUserRequest) returns (MongoServiceAddUserResponse) {}
+  // Delete user removes a user from a bucket
+  rpc RemoveUser(MongoServiceRemoveUserRequest) returns (MongoServiceRemoveUserResponse) {}
+}
+
+// The request of a API.Ping RPC
+message MongoServicePingRequest {}
+
+// The response of a API.Ping RPC
+message MongoServicePingResponse {}
+
+// The request of a Mongo.CreateNamespace RPC
+message MongoServiceCreateNamespaceRequest {
+    // the project id related to the api key
+    string project_id = 1;
+}
+
+// The response of a Mongo.CreateNamespace RPC
+message MongoServiceCreateNamespaceResponse {}
+
+// The request of a Mongo.DeleteNamespace RPC
+message MongoServiceDeleteNamespaceRequest {
+    // the project id related to the api key
+    string project_id = 1;
+}
+
+// The response of a Mongo.DeleteNamespace RPC
+message MongoServiceDeleteNamespaceResponse {}
+
+
+// The request of a Mongo.IsConfigured RPC
+message MongoServiceIsConfiguredRequest {
+    // the project id related to the api key
+    string project_id = 1;
+}
+
+// The response of a Mongo.IsConfigured RPC
+message MongoServiceIsConfiguredResponse {
+    // The data in the file
+    bool configured = 1;
+}
+
+// The request of a Mongo.AddUser RPC
+message MongoServiceAddUserRequest {
+    // the project id related to the api key
+    string project_id = 1;
+    // The id of the user (api key)
+    string user_id = 2;
+    // The password of the user (api key)
+    string password = 3;
+}
+
+// The response of a Mongo.AddUser RPC
+message MongoServiceAddUserResponse {}
+
+// The request of a Mongo.RemoveUser RPC
+message MongoServiceRemoveUserRequest {
+    // The id of the user (api key)
+    string user_id = 1;
+    // the project id related to the api key
+    string project_id = 2;
+}
+
+// The response of a Mongo.RemoveUser RPC
+message MongoServiceRemoveUserResponse {}

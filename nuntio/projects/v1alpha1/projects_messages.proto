@@ -1,0 +1,83 @@
+syntax = "proto3";
+
+package nuntio.projects.v1alpha1;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "./nuntio/projects/v1alpha1";
+option csharp_namespace = "nuntio.projects.v1alpha1";
+option java_multiple_files = true;
+option java_package = "nuntio.projects.v1alpha1";
+option php_namespace = "Nuntio\\projects\\v1alpha1";
+//import "google/protobuf/duration.proto";
+
+message File {
+    string name = 1;
+    google.protobuf.Timestamp created_at = 2;
+    string content_type = 3;
+    string path = 4;
+    int64 size = 5;
+    bytes data = 6;
+    string url = 7;
+}
+
+message Folder {
+    string path = 1;
+    repeated File files = 2;
+    repeated Folder folders = 3;
+    string name = 4;
+}
+
+message ApiAccess {
+    bool ready = 1;
+    bool enabled = 2;
+}
+
+message APIKey {
+    string id = 1;
+    google.protobuf.Timestamp created_at = 2;
+    google.protobuf.Timestamp updated_at = 3;
+    string secret = 4;
+    string project_id = 5;
+    ApiAccess mongo = 6;
+    ApiAccess postgres = 7;
+    ApiAccess storage = 8;
+    ApiAccess users = 9;
+}
+
+message Image {
+    string url = 1;
+    google.protobuf.Timestamp expires_at = 2;
+    bool expires = 3;
+    string key = 4;
+}
+
+message AccessToken {
+    string id = 1;
+    string namespace = 2;
+    string jwt = 3;
+    google.protobuf.Timestamp expires_at = 4;
+    google.protobuf.Timestamp created_at = 5;
+}
+
+message Member {
+    string id = 1;
+    google.protobuf.Timestamp created_at = 2;
+    google.protobuf.Timestamp updated_at = 3;
+    string password = 4;
+}
+
+message Project {
+    string id = 1;
+    string name = 2;
+    Image logo = 3;
+    google.protobuf.Timestamp created_at = 4;
+    google.protobuf.Timestamp updated_at = 5;
+    string owner_id = 6;
+    bool users_configured = 7;
+    bool mongo_configured = 8;
+    bool postgres_configured = 9;
+    bool storage_configured = 10;
+}
+
+message Null {}
