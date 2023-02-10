@@ -91,6 +91,8 @@ message GroupsServiceListRequest {
 message GroupsServiceListResponse {
     // list of groups
     repeated Group groups = 1;
+    // count of total amount of users
+    int64 count = 2;
 }
 
 // The request of a Group.Delete RPC
