@@ -213,7 +213,6 @@ message Group {
     string name = 2;
     google.protobuf.Timestamp created_at = 3;
     google.protobuf.Timestamp updated_at = 4;
-    int64 amount = 5;
 }
 
 message UserMeta {

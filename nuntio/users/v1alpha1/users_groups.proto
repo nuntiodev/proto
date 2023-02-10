@@ -37,10 +37,12 @@ message GroupsServicePingResponse {}
 
 // The request of a Groups.Create RPC
 message GroupsServiceCreateRequest {
-    // The group to be created
-    Group group = 1;
     // The namespace to perform action in
-    string namespace = 2;
+    string namespace = 1;
+    // The id of the group to be created
+    string id = 2;
+    // The name of the group to be created
+    string name = 3;
 }
 
 // The response of a Groups.Create RPC

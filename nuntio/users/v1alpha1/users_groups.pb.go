@@ -104,10 +104,12 @@ type GroupsServiceCreateRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// The group to be created
-	Group *Group `protobuf:"bytes,1,opt,name=group,proto3" json:"group,omitempty"`
 	// The namespace to perform action in
-	Namespace string `protobuf:"bytes,2,opt,name=namespace,proto3" json:"namespace,omitempty"`
+	Namespace string `protobuf:"bytes,1,opt,name=namespace,proto3" json:"namespace,omitempty"`
+	// The id of the group to be created
+	Id string `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
+	// The name of the group to be created
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 }
 
 func (x *GroupsServiceCreateRequest) Reset() {
@@ -142,16 +144,23 @@ func (*GroupsServiceCreateRequest) Descriptor() ([]byte, []int) {
 	return file_nuntio_users_v1alpha1_users_groups_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *GroupsServiceCreateRequest) GetGroup() *Group {
-	if x != nil {
-		return x.Group
-	}
-	return nil
-}
-
 func (x *GroupsServiceCreateRequest) GetNamespace() string {
 	if x != nil {
 		return x.Namespace
+	}
+	return ""
+}
+
+func (x *GroupsServiceCreateRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *GroupsServiceCreateRequest) GetName() string {
+	if x != nil {
+		return x.Name
 	}
 	return ""
 }
@@ -863,14 +872,13 @@ var file_nuntio_users_v1alpha1_users_groups_proto_rawDesc = []byte{
 	0x18, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x73, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x50, 0x69,
 	0x6e, 0x67, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x1b, 0x0a, 0x19, 0x47, 0x72, 0x6f,
 	0x75, 0x70, 0x73, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x50, 0x69, 0x6e, 0x67, 0x52, 0x65,
-	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x6e, 0x0a, 0x1a, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x73,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x5e, 0x0a, 0x1a, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x73,
 	0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x52, 0x65, 0x71,
-	0x75, 0x65, 0x73, 0x74, 0x12, 0x32, 0x0a, 0x05, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x0b, 0x32, 0x1c, 0x2e, 0x6e, 0x75, 0x6e, 0x74, 0x69, 0x6f, 0x2e, 0x75, 0x73, 0x65,
-	0x72, 0x73, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x47, 0x72, 0x6f, 0x75,
-	0x70, 0x52, 0x05, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x12, 0x1c, 0x0a, 0x09, 0x6e, 0x61, 0x6d, 0x65,
-	0x73, 0x70, 0x61, 0x63, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x6e, 0x61, 0x6d,
-	0x65, 0x73, 0x70, 0x61, 0x63, 0x65, 0x22, 0x51, 0x0a, 0x1b, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x73,
+	0x75, 0x65, 0x73, 0x74, 0x12, 0x1c, 0x0a, 0x09, 0x6e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63,
+	0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x6e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61,
+	0x63, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02,
+	0x69, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x22, 0x51, 0x0a, 0x1b, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x73,
 	0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x52, 0x65, 0x73,
 	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x32, 0x0a, 0x05, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x18, 0x01,
 	0x20, 0x01, 0x28, 0x0b, 0x32, 0x1c, 0x2e, 0x6e, 0x75, 0x6e, 0x74, 0x69, 0x6f, 0x2e, 0x75, 0x73,
@@ -1038,33 +1046,32 @@ var file_nuntio_users_v1alpha1_users_groups_proto_goTypes = []interface{}{
 	(*UserIdentifier)(nil),              // 17: nuntio.users.v1alpha1.UserIdentifier
 }
 var file_nuntio_users_v1alpha1_users_groups_proto_depIdxs = []int32{
-	16, // 0: nuntio.users.v1alpha1.GroupsServiceCreateRequest.group:type_name -> nuntio.users.v1alpha1.Group
-	16, // 1: nuntio.users.v1alpha1.GroupsServiceCreateResponse.group:type_name -> nuntio.users.v1alpha1.Group
-	17, // 2: nuntio.users.v1alpha1.GroupsServiceRemoveRequest.identifier:type_name -> nuntio.users.v1alpha1.UserIdentifier
-	17, // 3: nuntio.users.v1alpha1.GroupsServiceAddRequest.identifier:type_name -> nuntio.users.v1alpha1.UserIdentifier
-	16, // 4: nuntio.users.v1alpha1.GroupsServiceListResponse.groups:type_name -> nuntio.users.v1alpha1.Group
-	16, // 5: nuntio.users.v1alpha1.GroupsServiceGetResponse.group:type_name -> nuntio.users.v1alpha1.Group
-	0,  // 6: nuntio.users.v1alpha1.GroupsService.Ping:input_type -> nuntio.users.v1alpha1.GroupsServicePingRequest
-	2,  // 7: nuntio.users.v1alpha1.GroupsService.Create:input_type -> nuntio.users.v1alpha1.GroupsServiceCreateRequest
-	4,  // 8: nuntio.users.v1alpha1.GroupsService.Remove:input_type -> nuntio.users.v1alpha1.GroupsServiceRemoveRequest
-	6,  // 9: nuntio.users.v1alpha1.GroupsService.Add:input_type -> nuntio.users.v1alpha1.GroupsServiceAddRequest
-	10, // 10: nuntio.users.v1alpha1.GroupsService.Delete:input_type -> nuntio.users.v1alpha1.GroupsServiceDeleteRequest
-	8,  // 11: nuntio.users.v1alpha1.GroupsService.List:input_type -> nuntio.users.v1alpha1.GroupsServiceListRequest
-	12, // 12: nuntio.users.v1alpha1.GroupsService.Update:input_type -> nuntio.users.v1alpha1.GroupsServiceUpdateRequest
-	14, // 13: nuntio.users.v1alpha1.GroupsService.Get:input_type -> nuntio.users.v1alpha1.GroupsServiceGetRequest
-	1,  // 14: nuntio.users.v1alpha1.GroupsService.Ping:output_type -> nuntio.users.v1alpha1.GroupsServicePingResponse
-	3,  // 15: nuntio.users.v1alpha1.GroupsService.Create:output_type -> nuntio.users.v1alpha1.GroupsServiceCreateResponse
-	5,  // 16: nuntio.users.v1alpha1.GroupsService.Remove:output_type -> nuntio.users.v1alpha1.GroupsServiceRemoveResponse
-	7,  // 17: nuntio.users.v1alpha1.GroupsService.Add:output_type -> nuntio.users.v1alpha1.GroupsServiceAddResponse
-	11, // 18: nuntio.users.v1alpha1.GroupsService.Delete:output_type -> nuntio.users.v1alpha1.GroupsServiceDeleteResponse
-	9,  // 19: nuntio.users.v1alpha1.GroupsService.List:output_type -> nuntio.users.v1alpha1.GroupsServiceListResponse
-	13, // 20: nuntio.users.v1alpha1.GroupsService.Update:output_type -> nuntio.users.v1alpha1.GroupsServiceUpdateResponse
-	15, // 21: nuntio.users.v1alpha1.GroupsService.Get:output_type -> nuntio.users.v1alpha1.GroupsServiceGetResponse
-	14, // [14:22] is the sub-list for method output_type
-	6,  // [6:14] is the sub-list for method input_type
-	6,  // [6:6] is the sub-list for extension type_name
-	6,  // [6:6] is the sub-list for extension extendee
-	0,  // [0:6] is the sub-list for field type_name
+	16, // 0: nuntio.users.v1alpha1.GroupsServiceCreateResponse.group:type_name -> nuntio.users.v1alpha1.Group
+	17, // 1: nuntio.users.v1alpha1.GroupsServiceRemoveRequest.identifier:type_name -> nuntio.users.v1alpha1.UserIdentifier
+	17, // 2: nuntio.users.v1alpha1.GroupsServiceAddRequest.identifier:type_name -> nuntio.users.v1alpha1.UserIdentifier
+	16, // 3: nuntio.users.v1alpha1.GroupsServiceListResponse.groups:type_name -> nuntio.users.v1alpha1.Group
+	16, // 4: nuntio.users.v1alpha1.GroupsServiceGetResponse.group:type_name -> nuntio.users.v1alpha1.Group
+	0,  // 5: nuntio.users.v1alpha1.GroupsService.Ping:input_type -> nuntio.users.v1alpha1.GroupsServicePingRequest
+	2,  // 6: nuntio.users.v1alpha1.GroupsService.Create:input_type -> nuntio.users.v1alpha1.GroupsServiceCreateRequest
+	4,  // 7: nuntio.users.v1alpha1.GroupsService.Remove:input_type -> nuntio.users.v1alpha1.GroupsServiceRemoveRequest
+	6,  // 8: nuntio.users.v1alpha1.GroupsService.Add:input_type -> nuntio.users.v1alpha1.GroupsServiceAddRequest
+	10, // 9: nuntio.users.v1alpha1.GroupsService.Delete:input_type -> nuntio.users.v1alpha1.GroupsServiceDeleteRequest
+	8,  // 10: nuntio.users.v1alpha1.GroupsService.List:input_type -> nuntio.users.v1alpha1.GroupsServiceListRequest
+	12, // 11: nuntio.users.v1alpha1.GroupsService.Update:input_type -> nuntio.users.v1alpha1.GroupsServiceUpdateRequest
+	14, // 12: nuntio.users.v1alpha1.GroupsService.Get:input_type -> nuntio.users.v1alpha1.GroupsServiceGetRequest
+	1,  // 13: nuntio.users.v1alpha1.GroupsService.Ping:output_type -> nuntio.users.v1alpha1.GroupsServicePingResponse
+	3,  // 14: nuntio.users.v1alpha1.GroupsService.Create:output_type -> nuntio.users.v1alpha1.GroupsServiceCreateResponse
+	5,  // 15: nuntio.users.v1alpha1.GroupsService.Remove:output_type -> nuntio.users.v1alpha1.GroupsServiceRemoveResponse
+	7,  // 16: nuntio.users.v1alpha1.GroupsService.Add:output_type -> nuntio.users.v1alpha1.GroupsServiceAddResponse
+	11, // 17: nuntio.users.v1alpha1.GroupsService.Delete:output_type -> nuntio.users.v1alpha1.GroupsServiceDeleteResponse
+	9,  // 18: nuntio.users.v1alpha1.GroupsService.List:output_type -> nuntio.users.v1alpha1.GroupsServiceListResponse
+	13, // 19: nuntio.users.v1alpha1.GroupsService.Update:output_type -> nuntio.users.v1alpha1.GroupsServiceUpdateResponse
+	15, // 20: nuntio.users.v1alpha1.GroupsService.Get:output_type -> nuntio.users.v1alpha1.GroupsServiceGetResponse
+	13, // [13:21] is the sub-list for method output_type
+	5,  // [5:13] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_nuntio_users_v1alpha1_users_groups_proto_init() }
