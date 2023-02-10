@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package nuntio.projects.v1alpha1;
+
+import "nuntio/projects/v1alpha1/projects_messages.proto";
+
+option go_package = "./nuntio/projects/v1alpha1";
+option csharp_namespace = "nuntio.projects.v1alpha1";
+option java_multiple_files = true;
+option java_package = "nuntio.projects.v1alpha1";
+option php_namespace = "Nuntio\\projects\\v1alpha1";
+
+
+service ClusterService {
+  // Ping checks if a service is live
+  rpc Ping(ClusterServicePingRequest) returns (ClusterServicePingResponse) {}
+  // Get returns info about the cluster and what infrastructure is available.
+  rpc Get(ClusterServiceGetRequest) returns (ClusterServiceGetResponse) {}
+}
+
+// The request of a Cluster.Ping RPC
+message ClusterServicePingRequest {}
+
+// The response of a Cluster.Ping RPC
+message ClusterServicePingResponse {}
+
+// The request of a Cluster.Get RPC
+message ClusterServiceGetRequest {}
+
+// The response of a Cluster.Get RPC
+message ClusterServiceGetResponse {
+    bool users_enabled = 1;
+    bool storage_enabled = 2;
+    bool mongo_enabled = 3;
+    bool postgres_enabled = 4;
+}

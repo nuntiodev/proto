@@ -101,6 +101,10 @@ message ProjectsServiceUpdateResponse {}
 message ProjectsServiceGetRequest {
     // the id of the project
     string id = 1;
+    // the external address for the project service
+    string external_endpoint = 2;
+    // the internal address for the project service
+    string internal_endpoint = 3;
 }
 
 // The response of a Project.Get RPC
