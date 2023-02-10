@@ -11,7 +11,7 @@ option java_package = "nuntio.projects.v1alpha1";
 option php_namespace = "Nuntio\\projects\\v1alpha1";
 
 
-service MemberService {
+service MembersService {
   // Ping checks if a service is live
   rpc Ping(MemberServicePingRequest) returns (MemberServicePingResponse) {}
   // AddMember adds a member to a namespace

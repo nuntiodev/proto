@@ -11,7 +11,7 @@ option java_package = "nuntio.projects.v1alpha1";
 option php_namespace = "Nuntio\\projects\\v1alpha1";
 
 
-service ProjectService {
+service ProjectsService {
   // Ping returns an empty response used to check if the server is live
   rpc Ping(ProjectServicePingRequest) returns (ProjectServicePingResponse) {}
   // Create initializes a new project and all relating ressources
