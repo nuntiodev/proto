@@ -2,8 +2,6 @@ syntax = "proto3";
 
 package nuntio.projects.v1alpha1;
 
-import "nuntio/projects/v1alpha1/projects_messages.proto";
-
 option go_package = "./nuntio/projects/v1alpha1";
 option csharp_namespace = "nuntio.projects.v1alpha1";
 option java_multiple_files = true;

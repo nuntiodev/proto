@@ -269,8 +269,6 @@ message TokenPair {
     RefreshToken refresh_token = 2;
 }
 
-message Null {}
-
 message File {
     string name = 1;
     google.protobuf.Timestamp created_at = 2;

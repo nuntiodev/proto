@@ -79,5 +79,3 @@ message Project {
     bool postgres_configured = 9;
     bool storage_configured = 10;
 }
-
-message Null {}
