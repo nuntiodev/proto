@@ -13,43 +13,43 @@ option php_namespace = "Nuntio\\projects\\v1alpha1";
 
 service ProjectsService {
   // Ping returns an empty response used to check if the server is live
-  rpc Ping(ProjectServicePingRequest) returns (ProjectServicePingResponse) {}
+  rpc Ping(ProjectsServicePingRequest) returns (ProjectsServicePingResponse) {}
   // Create initializes a new project and all relating ressources
-  rpc Create(ProjectServiceCreateRequest) returns (ProjectServiceCreateResponse) {}
+  rpc Create(ProjectsServiceCreateRequest) returns (ProjectsServiceCreateResponse) {}
   // Deletes deletes a project and all its ressources
-  rpc Delete(ProjectServiceDeleteRequest) returns (ProjectServiceDeleteResponse) {}
+  rpc Delete(ProjectsServiceDeleteRequest) returns (ProjectsServiceDeleteResponse) {}
   // Update updates a project with a new name, logo etc.
-  rpc Update(ProjectServiceUpdateRequest) returns (ProjectServiceUpdateResponse) {}
+  rpc Update(ProjectsServiceUpdateRequest) returns (ProjectsServiceUpdateResponse) {}
   // Get fetches a speicfic project
-  rpc Get(ProjectServiceGetRequest) returns (ProjectServiceGetResponse) {}
+  rpc Get(ProjectsServiceGetRequest) returns (ProjectsServiceGetResponse) {}
   // List returns a list of projects
-  rpc List(ProjectServiceListRequest) returns (ProjectServiceListResponse) {}
+  rpc List(ProjectsServiceListRequest) returns (ProjectsServiceListResponse) {}
   // Enables storage for the project
-  rpc EnableStorage(ProjectServiceEnableStorageRequest) returns (ProjectServiceEnableStorageResponse) {}
+  rpc EnableStorage(ProjectsServiceEnableStorageRequest) returns (ProjectsServiceEnableStorageResponse) {}
   // Disables storage for the project
-  rpc DisableStorage(ProjectServiceDisableStorageRequest) returns (ProjectServiceDisableStorageResponse) {}
+  rpc DisableStorage(ProjectsServiceDisableStorageRequest) returns (ProjectsServiceDisableStorageResponse) {}
   // Enables USers for the project
-  rpc EnableUsers(ProjectServiceEnableUsersRequest) returns (ProjectServiceEnableUsersResponse) {}
+  rpc EnableUsers(ProjectsServiceEnableUsersRequest) returns (ProjectsServiceEnableUsersResponse) {}
   // Disables Users for the project
-  rpc DisableUsers(ProjectServiceDisableUsersRequest) returns (ProjectServiceDisableUsersResponse) {}
+  rpc DisableUsers(ProjectsServiceDisableUsersRequest) returns (ProjectsServiceDisableUsersResponse) {}
   // Enables Mongo for the project
-  rpc EnableMongo(ProjectServiceEnableMongoRequest) returns (ProjectServiceEnableMongoResponse) {}
+  rpc EnableMongo(ProjectsServiceEnableMongoRequest) returns (ProjectsServiceEnableMongoResponse) {}
   // Disables Mongo for the project
-  rpc DisableMongo(ProjectServiceDisableMongoRequest) returns (ProjectServiceDisableMongoResponse) {}
+  rpc DisableMongo(ProjectsServiceDisableMongoRequest) returns (ProjectsServiceDisableMongoResponse) {}
   // Enables Postgres for the project
-  rpc EnablePostgres(ProjectServiceEnablePostgresRequest) returns (ProjectServiceEnablePostgresResponse) {}
+  rpc EnablePostgres(ProjectsServiceEnablePostgresRequest) returns (ProjectsServiceEnablePostgresResponse) {}
   // Disable Postgres for the project
-  rpc DisablePostgres(ProjectServiceDisablePostgresRequest) returns (ProjectServiceDisablePostgresResponse) {}
+  rpc DisablePostgres(ProjectsServiceDisablePostgresRequest) returns (ProjectsServiceDisablePostgresResponse) {}
 }
 
 // The request of a Project.Ping RPC
-message ProjectServicePingRequest {}
+message ProjectsServicePingRequest {}
 
 // The response of a Project.Ping RPC
-message ProjectServicePingResponse {}
+message ProjectsServicePingResponse {}
 
 // The request of a Project.Create RPC
-message ProjectServiceCreateRequest {
+message ProjectsServiceCreateRequest {
     // the id of the project
     string id = 1;
     // the name related to the project
@@ -69,23 +69,23 @@ message ProjectServiceCreateRequest {
 }
 
 // The response of a Project.Create RPC
-message ProjectServiceCreateResponse {
+message ProjectsServiceCreateResponse {
     Project project = 1;
 }
 
 
 // The request of a Project.Delete RPC
-message ProjectServiceDeleteRequest {
+message ProjectsServiceDeleteRequest {
     // the id of the project
     string id = 1;
 }
 
 // The response of a Project.Delete RPC
-message ProjectServiceDeleteResponse {}
+message ProjectsServiceDeleteResponse {}
 
 
 // The request of a Project.Update RPC
-message ProjectServiceUpdateRequest {
+message ProjectsServiceUpdateRequest {
     // the id of the project
     string id = 1;
     // the name related to the project
@@ -95,21 +95,21 @@ message ProjectServiceUpdateRequest {
 }
 
 // The response of a Project.Update RPC
-message ProjectServiceUpdateResponse {}
+message ProjectsServiceUpdateResponse {}
 
 // The request of a Project.Get RPC
-message ProjectServiceGetRequest {
+message ProjectsServiceGetRequest {
     // the id of the project
     string id = 1;
 }
 
 // The response of a Project.Get RPC
-message ProjectServiceGetResponse {
+message ProjectsServiceGetResponse {
     Project project = 1;
 }
 
 // The request of a Project.List RPC
-message ProjectServiceListRequest {
+message ProjectsServiceListRequest {
     // where to start fetching from
     int32 from = 1;
     // where to stop fetching to
@@ -119,7 +119,7 @@ message ProjectServiceListRequest {
 }
 
 // The response of a Project.List RPC
-message ProjectServiceListResponse {
+message ProjectsServiceListResponse {
     // the result of list
     repeated Project projects = 1;
     // total amount of namespaces
@@ -129,83 +129,83 @@ message ProjectServiceListResponse {
 }
 
 // The request of a Project.EnableMongo RPC
-message ProjectServiceEnableMongoRequest {
+message ProjectsServiceEnableMongoRequest {
     // the id of the project
     string id = 1;
 }
 
 // The response of a Project.EnableMongo RPC
-message ProjectServiceEnableMongoResponse {}
+message ProjectsServiceEnableMongoResponse {}
 
 
 // The request of a Project.DisableMongo RPC
-message ProjectServiceDisableMongoRequest {
+message ProjectsServiceDisableMongoRequest {
     // the id of the project
     string id = 1;
 }
 
 // The response of a Project.DisableMongo RPC
-message ProjectServiceDisableMongoResponse {}
+message ProjectsServiceDisableMongoResponse {}
 
 
 // The request of a Project.EnablePostgres RPC
-message ProjectServiceEnablePostgresRequest {
+message ProjectsServiceEnablePostgresRequest {
     // the id of the project
     string id = 1;
 }
 
 // The response of a Project.EnablePostgres RPC
-message ProjectServiceEnablePostgresResponse {}
+message ProjectsServiceEnablePostgresResponse {}
 
 
 // The request of a Project.DisablePostgres RPC
-message ProjectServiceDisablePostgresRequest {
+message ProjectsServiceDisablePostgresRequest {
     // the id of the project
     string id = 1;
 }
 
 // The response of a Project.DisablePostgres RPC
-message ProjectServiceDisablePostgresResponse {
+message ProjectsServiceDisablePostgresResponse {
     // the id of the project
     string id = 1;
 }
 
 
 // The request of a Project.EnableStorage RPC
-message ProjectServiceEnableStorageRequest {
+message ProjectsServiceEnableStorageRequest {
     // the id of the project
     string id = 1;
 }
 
 // The response of a Project.EnableStorage RPC
-message ProjectServiceEnableStorageResponse {}
+message ProjectsServiceEnableStorageResponse {}
 
 
 // The request of a Project.DisableStorage RPC
-message ProjectServiceDisableStorageRequest {
+message ProjectsServiceDisableStorageRequest {
     // the id of the project
     string id = 1;
 }
 
 // The response of a Project.DisableStorage RPC
-message ProjectServiceDisableStorageResponse {}
+message ProjectsServiceDisableStorageResponse {}
 
 
 // The request of a Project.EnableUsers RPC
-message ProjectServiceEnableUsersRequest {
+message ProjectsServiceEnableUsersRequest {
     // the id of the project
     string id = 1;
 }
 
 // The response of a Project.EnableUsers RPC
-message ProjectServiceEnableUsersResponse {}
+message ProjectsServiceEnableUsersResponse {}
 
 
 // The request of a Project.DisableUsers RPC
-message ProjectServiceDisableUsersRequest {
+message ProjectsServiceDisableUsersRequest {
     // the id of the project
     string id = 1;
 }
 
 // The response of a Project.DisableUsers RPC
-message ProjectServiceDisableUsersResponse {}
+message ProjectsServiceDisableUsersResponse {}

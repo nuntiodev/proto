@@ -23,33 +23,33 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ProjectsServiceClient interface {
 	// Ping returns an empty response used to check if the server is live
-	Ping(ctx context.Context, in *ProjectServicePingRequest, opts ...grpc.CallOption) (*ProjectServicePingResponse, error)
+	Ping(ctx context.Context, in *ProjectsServicePingRequest, opts ...grpc.CallOption) (*ProjectsServicePingResponse, error)
 	// Create initializes a new project and all relating ressources
-	Create(ctx context.Context, in *ProjectServiceCreateRequest, opts ...grpc.CallOption) (*ProjectServiceCreateResponse, error)
+	Create(ctx context.Context, in *ProjectsServiceCreateRequest, opts ...grpc.CallOption) (*ProjectsServiceCreateResponse, error)
 	// Deletes deletes a project and all its ressources
-	Delete(ctx context.Context, in *ProjectServiceDeleteRequest, opts ...grpc.CallOption) (*ProjectServiceDeleteResponse, error)
+	Delete(ctx context.Context, in *ProjectsServiceDeleteRequest, opts ...grpc.CallOption) (*ProjectsServiceDeleteResponse, error)
 	// Update updates a project with a new name, logo etc.
-	Update(ctx context.Context, in *ProjectServiceUpdateRequest, opts ...grpc.CallOption) (*ProjectServiceUpdateResponse, error)
+	Update(ctx context.Context, in *ProjectsServiceUpdateRequest, opts ...grpc.CallOption) (*ProjectsServiceUpdateResponse, error)
 	// Get fetches a speicfic project
-	Get(ctx context.Context, in *ProjectServiceGetRequest, opts ...grpc.CallOption) (*ProjectServiceGetResponse, error)
+	Get(ctx context.Context, in *ProjectsServiceGetRequest, opts ...grpc.CallOption) (*ProjectsServiceGetResponse, error)
 	// List returns a list of projects
-	List(ctx context.Context, in *ProjectServiceListRequest, opts ...grpc.CallOption) (*ProjectServiceListResponse, error)
+	List(ctx context.Context, in *ProjectsServiceListRequest, opts ...grpc.CallOption) (*ProjectsServiceListResponse, error)
 	// Enables storage for the project
-	EnableStorage(ctx context.Context, in *ProjectServiceEnableStorageRequest, opts ...grpc.CallOption) (*ProjectServiceEnableStorageResponse, error)
+	EnableStorage(ctx context.Context, in *ProjectsServiceEnableStorageRequest, opts ...grpc.CallOption) (*ProjectsServiceEnableStorageResponse, error)
 	// Disables storage for the project
-	DisableStorage(ctx context.Context, in *ProjectServiceDisableStorageRequest, opts ...grpc.CallOption) (*ProjectServiceDisableStorageResponse, error)
+	DisableStorage(ctx context.Context, in *ProjectsServiceDisableStorageRequest, opts ...grpc.CallOption) (*ProjectsServiceDisableStorageResponse, error)
 	// Enables USers for the project
-	EnableUsers(ctx context.Context, in *ProjectServiceEnableUsersRequest, opts ...grpc.CallOption) (*ProjectServiceEnableUsersResponse, error)
+	EnableUsers(ctx context.Context, in *ProjectsServiceEnableUsersRequest, opts ...grpc.CallOption) (*ProjectsServiceEnableUsersResponse, error)
 	// Disables Users for the project
-	DisableUsers(ctx context.Context, in *ProjectServiceDisableUsersRequest, opts ...grpc.CallOption) (*ProjectServiceDisableUsersResponse, error)
+	DisableUsers(ctx context.Context, in *ProjectsServiceDisableUsersRequest, opts ...grpc.CallOption) (*ProjectsServiceDisableUsersResponse, error)
 	// Enables Mongo for the project
-	EnableMongo(ctx context.Context, in *ProjectServiceEnableMongoRequest, opts ...grpc.CallOption) (*ProjectServiceEnableMongoResponse, error)
+	EnableMongo(ctx context.Context, in *ProjectsServiceEnableMongoRequest, opts ...grpc.CallOption) (*ProjectsServiceEnableMongoResponse, error)
 	// Disables Mongo for the project
-	DisableMongo(ctx context.Context, in *ProjectServiceDisableMongoRequest, opts ...grpc.CallOption) (*ProjectServiceDisableMongoResponse, error)
+	DisableMongo(ctx context.Context, in *ProjectsServiceDisableMongoRequest, opts ...grpc.CallOption) (*ProjectsServiceDisableMongoResponse, error)
 	// Enables Postgres for the project
-	EnablePostgres(ctx context.Context, in *ProjectServiceEnablePostgresRequest, opts ...grpc.CallOption) (*ProjectServiceEnablePostgresResponse, error)
+	EnablePostgres(ctx context.Context, in *ProjectsServiceEnablePostgresRequest, opts ...grpc.CallOption) (*ProjectsServiceEnablePostgresResponse, error)
 	// Disable Postgres for the project
-	DisablePostgres(ctx context.Context, in *ProjectServiceDisablePostgresRequest, opts ...grpc.CallOption) (*ProjectServiceDisablePostgresResponse, error)
+	DisablePostgres(ctx context.Context, in *ProjectsServiceDisablePostgresRequest, opts ...grpc.CallOption) (*ProjectsServiceDisablePostgresResponse, error)
 }
 
 type projectsServiceClient struct {
@@ -60,8 +60,8 @@ func NewProjectsServiceClient(cc grpc.ClientConnInterface) ProjectsServiceClient
 	return &projectsServiceClient{cc}
 }
 
-func (c *projectsServiceClient) Ping(ctx context.Context, in *ProjectServicePingRequest, opts ...grpc.CallOption) (*ProjectServicePingResponse, error) {
-	out := new(ProjectServicePingResponse)
+func (c *projectsServiceClient) Ping(ctx context.Context, in *ProjectsServicePingRequest, opts ...grpc.CallOption) (*ProjectsServicePingResponse, error) {
+	out := new(ProjectsServicePingResponse)
 	err := c.cc.Invoke(ctx, "/nuntio.projects.v1alpha1.ProjectsService/Ping", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -69,8 +69,8 @@ func (c *projectsServiceClient) Ping(ctx context.Context, in *ProjectServicePing
 	return out, nil
 }
 
-func (c *projectsServiceClient) Create(ctx context.Context, in *ProjectServiceCreateRequest, opts ...grpc.CallOption) (*ProjectServiceCreateResponse, error) {
-	out := new(ProjectServiceCreateResponse)
+func (c *projectsServiceClient) Create(ctx context.Context, in *ProjectsServiceCreateRequest, opts ...grpc.CallOption) (*ProjectsServiceCreateResponse, error) {
+	out := new(ProjectsServiceCreateResponse)
 	err := c.cc.Invoke(ctx, "/nuntio.projects.v1alpha1.ProjectsService/Create", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -78,8 +78,8 @@ func (c *projectsServiceClient) Create(ctx context.Context, in *ProjectServiceCr
 	return out, nil
 }
 
-func (c *projectsServiceClient) Delete(ctx context.Context, in *ProjectServiceDeleteRequest, opts ...grpc.CallOption) (*ProjectServiceDeleteResponse, error) {
-	out := new(ProjectServiceDeleteResponse)
+func (c *projectsServiceClient) Delete(ctx context.Context, in *ProjectsServiceDeleteRequest, opts ...grpc.CallOption) (*ProjectsServiceDeleteResponse, error) {
+	out := new(ProjectsServiceDeleteResponse)
 	err := c.cc.Invoke(ctx, "/nuntio.projects.v1alpha1.ProjectsService/Delete", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -87,8 +87,8 @@ func (c *projectsServiceClient) Delete(ctx context.Context, in *ProjectServiceDe
 	return out, nil
 }
 
-func (c *projectsServiceClient) Update(ctx context.Context, in *ProjectServiceUpdateRequest, opts ...grpc.CallOption) (*ProjectServiceUpdateResponse, error) {
-	out := new(ProjectServiceUpdateResponse)
+func (c *projectsServiceClient) Update(ctx context.Context, in *ProjectsServiceUpdateRequest, opts ...grpc.CallOption) (*ProjectsServiceUpdateResponse, error) {
+	out := new(ProjectsServiceUpdateResponse)
 	err := c.cc.Invoke(ctx, "/nuntio.projects.v1alpha1.ProjectsService/Update", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -96,8 +96,8 @@ func (c *projectsServiceClient) Update(ctx context.Context, in *ProjectServiceUp
 	return out, nil
 }
 
-func (c *projectsServiceClient) Get(ctx context.Context, in *ProjectServiceGetRequest, opts ...grpc.CallOption) (*ProjectServiceGetResponse, error) {
-	out := new(ProjectServiceGetResponse)
+func (c *projectsServiceClient) Get(ctx context.Context, in *ProjectsServiceGetRequest, opts ...grpc.CallOption) (*ProjectsServiceGetResponse, error) {
+	out := new(ProjectsServiceGetResponse)
 	err := c.cc.Invoke(ctx, "/nuntio.projects.v1alpha1.ProjectsService/Get", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -105,8 +105,8 @@ func (c *projectsServiceClient) Get(ctx context.Context, in *ProjectServiceGetRe
 	return out, nil
 }
 
-func (c *projectsServiceClient) List(ctx context.Context, in *ProjectServiceListRequest, opts ...grpc.CallOption) (*ProjectServiceListResponse, error) {
-	out := new(ProjectServiceListResponse)
+func (c *projectsServiceClient) List(ctx context.Context, in *ProjectsServiceListRequest, opts ...grpc.CallOption) (*ProjectsServiceListResponse, error) {
+	out := new(ProjectsServiceListResponse)
 	err := c.cc.Invoke(ctx, "/nuntio.projects.v1alpha1.ProjectsService/List", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -114,8 +114,8 @@ func (c *projectsServiceClient) List(ctx context.Context, in *ProjectServiceList
 	return out, nil
 }
 
-func (c *projectsServiceClient) EnableStorage(ctx context.Context, in *ProjectServiceEnableStorageRequest, opts ...grpc.CallOption) (*ProjectServiceEnableStorageResponse, error) {
-	out := new(ProjectServiceEnableStorageResponse)
+func (c *projectsServiceClient) EnableStorage(ctx context.Context, in *ProjectsServiceEnableStorageRequest, opts ...grpc.CallOption) (*ProjectsServiceEnableStorageResponse, error) {
+	out := new(ProjectsServiceEnableStorageResponse)
 	err := c.cc.Invoke(ctx, "/nuntio.projects.v1alpha1.ProjectsService/EnableStorage", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -123,8 +123,8 @@ func (c *projectsServiceClient) EnableStorage(ctx context.Context, in *ProjectSe
 	return out, nil
 }
 
-func (c *projectsServiceClient) DisableStorage(ctx context.Context, in *ProjectServiceDisableStorageRequest, opts ...grpc.CallOption) (*ProjectServiceDisableStorageResponse, error) {
-	out := new(ProjectServiceDisableStorageResponse)
+func (c *projectsServiceClient) DisableStorage(ctx context.Context, in *ProjectsServiceDisableStorageRequest, opts ...grpc.CallOption) (*ProjectsServiceDisableStorageResponse, error) {
+	out := new(ProjectsServiceDisableStorageResponse)
 	err := c.cc.Invoke(ctx, "/nuntio.projects.v1alpha1.ProjectsService/DisableStorage", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -132,8 +132,8 @@ func (c *projectsServiceClient) DisableStorage(ctx context.Context, in *ProjectS
 	return out, nil
 }
 
-func (c *projectsServiceClient) EnableUsers(ctx context.Context, in *ProjectServiceEnableUsersRequest, opts ...grpc.CallOption) (*ProjectServiceEnableUsersResponse, error) {
-	out := new(ProjectServiceEnableUsersResponse)
+func (c *projectsServiceClient) EnableUsers(ctx context.Context, in *ProjectsServiceEnableUsersRequest, opts ...grpc.CallOption) (*ProjectsServiceEnableUsersResponse, error) {
+	out := new(ProjectsServiceEnableUsersResponse)
 	err := c.cc.Invoke(ctx, "/nuntio.projects.v1alpha1.ProjectsService/EnableUsers", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -141,8 +141,8 @@ func (c *projectsServiceClient) EnableUsers(ctx context.Context, in *ProjectServ
 	return out, nil
 }
 
-func (c *projectsServiceClient) DisableUsers(ctx context.Context, in *ProjectServiceDisableUsersRequest, opts ...grpc.CallOption) (*ProjectServiceDisableUsersResponse, error) {
-	out := new(ProjectServiceDisableUsersResponse)
+func (c *projectsServiceClient) DisableUsers(ctx context.Context, in *ProjectsServiceDisableUsersRequest, opts ...grpc.CallOption) (*ProjectsServiceDisableUsersResponse, error) {
+	out := new(ProjectsServiceDisableUsersResponse)
 	err := c.cc.Invoke(ctx, "/nuntio.projects.v1alpha1.ProjectsService/DisableUsers", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -150,8 +150,8 @@ func (c *projectsServiceClient) DisableUsers(ctx context.Context, in *ProjectSer
 	return out, nil
 }
 
-func (c *projectsServiceClient) EnableMongo(ctx context.Context, in *ProjectServiceEnableMongoRequest, opts ...grpc.CallOption) (*ProjectServiceEnableMongoResponse, error) {
-	out := new(ProjectServiceEnableMongoResponse)
+func (c *projectsServiceClient) EnableMongo(ctx context.Context, in *ProjectsServiceEnableMongoRequest, opts ...grpc.CallOption) (*ProjectsServiceEnableMongoResponse, error) {
+	out := new(ProjectsServiceEnableMongoResponse)
 	err := c.cc.Invoke(ctx, "/nuntio.projects.v1alpha1.ProjectsService/EnableMongo", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -159,8 +159,8 @@ func (c *projectsServiceClient) EnableMongo(ctx context.Context, in *ProjectServ
 	return out, nil
 }
 
-func (c *projectsServiceClient) DisableMongo(ctx context.Context, in *ProjectServiceDisableMongoRequest, opts ...grpc.CallOption) (*ProjectServiceDisableMongoResponse, error) {
-	out := new(ProjectServiceDisableMongoResponse)
+func (c *projectsServiceClient) DisableMongo(ctx context.Context, in *ProjectsServiceDisableMongoRequest, opts ...grpc.CallOption) (*ProjectsServiceDisableMongoResponse, error) {
+	out := new(ProjectsServiceDisableMongoResponse)
 	err := c.cc.Invoke(ctx, "/nuntio.projects.v1alpha1.ProjectsService/DisableMongo", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -168,8 +168,8 @@ func (c *projectsServiceClient) DisableMongo(ctx context.Context, in *ProjectSer
 	return out, nil
 }
 
-func (c *projectsServiceClient) EnablePostgres(ctx context.Context, in *ProjectServiceEnablePostgresRequest, opts ...grpc.CallOption) (*ProjectServiceEnablePostgresResponse, error) {
-	out := new(ProjectServiceEnablePostgresResponse)
+func (c *projectsServiceClient) EnablePostgres(ctx context.Context, in *ProjectsServiceEnablePostgresRequest, opts ...grpc.CallOption) (*ProjectsServiceEnablePostgresResponse, error) {
+	out := new(ProjectsServiceEnablePostgresResponse)
 	err := c.cc.Invoke(ctx, "/nuntio.projects.v1alpha1.ProjectsService/EnablePostgres", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -177,8 +177,8 @@ func (c *projectsServiceClient) EnablePostgres(ctx context.Context, in *ProjectS
 	return out, nil
 }
 
-func (c *projectsServiceClient) DisablePostgres(ctx context.Context, in *ProjectServiceDisablePostgresRequest, opts ...grpc.CallOption) (*ProjectServiceDisablePostgresResponse, error) {
-	out := new(ProjectServiceDisablePostgresResponse)
+func (c *projectsServiceClient) DisablePostgres(ctx context.Context, in *ProjectsServiceDisablePostgresRequest, opts ...grpc.CallOption) (*ProjectsServiceDisablePostgresResponse, error) {
+	out := new(ProjectsServiceDisablePostgresResponse)
 	err := c.cc.Invoke(ctx, "/nuntio.projects.v1alpha1.ProjectsService/DisablePostgres", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -191,79 +191,79 @@ func (c *projectsServiceClient) DisablePostgres(ctx context.Context, in *Project
 // for forward compatibility
 type ProjectsServiceServer interface {
 	// Ping returns an empty response used to check if the server is live
-	Ping(context.Context, *ProjectServicePingRequest) (*ProjectServicePingResponse, error)
+	Ping(context.Context, *ProjectsServicePingRequest) (*ProjectsServicePingResponse, error)
 	// Create initializes a new project and all relating ressources
-	Create(context.Context, *ProjectServiceCreateRequest) (*ProjectServiceCreateResponse, error)
+	Create(context.Context, *ProjectsServiceCreateRequest) (*ProjectsServiceCreateResponse, error)
 	// Deletes deletes a project and all its ressources
-	Delete(context.Context, *ProjectServiceDeleteRequest) (*ProjectServiceDeleteResponse, error)
+	Delete(context.Context, *ProjectsServiceDeleteRequest) (*ProjectsServiceDeleteResponse, error)
 	// Update updates a project with a new name, logo etc.
-	Update(context.Context, *ProjectServiceUpdateRequest) (*ProjectServiceUpdateResponse, error)
+	Update(context.Context, *ProjectsServiceUpdateRequest) (*ProjectsServiceUpdateResponse, error)
 	// Get fetches a speicfic project
-	Get(context.Context, *ProjectServiceGetRequest) (*ProjectServiceGetResponse, error)
+	Get(context.Context, *ProjectsServiceGetRequest) (*ProjectsServiceGetResponse, error)
 	// List returns a list of projects
-	List(context.Context, *ProjectServiceListRequest) (*ProjectServiceListResponse, error)
+	List(context.Context, *ProjectsServiceListRequest) (*ProjectsServiceListResponse, error)
 	// Enables storage for the project
-	EnableStorage(context.Context, *ProjectServiceEnableStorageRequest) (*ProjectServiceEnableStorageResponse, error)
+	EnableStorage(context.Context, *ProjectsServiceEnableStorageRequest) (*ProjectsServiceEnableStorageResponse, error)
 	// Disables storage for the project
-	DisableStorage(context.Context, *ProjectServiceDisableStorageRequest) (*ProjectServiceDisableStorageResponse, error)
+	DisableStorage(context.Context, *ProjectsServiceDisableStorageRequest) (*ProjectsServiceDisableStorageResponse, error)
 	// Enables USers for the project
-	EnableUsers(context.Context, *ProjectServiceEnableUsersRequest) (*ProjectServiceEnableUsersResponse, error)
+	EnableUsers(context.Context, *ProjectsServiceEnableUsersRequest) (*ProjectsServiceEnableUsersResponse, error)
 	// Disables Users for the project
-	DisableUsers(context.Context, *ProjectServiceDisableUsersRequest) (*ProjectServiceDisableUsersResponse, error)
+	DisableUsers(context.Context, *ProjectsServiceDisableUsersRequest) (*ProjectsServiceDisableUsersResponse, error)
 	// Enables Mongo for the project
-	EnableMongo(context.Context, *ProjectServiceEnableMongoRequest) (*ProjectServiceEnableMongoResponse, error)
+	EnableMongo(context.Context, *ProjectsServiceEnableMongoRequest) (*ProjectsServiceEnableMongoResponse, error)
 	// Disables Mongo for the project
-	DisableMongo(context.Context, *ProjectServiceDisableMongoRequest) (*ProjectServiceDisableMongoResponse, error)
+	DisableMongo(context.Context, *ProjectsServiceDisableMongoRequest) (*ProjectsServiceDisableMongoResponse, error)
 	// Enables Postgres for the project
-	EnablePostgres(context.Context, *ProjectServiceEnablePostgresRequest) (*ProjectServiceEnablePostgresResponse, error)
+	EnablePostgres(context.Context, *ProjectsServiceEnablePostgresRequest) (*ProjectsServiceEnablePostgresResponse, error)
 	// Disable Postgres for the project
-	DisablePostgres(context.Context, *ProjectServiceDisablePostgresRequest) (*ProjectServiceDisablePostgresResponse, error)
+	DisablePostgres(context.Context, *ProjectsServiceDisablePostgresRequest) (*ProjectsServiceDisablePostgresResponse, error)
 }
 
 // UnimplementedProjectsServiceServer should be embedded to have forward compatible implementations.
 type UnimplementedProjectsServiceServer struct {
 }
 
-func (UnimplementedProjectsServiceServer) Ping(context.Context, *ProjectServicePingRequest) (*ProjectServicePingResponse, error) {
+func (UnimplementedProjectsServiceServer) Ping(context.Context, *ProjectsServicePingRequest) (*ProjectsServicePingResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Ping not implemented")
 }
-func (UnimplementedProjectsServiceServer) Create(context.Context, *ProjectServiceCreateRequest) (*ProjectServiceCreateResponse, error) {
+func (UnimplementedProjectsServiceServer) Create(context.Context, *ProjectsServiceCreateRequest) (*ProjectsServiceCreateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
-func (UnimplementedProjectsServiceServer) Delete(context.Context, *ProjectServiceDeleteRequest) (*ProjectServiceDeleteResponse, error) {
+func (UnimplementedProjectsServiceServer) Delete(context.Context, *ProjectsServiceDeleteRequest) (*ProjectsServiceDeleteResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
-func (UnimplementedProjectsServiceServer) Update(context.Context, *ProjectServiceUpdateRequest) (*ProjectServiceUpdateResponse, error) {
+func (UnimplementedProjectsServiceServer) Update(context.Context, *ProjectsServiceUpdateRequest) (*ProjectsServiceUpdateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
-func (UnimplementedProjectsServiceServer) Get(context.Context, *ProjectServiceGetRequest) (*ProjectServiceGetResponse, error) {
+func (UnimplementedProjectsServiceServer) Get(context.Context, *ProjectsServiceGetRequest) (*ProjectsServiceGetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedProjectsServiceServer) List(context.Context, *ProjectServiceListRequest) (*ProjectServiceListResponse, error) {
+func (UnimplementedProjectsServiceServer) List(context.Context, *ProjectsServiceListRequest) (*ProjectsServiceListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
 }
-func (UnimplementedProjectsServiceServer) EnableStorage(context.Context, *ProjectServiceEnableStorageRequest) (*ProjectServiceEnableStorageResponse, error) {
+func (UnimplementedProjectsServiceServer) EnableStorage(context.Context, *ProjectsServiceEnableStorageRequest) (*ProjectsServiceEnableStorageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method EnableStorage not implemented")
 }
-func (UnimplementedProjectsServiceServer) DisableStorage(context.Context, *ProjectServiceDisableStorageRequest) (*ProjectServiceDisableStorageResponse, error) {
+func (UnimplementedProjectsServiceServer) DisableStorage(context.Context, *ProjectsServiceDisableStorageRequest) (*ProjectsServiceDisableStorageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DisableStorage not implemented")
 }
-func (UnimplementedProjectsServiceServer) EnableUsers(context.Context, *ProjectServiceEnableUsersRequest) (*ProjectServiceEnableUsersResponse, error) {
+func (UnimplementedProjectsServiceServer) EnableUsers(context.Context, *ProjectsServiceEnableUsersRequest) (*ProjectsServiceEnableUsersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method EnableUsers not implemented")
 }
-func (UnimplementedProjectsServiceServer) DisableUsers(context.Context, *ProjectServiceDisableUsersRequest) (*ProjectServiceDisableUsersResponse, error) {
+func (UnimplementedProjectsServiceServer) DisableUsers(context.Context, *ProjectsServiceDisableUsersRequest) (*ProjectsServiceDisableUsersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DisableUsers not implemented")
 }
-func (UnimplementedProjectsServiceServer) EnableMongo(context.Context, *ProjectServiceEnableMongoRequest) (*ProjectServiceEnableMongoResponse, error) {
+func (UnimplementedProjectsServiceServer) EnableMongo(context.Context, *ProjectsServiceEnableMongoRequest) (*ProjectsServiceEnableMongoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method EnableMongo not implemented")
 }
-func (UnimplementedProjectsServiceServer) DisableMongo(context.Context, *ProjectServiceDisableMongoRequest) (*ProjectServiceDisableMongoResponse, error) {
+func (UnimplementedProjectsServiceServer) DisableMongo(context.Context, *ProjectsServiceDisableMongoRequest) (*ProjectsServiceDisableMongoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DisableMongo not implemented")
 }
-func (UnimplementedProjectsServiceServer) EnablePostgres(context.Context, *ProjectServiceEnablePostgresRequest) (*ProjectServiceEnablePostgresResponse, error) {
+func (UnimplementedProjectsServiceServer) EnablePostgres(context.Context, *ProjectsServiceEnablePostgresRequest) (*ProjectsServiceEnablePostgresResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method EnablePostgres not implemented")
 }
-func (UnimplementedProjectsServiceServer) DisablePostgres(context.Context, *ProjectServiceDisablePostgresRequest) (*ProjectServiceDisablePostgresResponse, error) {
+func (UnimplementedProjectsServiceServer) DisablePostgres(context.Context, *ProjectsServiceDisablePostgresRequest) (*ProjectsServiceDisablePostgresResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DisablePostgres not implemented")
 }
 
@@ -279,7 +279,7 @@ func RegisterProjectsServiceServer(s grpc.ServiceRegistrar, srv ProjectsServiceS
 }
 
 func _ProjectsService_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ProjectServicePingRequest)
+	in := new(ProjectsServicePingRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -291,13 +291,13 @@ func _ProjectsService_Ping_Handler(srv interface{}, ctx context.Context, dec fun
 		FullMethod: "/nuntio.projects.v1alpha1.ProjectsService/Ping",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProjectsServiceServer).Ping(ctx, req.(*ProjectServicePingRequest))
+		return srv.(ProjectsServiceServer).Ping(ctx, req.(*ProjectsServicePingRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ProjectsService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ProjectServiceCreateRequest)
+	in := new(ProjectsServiceCreateRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -309,13 +309,13 @@ func _ProjectsService_Create_Handler(srv interface{}, ctx context.Context, dec f
 		FullMethod: "/nuntio.projects.v1alpha1.ProjectsService/Create",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProjectsServiceServer).Create(ctx, req.(*ProjectServiceCreateRequest))
+		return srv.(ProjectsServiceServer).Create(ctx, req.(*ProjectsServiceCreateRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ProjectsService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ProjectServiceDeleteRequest)
+	in := new(ProjectsServiceDeleteRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -327,13 +327,13 @@ func _ProjectsService_Delete_Handler(srv interface{}, ctx context.Context, dec f
 		FullMethod: "/nuntio.projects.v1alpha1.ProjectsService/Delete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProjectsServiceServer).Delete(ctx, req.(*ProjectServiceDeleteRequest))
+		return srv.(ProjectsServiceServer).Delete(ctx, req.(*ProjectsServiceDeleteRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ProjectsService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ProjectServiceUpdateRequest)
+	in := new(ProjectsServiceUpdateRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -345,13 +345,13 @@ func _ProjectsService_Update_Handler(srv interface{}, ctx context.Context, dec f
 		FullMethod: "/nuntio.projects.v1alpha1.ProjectsService/Update",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProjectsServiceServer).Update(ctx, req.(*ProjectServiceUpdateRequest))
+		return srv.(ProjectsServiceServer).Update(ctx, req.(*ProjectsServiceUpdateRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ProjectsService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ProjectServiceGetRequest)
+	in := new(ProjectsServiceGetRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -363,13 +363,13 @@ func _ProjectsService_Get_Handler(srv interface{}, ctx context.Context, dec func
 		FullMethod: "/nuntio.projects.v1alpha1.ProjectsService/Get",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProjectsServiceServer).Get(ctx, req.(*ProjectServiceGetRequest))
+		return srv.(ProjectsServiceServer).Get(ctx, req.(*ProjectsServiceGetRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ProjectsService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ProjectServiceListRequest)
+	in := new(ProjectsServiceListRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -381,13 +381,13 @@ func _ProjectsService_List_Handler(srv interface{}, ctx context.Context, dec fun
 		FullMethod: "/nuntio.projects.v1alpha1.ProjectsService/List",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProjectsServiceServer).List(ctx, req.(*ProjectServiceListRequest))
+		return srv.(ProjectsServiceServer).List(ctx, req.(*ProjectsServiceListRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ProjectsService_EnableStorage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ProjectServiceEnableStorageRequest)
+	in := new(ProjectsServiceEnableStorageRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -399,13 +399,13 @@ func _ProjectsService_EnableStorage_Handler(srv interface{}, ctx context.Context
 		FullMethod: "/nuntio.projects.v1alpha1.ProjectsService/EnableStorage",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProjectsServiceServer).EnableStorage(ctx, req.(*ProjectServiceEnableStorageRequest))
+		return srv.(ProjectsServiceServer).EnableStorage(ctx, req.(*ProjectsServiceEnableStorageRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ProjectsService_DisableStorage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ProjectServiceDisableStorageRequest)
+	in := new(ProjectsServiceDisableStorageRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -417,13 +417,13 @@ func _ProjectsService_DisableStorage_Handler(srv interface{}, ctx context.Contex
 		FullMethod: "/nuntio.projects.v1alpha1.ProjectsService/DisableStorage",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProjectsServiceServer).DisableStorage(ctx, req.(*ProjectServiceDisableStorageRequest))
+		return srv.(ProjectsServiceServer).DisableStorage(ctx, req.(*ProjectsServiceDisableStorageRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ProjectsService_EnableUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ProjectServiceEnableUsersRequest)
+	in := new(ProjectsServiceEnableUsersRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -435,13 +435,13 @@ func _ProjectsService_EnableUsers_Handler(srv interface{}, ctx context.Context, 
 		FullMethod: "/nuntio.projects.v1alpha1.ProjectsService/EnableUsers",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProjectsServiceServer).EnableUsers(ctx, req.(*ProjectServiceEnableUsersRequest))
+		return srv.(ProjectsServiceServer).EnableUsers(ctx, req.(*ProjectsServiceEnableUsersRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ProjectsService_DisableUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ProjectServiceDisableUsersRequest)
+	in := new(ProjectsServiceDisableUsersRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -453,13 +453,13 @@ func _ProjectsService_DisableUsers_Handler(srv interface{}, ctx context.Context,
 		FullMethod: "/nuntio.projects.v1alpha1.ProjectsService/DisableUsers",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProjectsServiceServer).DisableUsers(ctx, req.(*ProjectServiceDisableUsersRequest))
+		return srv.(ProjectsServiceServer).DisableUsers(ctx, req.(*ProjectsServiceDisableUsersRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ProjectsService_EnableMongo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ProjectServiceEnableMongoRequest)
+	in := new(ProjectsServiceEnableMongoRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -471,13 +471,13 @@ func _ProjectsService_EnableMongo_Handler(srv interface{}, ctx context.Context, 
 		FullMethod: "/nuntio.projects.v1alpha1.ProjectsService/EnableMongo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProjectsServiceServer).EnableMongo(ctx, req.(*ProjectServiceEnableMongoRequest))
+		return srv.(ProjectsServiceServer).EnableMongo(ctx, req.(*ProjectsServiceEnableMongoRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ProjectsService_DisableMongo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ProjectServiceDisableMongoRequest)
+	in := new(ProjectsServiceDisableMongoRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -489,13 +489,13 @@ func _ProjectsService_DisableMongo_Handler(srv interface{}, ctx context.Context,
 		FullMethod: "/nuntio.projects.v1alpha1.ProjectsService/DisableMongo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProjectsServiceServer).DisableMongo(ctx, req.(*ProjectServiceDisableMongoRequest))
+		return srv.(ProjectsServiceServer).DisableMongo(ctx, req.(*ProjectsServiceDisableMongoRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ProjectsService_EnablePostgres_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ProjectServiceEnablePostgresRequest)
+	in := new(ProjectsServiceEnablePostgresRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -507,13 +507,13 @@ func _ProjectsService_EnablePostgres_Handler(srv interface{}, ctx context.Contex
 		FullMethod: "/nuntio.projects.v1alpha1.ProjectsService/EnablePostgres",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProjectsServiceServer).EnablePostgres(ctx, req.(*ProjectServiceEnablePostgresRequest))
+		return srv.(ProjectsServiceServer).EnablePostgres(ctx, req.(*ProjectsServiceEnablePostgresRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ProjectsService_DisablePostgres_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ProjectServiceDisablePostgresRequest)
+	in := new(ProjectsServiceDisablePostgresRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -525,7 +525,7 @@ func _ProjectsService_DisablePostgres_Handler(srv interface{}, ctx context.Conte
 		FullMethod: "/nuntio.projects.v1alpha1.ProjectsService/DisablePostgres",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProjectsServiceServer).DisablePostgres(ctx, req.(*ProjectServiceDisablePostgresRequest))
+		return srv.(ProjectsServiceServer).DisablePostgres(ctx, req.(*ProjectsServiceDisablePostgresRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

@@ -13,25 +13,25 @@ option php_namespace = "Nuntio\\projects\\v1alpha1";
 
 service MembersService {
   // Ping checks if a service is live
-  rpc Ping(MemberServicePingRequest) returns (MemberServicePingResponse) {}
+  rpc Ping(MembersServicePingRequest) returns (MembersServicePingResponse) {}
   // AddMember adds a member to a namespace
-  rpc Add(MemberServiceAddRequest) returns (MemberServiceAddResponse) {}
+  rpc Add(MembersServiceAddRequest) returns (MembersServiceAddResponse) {}
   // RemoveMember removes a member from a namespace
-  rpc Remove(MemberServiceRemoveRequest) returns (MemberServiceRemoveResponse) {}
+  rpc Remove(MembersServiceRemoveRequest) returns (MembersServiceRemoveResponse) {}
   // AddProject adds a project to a members list of projects
-  rpc AddProject(MemberServiceAddProjectRequest) returns (MemberServiceAddProjectResponse) {}
+  rpc AddProject(MembersServiceAddProjectRequest) returns (MembersServiceAddProjectResponse) {}
   // ListMembers returns a list of claimed and unclaimed members
-  rpc ListMembers(MemberServiceListMembersRequest) returns (MemberServiceListMembersResponse) {}
+  rpc ListMembers(MembersServiceListMembersRequest) returns (MembersServiceListMembersResponse) {}
 }
 
 // The request of a Member.Ping RPC
-message MemberServicePingRequest {}
+message MembersServicePingRequest {}
 
 // The response of a Member.Ping RPC
-message MemberServicePingResponse {}
+message MembersServicePingResponse {}
 
 // The request of a Member.AddMember RPC
-message MemberServiceAddRequest {
+message MembersServiceAddRequest {
     // the email of the user (to auto send request)
     string email = 1;
     // the namespace to add
@@ -39,13 +39,13 @@ message MemberServiceAddRequest {
 }
 
 // The response of a Member.AddMember RPC
-message MemberServiceAddResponse {
+message MembersServiceAddResponse {
     // the code used to add a namespace
     string code = 1;
 }
 
 // The request of a Member.RemoveMember RPC
-message MemberServiceRemoveRequest {
+message MembersServiceRemoveRequest {
     // the id of the member
     string id = 1;
     // the id of the namespace
@@ -53,11 +53,11 @@ message MemberServiceRemoveRequest {
 } 
 
 // The response of a Member.RemoveMember RPC
-message MemberServiceRemoveResponse {} 
+message MembersServiceRemoveResponse {} 
 
 
 // The request of a Member.AddProject RPC
-message MemberServiceAddProjectRequest {
+message MembersServiceAddProjectRequest {
     // the id of the namespace
     string namespace = 1;
     // your secret code to add the project
@@ -65,17 +65,17 @@ message MemberServiceAddProjectRequest {
 }
 
 // The response of a Member.AddProject RPC
-message MemberServiceAddProjectResponse {}
+message MembersServiceAddProjectResponse {}
 
 
 // The request of a Member.ListMembers RPC
-message MemberServiceListMembersRequest {
+message MembersServiceListMembersRequest {
     // the id of the namespace
     string namespace = 1;
 }
 
 // The response of a Member.ListMembers RPC
-message MemberServiceListMembersResponse {
+message MembersServiceListMembersResponse {
     // the result of List Members
     repeated Member members = 1;
 }
