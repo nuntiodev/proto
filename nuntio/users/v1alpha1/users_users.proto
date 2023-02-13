@@ -90,7 +90,7 @@ message UsersServiceUpdateProfileRequest {
     // The namespace to perform action in
     string namespace = 2;
     // The profile information to update. Leave optinal fields to keep fields the same
-    User update = 3;
+    Profile profile = 3;
 }
 
 // The response of a Users.UpdateProfile RPC
@@ -102,8 +102,12 @@ message UsersServiceUpdateContactInfoRequest {
     UserIdentifier identifier = 1;
     // The namespace to perform action in
     string namespace = 2;
-    // The profile information to update. Leave optinal fields to keep fields the same
-    User update = 3;
+    // The username to update (optional)
+    optional string username = 3;
+    // The phone number to update (optional)
+    optional string phone = 4;
+    // The email to update (optional)
+    optional string email = 5;
 }
 
 // The response of a Users.UpdateContactInfo RPC
