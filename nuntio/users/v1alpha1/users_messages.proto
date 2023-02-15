@@ -77,6 +77,16 @@ enum LoginStatus {
     LOGIN_STATUS_EMAIL_IS_NOT_VERIFIED = 3;
     LOGIN_STATUS_PHONE_IS_NOT_VERIFIED = 4;
 }
+
+enum DeviceInfo {
+    DEVICE_INFO_UNSPECIFIED = 0;
+    DEVICE_INFO_IOS = 1;
+    DEVICE_INFO_MACOS = 2;
+    DEVICE_INFO_WINDOWS = 3;
+    DEVICE_INFO_WEB = 4;
+    DEVICE_INFO_LINUX = 5;
+    DEVICE_INFO_ANDROID = 6;
+}
   
 message Image {
     string url = 1;
@@ -162,7 +172,6 @@ enum OauthProviderType {
     OAUTH_PROVIDER_TYPE_GOOGLE_PROVIDER = 2;
     OAUTH_PROVIDER_TYPE_GITHUB_PROVIDER = 3;
 }  
-  
 
 message Template {
     string body = 1;
@@ -217,7 +226,7 @@ message Group {
     string name = 2;
     google.protobuf.Timestamp created_at = 3;
     google.protobuf.Timestamp updated_at = 4;
-    GroupMeta group_meta = 5;
+    GroupMeta meta = 5;
 }
 
 message UserMeta {
@@ -246,15 +255,18 @@ message User {
 
 message TokenMeta {
     string id = 1;
-    string logged_in_from = 2;
-    LoginType login_type = 3;
-    string user_id = 4;
-    google.protobuf.Timestamp blocked_at = 5;
-    google.protobuf.Timestamp created_at = 6;
-    OauthProviderType oauth_provider = 7;
-    bool blocked = 8;
-    google.protobuf.Timestamp expires_at = 9;
-    google.protobuf.Timestamp used_at = 10;
+    CountryCode country = 2;
+    int32 postal_code = 3;
+    LoginType login_type = 4;
+    string user_id = 5;
+    google.protobuf.Timestamp blocked_at = 6;
+    google.protobuf.Timestamp created_at = 7;
+    OauthProviderType oauth_provider = 8;
+    bool blocked = 9;
+    google.protobuf.Timestamp expires_at = 10;
+    google.protobuf.Timestamp used_at = 11;
+    DeviceInfo device = 12;
+    
 }
 
 message AccessToken {

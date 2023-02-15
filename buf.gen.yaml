@@ -9,3 +9,16 @@ plugins:
     opt: 
       - paths=source_relative
       - require_unimplemented_servers=false
+
+  - name: js
+    out: .
+    opt: import_style=commonjs,binary
+
+  - name: grpc
+    out: .
+    opt: grpc_js
+    path: grpc_tools_node_protoc_plugin
+
+  - name: ts
+    out: .
+    opt: grpc_js

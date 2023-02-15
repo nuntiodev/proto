@@ -267,8 +267,9 @@ message UsersServiceListRequest {
 
 // The request of a Users.AddContact RPC
 message UsersServiceAddContactRequest {
-    Contact contact = 1;
-    string namespace = 2;
+    string namespace = 1;
+    UserIdentifier from_identifier = 2;
+    UserIdentifier to_identifier = 3;
 }
 
 // The response of a Users.AddContact RPC
