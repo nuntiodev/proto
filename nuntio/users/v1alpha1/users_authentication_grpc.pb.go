@@ -30,8 +30,8 @@ type AuthenticationServiceClient interface {
 	UpdateCallbacks(ctx context.Context, in *AuthenticationServiceUpdateCallbacksRequest, opts ...grpc.CallOption) (*AuthenticationServiceUpdateCallbacksResponse, error)
 	// Set default hashing algorithm
 	UpdateHashingAlgorithm(ctx context.Context, in *AuthenticationServiceUpdateHashingAlgorithmRequest, opts ...grpc.CallOption) (*AuthenticationServiceUpdateHashingAlgorithmResponse, error)
-	// Set supported login mechanisms
-	UpdateLoginMechanisms(ctx context.Context, in *AuthenticationServiceUpdateLoginMechanismsRequest, opts ...grpc.CallOption) (*AuthenticationServiceUpdateLoginMechanismsResponse, error)
+	// Set supported login settings
+	UpdateLoginSettings(ctx context.Context, in *AuthenticationServiceUpdateLoginSettingsRequest, opts ...grpc.CallOption) (*AuthenticationServiceUpdateLoginSettingsResponse, error)
 	// Update token settings (eg. ttl)
 	UpdateTokenSettings(ctx context.Context, in *AuthenticationServiceUpdateTokenSettingsRequest, opts ...grpc.CallOption) (*AuthenticationServiceUpdateTokenSettingsResponse, error)
 	// Update email or text template
@@ -120,9 +120,9 @@ func (c *authenticationServiceClient) UpdateHashingAlgorithm(ctx context.Context
 	return out, nil
 }
 
-func (c *authenticationServiceClient) UpdateLoginMechanisms(ctx context.Context, in *AuthenticationServiceUpdateLoginMechanismsRequest, opts ...grpc.CallOption) (*AuthenticationServiceUpdateLoginMechanismsResponse, error) {
-	out := new(AuthenticationServiceUpdateLoginMechanismsResponse)
-	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.AuthenticationService/UpdateLoginMechanisms", in, out, opts...)
+func (c *authenticationServiceClient) UpdateLoginSettings(ctx context.Context, in *AuthenticationServiceUpdateLoginSettingsRequest, opts ...grpc.CallOption) (*AuthenticationServiceUpdateLoginSettingsResponse, error) {
+	out := new(AuthenticationServiceUpdateLoginSettingsResponse)
+	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.AuthenticationService/UpdateLoginSettings", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -330,8 +330,8 @@ type AuthenticationServiceServer interface {
 	UpdateCallbacks(context.Context, *AuthenticationServiceUpdateCallbacksRequest) (*AuthenticationServiceUpdateCallbacksResponse, error)
 	// Set default hashing algorithm
 	UpdateHashingAlgorithm(context.Context, *AuthenticationServiceUpdateHashingAlgorithmRequest) (*AuthenticationServiceUpdateHashingAlgorithmResponse, error)
-	// Set supported login mechanisms
-	UpdateLoginMechanisms(context.Context, *AuthenticationServiceUpdateLoginMechanismsRequest) (*AuthenticationServiceUpdateLoginMechanismsResponse, error)
+	// Set supported login settings
+	UpdateLoginSettings(context.Context, *AuthenticationServiceUpdateLoginSettingsRequest) (*AuthenticationServiceUpdateLoginSettingsResponse, error)
 	// Update token settings (eg. ttl)
 	UpdateTokenSettings(context.Context, *AuthenticationServiceUpdateTokenSettingsRequest) (*AuthenticationServiceUpdateTokenSettingsResponse, error)
 	// Update email or text template
@@ -392,8 +392,8 @@ func (UnimplementedAuthenticationServiceServer) UpdateCallbacks(context.Context,
 func (UnimplementedAuthenticationServiceServer) UpdateHashingAlgorithm(context.Context, *AuthenticationServiceUpdateHashingAlgorithmRequest) (*AuthenticationServiceUpdateHashingAlgorithmResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateHashingAlgorithm not implemented")
 }
-func (UnimplementedAuthenticationServiceServer) UpdateLoginMechanisms(context.Context, *AuthenticationServiceUpdateLoginMechanismsRequest) (*AuthenticationServiceUpdateLoginMechanismsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateLoginMechanisms not implemented")
+func (UnimplementedAuthenticationServiceServer) UpdateLoginSettings(context.Context, *AuthenticationServiceUpdateLoginSettingsRequest) (*AuthenticationServiceUpdateLoginSettingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateLoginSettings not implemented")
 }
 func (UnimplementedAuthenticationServiceServer) UpdateTokenSettings(context.Context, *AuthenticationServiceUpdateTokenSettingsRequest) (*AuthenticationServiceUpdateTokenSettingsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateTokenSettings not implemented")
@@ -542,20 +542,20 @@ func _AuthenticationService_UpdateHashingAlgorithm_Handler(srv interface{}, ctx 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AuthenticationService_UpdateLoginMechanisms_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AuthenticationServiceUpdateLoginMechanismsRequest)
+func _AuthenticationService_UpdateLoginSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AuthenticationServiceUpdateLoginSettingsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AuthenticationServiceServer).UpdateLoginMechanisms(ctx, in)
+		return srv.(AuthenticationServiceServer).UpdateLoginSettings(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/nuntio.users.v1alpha1.AuthenticationService/UpdateLoginMechanisms",
+		FullMethod: "/nuntio.users.v1alpha1.AuthenticationService/UpdateLoginSettings",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthenticationServiceServer).UpdateLoginMechanisms(ctx, req.(*AuthenticationServiceUpdateLoginMechanismsRequest))
+		return srv.(AuthenticationServiceServer).UpdateLoginSettings(ctx, req.(*AuthenticationServiceUpdateLoginSettingsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -962,8 +962,8 @@ var AuthenticationService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _AuthenticationService_UpdateHashingAlgorithm_Handler,
 		},
 		{
-			MethodName: "UpdateLoginMechanisms",
-			Handler:    _AuthenticationService_UpdateLoginMechanisms_Handler,
+			MethodName: "UpdateLoginSettings",
+			Handler:    _AuthenticationService_UpdateLoginSettings_Handler,
 		},
 		{
 			MethodName: "UpdateTokenSettings",

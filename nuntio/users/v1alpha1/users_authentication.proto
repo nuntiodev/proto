@@ -20,8 +20,8 @@ service AuthenticationService {
     rpc UpdateCallbacks(AuthenticationServiceUpdateCallbacksRequest) returns (AuthenticationServiceUpdateCallbacksResponse) {}
     // Set default hashing algorithm
     rpc UpdateHashingAlgorithm(AuthenticationServiceUpdateHashingAlgorithmRequest) returns (AuthenticationServiceUpdateHashingAlgorithmResponse) {}
-    // Set supported login mechanisms
-    rpc UpdateLoginMechanisms(AuthenticationServiceUpdateLoginMechanismsRequest) returns (AuthenticationServiceUpdateLoginMechanismsResponse) {}
+    // Set supported login settings
+    rpc UpdateLoginSettings(AuthenticationServiceUpdateLoginSettingsRequest) returns (AuthenticationServiceUpdateLoginSettingsResponse) {}
     // Update token settings (eg. ttl)
     rpc UpdateTokenSettings(AuthenticationServiceUpdateTokenSettingsRequest)returns (AuthenticationServiceUpdateTokenSettingsResponse) {}
     // Update email or text template
@@ -385,15 +385,21 @@ message AuthenticationServiceBlockTokenRequest {
 message AuthenticationServiceBlockTokenResponse {}
 
 // The request of a Authentication.UpdateLoginMechanisms RPC
-message AuthenticationServiceUpdateLoginMechanismsRequest {
+message AuthenticationServiceUpdateLoginSettingsRequest {
     // Array of supported login types
     repeated LoginType supported_login_mechanisms = 1;  
     // The namespace to perform action in
     string namespace = 2;
+    // to enable/disable singup
+    optional bool enable_signup = 3;
+    // to enable/disable login
+    optional bool enable_login = 4;
+    // to enable/disable password validation
+    optional bool validate_password = 5;
 }
 
 // The request of a Authentication.UpdateLoginMechanisms RPC
-message AuthenticationServiceUpdateLoginMechanismsResponse {}
+message AuthenticationServiceUpdateLoginSettingsResponse {}
 
 // The request of a Authentication.SendMagicEmail RPC
 message AuthenticationServiceSendMagicEmailRequest {
