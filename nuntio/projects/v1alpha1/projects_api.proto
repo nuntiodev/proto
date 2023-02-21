@@ -143,7 +143,7 @@ message APIServiceListAPIKeysResponse {
     // the result of list
     repeated APIKey api_keys = 1;
     // total amount of api keys in system
-    int64 amount = 2;
+    int64 count = 2;
 }
 
 // The request of a API.PublicKey RPC
