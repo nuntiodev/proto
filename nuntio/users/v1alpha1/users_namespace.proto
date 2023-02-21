@@ -20,6 +20,8 @@ service NamespaceService {
     rpc Delete(NamespaceServiceDeleteRequest) returns (NamespaceServiceDeleteResponse) {}
     // Get namespace config
     rpc Get(NamespaceServiceGetRequest) returns (NamespaceServiceGetResponse) {}
+    // Update updates the profile of the namespace
+    rpc Update(NamespaceServiceUpdateRequest) returns (NamespaceServiceUpdateResponse) {}
     // Get public key of system
     rpc PublicKey(NamespaceServicePublicKeyRequest) returns (NamespaceServicePublicKeyResponse) {}
   }
@@ -59,6 +61,20 @@ message NamespaceServiceDeleteRequest {
 
 // The response of a Namespace.Delete RPC
 message NamespaceServiceDeleteResponse {}
+
+// The request of a Namespace.Update RPC
+message NamespaceServiceUpdateRequest {
+    // The id of the namespace
+    string namespace = 1;
+    // The name of the namespace
+    optional string name = 2;
+    // The logo of the namespace
+    optional string image = 3;
+}
+
+// The response of a Namespace.Update RPC
+message NamespaceServiceUpdateResponse {}
+
 
 // The request of a Namespace.Get RPC
 message NamespaceServiceGetRequest {

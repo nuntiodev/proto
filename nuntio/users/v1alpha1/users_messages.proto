@@ -168,9 +168,8 @@ enum TemplateType {
 
 enum OauthProviderType {
     OAUTH_PROVIDER_TYPE_UNSPECIFIED = 0;
-    OAUTH_PROVIDER_TYPE_NUNTIO_PROVIDER = 1;
-    OAUTH_PROVIDER_TYPE_GOOGLE_PROVIDER = 2;
-    OAUTH_PROVIDER_TYPE_GITHUB_PROVIDER = 3;
+    OAUTH_PROVIDER_TYPE_GOOGLE_PROVIDER = 1;
+    OAUTH_PROVIDER_TYPE_GITHUB_PROVIDER = 2;
 }  
 
 message Template {
@@ -212,7 +211,7 @@ message Namespace {
     optional int32 verification_code_ttl = 16;
     repeated string callbacks = 17;
     string id = 18;
-    map<string, OAuthProvider> oauth_providers = 19;
+    repeated OAuthProvider oauth_providers = 19;
     EmailProvider email_provider = 20;
     TextProvider text_provider = 21;
 }

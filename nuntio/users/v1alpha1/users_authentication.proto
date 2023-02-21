@@ -370,7 +370,7 @@ message AuthenticationServiceInitializeAuthResponse {
     // Array of callbacks
     repeated string callbacks = 8;
     // Map of oauth2 providers
-    map<string, OAuthProvider> oauth_providers = 9;
+    repeated OAuthProvider oauth_providers = 9;
 }
 
 // The request of a Authentication.BlockToken RPC

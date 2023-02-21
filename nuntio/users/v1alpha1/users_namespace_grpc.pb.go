@@ -30,6 +30,8 @@ type NamespaceServiceClient interface {
 	Delete(ctx context.Context, in *NamespaceServiceDeleteRequest, opts ...grpc.CallOption) (*NamespaceServiceDeleteResponse, error)
 	// Get namespace config
 	Get(ctx context.Context, in *NamespaceServiceGetRequest, opts ...grpc.CallOption) (*NamespaceServiceGetResponse, error)
+	// Update updates the profile of the namespace
+	Update(ctx context.Context, in *NamespaceServiceUpdateRequest, opts ...grpc.CallOption) (*NamespaceServiceUpdateResponse, error)
 	// Get public key of system
 	PublicKey(ctx context.Context, in *NamespaceServicePublicKeyRequest, opts ...grpc.CallOption) (*NamespaceServicePublicKeyResponse, error)
 }
@@ -78,6 +80,15 @@ func (c *namespaceServiceClient) Get(ctx context.Context, in *NamespaceServiceGe
 	return out, nil
 }
 
+func (c *namespaceServiceClient) Update(ctx context.Context, in *NamespaceServiceUpdateRequest, opts ...grpc.CallOption) (*NamespaceServiceUpdateResponse, error) {
+	out := new(NamespaceServiceUpdateResponse)
+	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.NamespaceService/Update", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *namespaceServiceClient) PublicKey(ctx context.Context, in *NamespaceServicePublicKeyRequest, opts ...grpc.CallOption) (*NamespaceServicePublicKeyResponse, error) {
 	out := new(NamespaceServicePublicKeyResponse)
 	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.NamespaceService/PublicKey", in, out, opts...)
@@ -99,6 +110,8 @@ type NamespaceServiceServer interface {
 	Delete(context.Context, *NamespaceServiceDeleteRequest) (*NamespaceServiceDeleteResponse, error)
 	// Get namespace config
 	Get(context.Context, *NamespaceServiceGetRequest) (*NamespaceServiceGetResponse, error)
+	// Update updates the profile of the namespace
+	Update(context.Context, *NamespaceServiceUpdateRequest) (*NamespaceServiceUpdateResponse, error)
 	// Get public key of system
 	PublicKey(context.Context, *NamespaceServicePublicKeyRequest) (*NamespaceServicePublicKeyResponse, error)
 }
@@ -118,6 +131,9 @@ func (UnimplementedNamespaceServiceServer) Delete(context.Context, *NamespaceSer
 }
 func (UnimplementedNamespaceServiceServer) Get(context.Context, *NamespaceServiceGetRequest) (*NamespaceServiceGetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+}
+func (UnimplementedNamespaceServiceServer) Update(context.Context, *NamespaceServiceUpdateRequest) (*NamespaceServiceUpdateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
 func (UnimplementedNamespaceServiceServer) PublicKey(context.Context, *NamespaceServicePublicKeyRequest) (*NamespaceServicePublicKeyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PublicKey not implemented")
@@ -206,6 +222,24 @@ func _NamespaceService_Get_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _NamespaceService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NamespaceServiceUpdateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NamespaceServiceServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nuntio.users.v1alpha1.NamespaceService/Update",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NamespaceServiceServer).Update(ctx, req.(*NamespaceServiceUpdateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _NamespaceService_PublicKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(NamespaceServicePublicKeyRequest)
 	if err := dec(in); err != nil {
@@ -246,6 +280,10 @@ var NamespaceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Get",
 			Handler:    _NamespaceService_Get_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _NamespaceService_Update_Handler,
 		},
 		{
 			MethodName: "PublicKey",
