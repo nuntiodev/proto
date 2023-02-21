@@ -56,6 +56,8 @@ type APIServiceClient interface {
 	EnableUsersAccess(ctx context.Context, in *APIServiceEnableUsersAccessRequest, opts ...grpc.CallOption) (*APIServiceEnableUsersAccessResponse, error)
 	// DisableUsersAccess remove access to Nuntio/Hera for the api key
 	DisableUsersAccess(ctx context.Context, in *APIServiceDisableUsersAccessRequest, opts ...grpc.CallOption) (*APIServiceDisableUsersAccessResponse, error)
+	// UpdateStatus updates the status of the api key
+	UpdateStatus(ctx context.Context, in *APIServiceUpdateStatusRequest, opts ...grpc.CallOption) (*APIServiceUpdateStatusResponse, error)
 }
 
 type aPIServiceClient struct {
@@ -219,6 +221,15 @@ func (c *aPIServiceClient) DisableUsersAccess(ctx context.Context, in *APIServic
 	return out, nil
 }
 
+func (c *aPIServiceClient) UpdateStatus(ctx context.Context, in *APIServiceUpdateStatusRequest, opts ...grpc.CallOption) (*APIServiceUpdateStatusResponse, error) {
+	out := new(APIServiceUpdateStatusResponse)
+	err := c.cc.Invoke(ctx, "/nuntio.projects.v1alpha1.APIService/UpdateStatus", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // APIServiceServer is the server API for APIService service.
 // All implementations should embed UnimplementedAPIServiceServer
 // for forward compatibility
@@ -257,6 +268,8 @@ type APIServiceServer interface {
 	EnableUsersAccess(context.Context, *APIServiceEnableUsersAccessRequest) (*APIServiceEnableUsersAccessResponse, error)
 	// DisableUsersAccess remove access to Nuntio/Hera for the api key
 	DisableUsersAccess(context.Context, *APIServiceDisableUsersAccessRequest) (*APIServiceDisableUsersAccessResponse, error)
+	// UpdateStatus updates the status of the api key
+	UpdateStatus(context.Context, *APIServiceUpdateStatusRequest) (*APIServiceUpdateStatusResponse, error)
 }
 
 // UnimplementedAPIServiceServer should be embedded to have forward compatible implementations.
@@ -313,6 +326,9 @@ func (UnimplementedAPIServiceServer) EnableUsersAccess(context.Context, *APIServ
 }
 func (UnimplementedAPIServiceServer) DisableUsersAccess(context.Context, *APIServiceDisableUsersAccessRequest) (*APIServiceDisableUsersAccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DisableUsersAccess not implemented")
+}
+func (UnimplementedAPIServiceServer) UpdateStatus(context.Context, *APIServiceUpdateStatusRequest) (*APIServiceUpdateStatusResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateStatus not implemented")
 }
 
 // UnsafeAPIServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -632,6 +648,24 @@ func _APIService_DisableUsersAccess_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _APIService_UpdateStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(APIServiceUpdateStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(APIServiceServer).UpdateStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nuntio.projects.v1alpha1.APIService/UpdateStatus",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(APIServiceServer).UpdateStatus(ctx, req.(*APIServiceUpdateStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // APIService_ServiceDesc is the grpc.ServiceDesc for APIService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -706,6 +740,10 @@ var APIService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DisableUsersAccess",
 			Handler:    _APIService_DisableUsersAccess_Handler,
+		},
+		{
+			MethodName: "UpdateStatus",
+			Handler:    _APIService_UpdateStatus_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

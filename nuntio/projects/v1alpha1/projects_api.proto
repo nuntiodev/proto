@@ -46,6 +46,8 @@ service APIService {
   rpc EnableUsersAccess(APIServiceEnableUsersAccessRequest) returns (APIServiceEnableUsersAccessResponse) {}
   // DisableUsersAccess remove access to Nuntio/Hera for the api key
   rpc DisableUsersAccess(APIServiceDisableUsersAccessRequest) returns (APIServiceDisableUsersAccessResponse) {}
+  // UpdateStatus updates the status of the api key
+  rpc UpdateStatus(APIServiceUpdateStatusRequest) returns (APIServiceUpdateStatusResponse) {}
 }
 
 // The request of a API.Ping RPC
@@ -68,6 +70,8 @@ message APIServiceCreateAPIKeyRequest {
     bool configure_storage = 5;
     // init users access
     bool configure_users = 6;
+    // the name of the api key
+    string name = 7;
 }
 
 // The response of a API.CreateAPIKey RPC
@@ -250,3 +254,16 @@ message APIServiceDisableUsersAccessRequest {
 
 // The response of a API.DisableUsersAccess RPC
 message APIServiceDisableUsersAccessResponse {}
+
+// The request of a API.DisableUsersAccess RPC
+message APIServiceUpdateStatusRequest {
+    // id of the api key
+    string id = 1;
+    // the status of the api key
+    APIKeyStatus status = 2;
+    // the secret of the api key
+    string api_key = 3;
+}
+
+// The response of a API.DisableUsersAccess RPC
+message APIServiceUpdateStatusResponse {}

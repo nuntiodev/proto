@@ -11,6 +11,12 @@ option java_package = "nuntio.projects.v1alpha1";
 option php_namespace = "Nuntio\\projects\\v1alpha1";
 //import "google/protobuf/duration.proto";
 
+enum APIKeyStatus {
+    APIKEY_STATUS_UNSPECIFIED = 0;
+    APIKEY_STATUS_ACTIVE = 1;
+    APIKEY_STATUS_REVOKED = 2;
+}
+
 message File {
     string name = 1;
     google.protobuf.Timestamp created_at = 2;
@@ -43,6 +49,8 @@ message APIKey {
     ApiAccess postgres = 7;
     ApiAccess storage = 8;
     ApiAccess users = 9;
+    string name = 10;
+    APIKeyStatus status = 11;
 }
 
 message Image {
