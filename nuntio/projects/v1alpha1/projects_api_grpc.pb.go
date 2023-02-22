@@ -30,6 +30,8 @@ type APIServiceClient interface {
 	DeleteAllAPIKeys(ctx context.Context, in *APIServiceDeleteAllAPIKeysRequest, opts ...grpc.CallOption) (*APIServiceDeleteAllAPIKeysResponse, error)
 	// DeleteAPIKey deletes an API key
 	DeleteAPIKey(ctx context.Context, in *APIServiceDeleteAPIKeyRequest, opts ...grpc.CallOption) (*APIServiceDeleteAPIKeyResponse, error)
+	// UpdateAPIKey updates the access for an API key
+	UpdateAPIKey(ctx context.Context, in *APIServiceUpdateAPIKeyRequest, opts ...grpc.CallOption) (*APIServiceUpdateAPIKeyResponse, error)
 	// GenerateAccessToken uses an API key to generate a short lived access token
 	GenerateAccessToken(ctx context.Context, in *APIServiceGenerateAccessTokenRequest, opts ...grpc.CallOption) (*APIServiceGenerateAccessTokenResponse, error)
 	// GetAPIKey returns the requested API key to the user
@@ -98,6 +100,15 @@ func (c *aPIServiceClient) DeleteAllAPIKeys(ctx context.Context, in *APIServiceD
 func (c *aPIServiceClient) DeleteAPIKey(ctx context.Context, in *APIServiceDeleteAPIKeyRequest, opts ...grpc.CallOption) (*APIServiceDeleteAPIKeyResponse, error) {
 	out := new(APIServiceDeleteAPIKeyResponse)
 	err := c.cc.Invoke(ctx, "/nuntio.projects.v1alpha1.APIService/DeleteAPIKey", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *aPIServiceClient) UpdateAPIKey(ctx context.Context, in *APIServiceUpdateAPIKeyRequest, opts ...grpc.CallOption) (*APIServiceUpdateAPIKeyResponse, error) {
+	out := new(APIServiceUpdateAPIKeyResponse)
+	err := c.cc.Invoke(ctx, "/nuntio.projects.v1alpha1.APIService/UpdateAPIKey", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -242,6 +253,8 @@ type APIServiceServer interface {
 	DeleteAllAPIKeys(context.Context, *APIServiceDeleteAllAPIKeysRequest) (*APIServiceDeleteAllAPIKeysResponse, error)
 	// DeleteAPIKey deletes an API key
 	DeleteAPIKey(context.Context, *APIServiceDeleteAPIKeyRequest) (*APIServiceDeleteAPIKeyResponse, error)
+	// UpdateAPIKey updates the access for an API key
+	UpdateAPIKey(context.Context, *APIServiceUpdateAPIKeyRequest) (*APIServiceUpdateAPIKeyResponse, error)
 	// GenerateAccessToken uses an API key to generate a short lived access token
 	GenerateAccessToken(context.Context, *APIServiceGenerateAccessTokenRequest) (*APIServiceGenerateAccessTokenResponse, error)
 	// GetAPIKey returns the requested API key to the user
@@ -287,6 +300,9 @@ func (UnimplementedAPIServiceServer) DeleteAllAPIKeys(context.Context, *APIServi
 }
 func (UnimplementedAPIServiceServer) DeleteAPIKey(context.Context, *APIServiceDeleteAPIKeyRequest) (*APIServiceDeleteAPIKeyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAPIKey not implemented")
+}
+func (UnimplementedAPIServiceServer) UpdateAPIKey(context.Context, *APIServiceUpdateAPIKeyRequest) (*APIServiceUpdateAPIKeyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAPIKey not implemented")
 }
 func (UnimplementedAPIServiceServer) GenerateAccessToken(context.Context, *APIServiceGenerateAccessTokenRequest) (*APIServiceGenerateAccessTokenResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GenerateAccessToken not implemented")
@@ -410,6 +426,24 @@ func _APIService_DeleteAPIKey_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(APIServiceServer).DeleteAPIKey(ctx, req.(*APIServiceDeleteAPIKeyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _APIService_UpdateAPIKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(APIServiceUpdateAPIKeyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(APIServiceServer).UpdateAPIKey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nuntio.projects.v1alpha1.APIService/UpdateAPIKey",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(APIServiceServer).UpdateAPIKey(ctx, req.(*APIServiceUpdateAPIKeyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -688,6 +722,10 @@ var APIService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteAPIKey",
 			Handler:    _APIService_DeleteAPIKey_Handler,
+		},
+		{
+			MethodName: "UpdateAPIKey",
+			Handler:    _APIService_UpdateAPIKey_Handler,
 		},
 		{
 			MethodName: "GenerateAccessToken",

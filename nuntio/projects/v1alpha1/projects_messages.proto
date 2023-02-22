@@ -51,6 +51,7 @@ message APIKey {
     ApiAccess users = 9;
     string name = 10;
     APIKeyStatus status = 11;
+    google.protobuf.Timestamp used_at = 12;
 }
 
 message Image {

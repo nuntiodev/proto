@@ -20,6 +20,8 @@ service APIService {
   rpc DeleteAllAPIKeys(APIServiceDeleteAllAPIKeysRequest) returns (APIServiceDeleteAllAPIKeysResponse) {}
   // DeleteAPIKey deletes an API key
   rpc DeleteAPIKey(APIServiceDeleteAPIKeyRequest) returns (APIServiceDeleteAPIKeyResponse) {}
+  // UpdateAPIKey updates the access for an API key
+  rpc UpdateAPIKey(APIServiceUpdateAPIKeyRequest) returns (APIServiceUpdateAPIKeyResponse) {}
   // GenerateAccessToken uses an API key to generate a short lived access token
   rpc GenerateAccessToken(APIServiceGenerateAccessTokenRequest) returns (APIServiceGenerateAccessTokenResponse) {}
   // GetAPIKey returns the requested API key to the user
@@ -255,15 +257,34 @@ message APIServiceDisableUsersAccessRequest {
 // The response of a API.DisableUsersAccess RPC
 message APIServiceDisableUsersAccessResponse {}
 
-// The request of a API.DisableUsersAccess RPC
+// The request of a API.UpdateStatus RPC
 message APIServiceUpdateStatusRequest {
     // id of the api key
     string id = 1;
     // the status of the api key
     APIKeyStatus status = 2;
+}
+
+// The response of a API.UpdateStatus RPC
+message APIServiceUpdateStatusResponse {}
+
+// The request of a API.UpdateAPIKey RPC
+message APIServiceUpdateAPIKeyRequest {
+    // id of the api key
+    string id = 1;
     // the secret of the api key
-    string api_key = 3;
+    string api_key = 2;
+    // the name of the api key
+    optional string name = 3;
+    // to enable/disable users
+    optional bool enable_users = 4;
+    // to enable/disable storage
+    optional bool enable_storage = 5;
+    // to enable/disable mongo
+    optional bool enable_mongo = 6;
+    // to enable/disable postgres
+    optional bool enable_postgres = 7;
 }
 
 // The response of a API.DisableUsersAccess RPC
-message APIServiceUpdateStatusResponse {}
+message APIServiceUpdateAPIKeyResponse {}
