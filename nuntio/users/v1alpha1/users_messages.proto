@@ -166,7 +166,7 @@ enum TemplateType {
     TEMPLATE_TYPE_TEXT_MAGIC_LINK = 6;
 }
 
-enum OauthProviderType {
+enum OAuthProviderType {
     OAUTH_PROVIDER_TYPE_UNSPECIFIED = 0;
     OAUTH_PROVIDER_TYPE_GOOGLE_PROVIDER = 1;
     OAUTH_PROVIDER_TYPE_GITHUB_PROVIDER = 2;
@@ -182,7 +182,7 @@ message Template {
 
 message OAuthProvider {
     string id = 1;
-    OauthProviderType type = 2;
+    OAuthProviderType type = 2;
     string secret = 3;
     string logo = 4;
     string name = 5;
@@ -259,7 +259,7 @@ message TokenMeta {
     string user_id = 5;
     google.protobuf.Timestamp blocked_at = 6;
     google.protobuf.Timestamp created_at = 7;
-    OauthProviderType oauth_provider = 8;
+    OAuthProviderType oauth_provider = 8;
     bool blocked = 9;
     google.protobuf.Timestamp expires_at = 10;
     google.protobuf.Timestamp used_at = 11;

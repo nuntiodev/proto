@@ -77,10 +77,14 @@ message AuthenticationServicePingResponse {}
 
 // The request of a Authentication.UpdateOAuth2Provider RPC
 message AuthenticationServiceUpdateOAuth2ProviderRequest {
-    // The provider to be updated
-    OAuthProvider provider = 1;
     // The namespace to perform action in
-    string namespace = 2;
+    string namespace = 1;
+    // The public key of the provider
+    string public_key = 2;
+    // The public key of the provider
+    string private_key = 3;
+    // The type of provider
+    OAuthProviderType provider = 4;
 }
 
 // The response of a Authentication.UpdateOAuth2Provider RPC
@@ -294,7 +298,7 @@ message AuthenticationServiceContinueWithRequest {
     // The namespace to perform action in
     string namespace = 2;
     // The OAuth provider used for "login with x"
-    OauthProviderType provider_type = 3;
+    OAuthProviderType provider = 3;
     // The requested redirect addr
     string redirect_addr = 4;
 }

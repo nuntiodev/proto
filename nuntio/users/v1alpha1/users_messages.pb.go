@@ -621,52 +621,52 @@ func (TemplateType) EnumDescriptor() ([]byte, []int) {
 	return file_nuntio_users_v1alpha1_users_messages_proto_rawDescGZIP(), []int{10}
 }
 
-type OauthProviderType int32
+type OAuthProviderType int32
 
 const (
-	OauthProviderType_OAUTH_PROVIDER_TYPE_UNSPECIFIED     OauthProviderType = 0
-	OauthProviderType_OAUTH_PROVIDER_TYPE_GOOGLE_PROVIDER OauthProviderType = 1
-	OauthProviderType_OAUTH_PROVIDER_TYPE_GITHUB_PROVIDER OauthProviderType = 2
+	OAuthProviderType_OAUTH_PROVIDER_TYPE_UNSPECIFIED     OAuthProviderType = 0
+	OAuthProviderType_OAUTH_PROVIDER_TYPE_GOOGLE_PROVIDER OAuthProviderType = 1
+	OAuthProviderType_OAUTH_PROVIDER_TYPE_GITHUB_PROVIDER OAuthProviderType = 2
 )
 
-// Enum value maps for OauthProviderType.
+// Enum value maps for OAuthProviderType.
 var (
-	OauthProviderType_name = map[int32]string{
+	OAuthProviderType_name = map[int32]string{
 		0: "OAUTH_PROVIDER_TYPE_UNSPECIFIED",
 		1: "OAUTH_PROVIDER_TYPE_GOOGLE_PROVIDER",
 		2: "OAUTH_PROVIDER_TYPE_GITHUB_PROVIDER",
 	}
-	OauthProviderType_value = map[string]int32{
+	OAuthProviderType_value = map[string]int32{
 		"OAUTH_PROVIDER_TYPE_UNSPECIFIED":     0,
 		"OAUTH_PROVIDER_TYPE_GOOGLE_PROVIDER": 1,
 		"OAUTH_PROVIDER_TYPE_GITHUB_PROVIDER": 2,
 	}
 )
 
-func (x OauthProviderType) Enum() *OauthProviderType {
-	p := new(OauthProviderType)
+func (x OAuthProviderType) Enum() *OAuthProviderType {
+	p := new(OAuthProviderType)
 	*p = x
 	return p
 }
 
-func (x OauthProviderType) String() string {
+func (x OAuthProviderType) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (OauthProviderType) Descriptor() protoreflect.EnumDescriptor {
+func (OAuthProviderType) Descriptor() protoreflect.EnumDescriptor {
 	return file_nuntio_users_v1alpha1_users_messages_proto_enumTypes[11].Descriptor()
 }
 
-func (OauthProviderType) Type() protoreflect.EnumType {
+func (OAuthProviderType) Type() protoreflect.EnumType {
 	return &file_nuntio_users_v1alpha1_users_messages_proto_enumTypes[11]
 }
 
-func (x OauthProviderType) Number() protoreflect.EnumNumber {
+func (x OAuthProviderType) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use OauthProviderType.Descriptor instead.
-func (OauthProviderType) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use OAuthProviderType.Descriptor instead.
+func (OAuthProviderType) EnumDescriptor() ([]byte, []int) {
 	return file_nuntio_users_v1alpha1_users_messages_proto_rawDescGZIP(), []int{11}
 }
 
@@ -1517,7 +1517,7 @@ type OAuthProvider struct {
 	unknownFields protoimpl.UnknownFields
 
 	Id      string            `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Type    OauthProviderType `protobuf:"varint,2,opt,name=type,proto3,enum=nuntio.users.v1alpha1.OauthProviderType" json:"type,omitempty"`
+	Type    OAuthProviderType `protobuf:"varint,2,opt,name=type,proto3,enum=nuntio.users.v1alpha1.OAuthProviderType" json:"type,omitempty"`
 	Secret  string            `protobuf:"bytes,3,opt,name=secret,proto3" json:"secret,omitempty"`
 	Logo    string            `protobuf:"bytes,4,opt,name=logo,proto3" json:"logo,omitempty"`
 	Name    string            `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
@@ -1565,11 +1565,11 @@ func (x *OAuthProvider) GetId() string {
 	return ""
 }
 
-func (x *OAuthProvider) GetType() OauthProviderType {
+func (x *OAuthProvider) GetType() OAuthProviderType {
 	if x != nil {
 		return x.Type
 	}
-	return OauthProviderType_OAUTH_PROVIDER_TYPE_UNSPECIFIED
+	return OAuthProviderType_OAUTH_PROVIDER_TYPE_UNSPECIFIED
 }
 
 func (x *OAuthProvider) GetSecret() string {
@@ -2196,7 +2196,7 @@ type TokenMeta struct {
 	UserId        string                 `protobuf:"bytes,5,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	BlockedAt     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=blocked_at,json=blockedAt,proto3" json:"blocked_at,omitempty"`
 	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	OauthProvider OauthProviderType      `protobuf:"varint,8,opt,name=oauth_provider,json=oauthProvider,proto3,enum=nuntio.users.v1alpha1.OauthProviderType" json:"oauth_provider,omitempty"`
+	OauthProvider OAuthProviderType      `protobuf:"varint,8,opt,name=oauth_provider,json=oauthProvider,proto3,enum=nuntio.users.v1alpha1.OAuthProviderType" json:"oauth_provider,omitempty"`
 	Blocked       bool                   `protobuf:"varint,9,opt,name=blocked,proto3" json:"blocked,omitempty"`
 	ExpiresAt     *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
 	UsedAt        *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=used_at,json=usedAt,proto3" json:"used_at,omitempty"`
@@ -2284,11 +2284,11 @@ func (x *TokenMeta) GetCreatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *TokenMeta) GetOauthProvider() OauthProviderType {
+func (x *TokenMeta) GetOauthProvider() OAuthProviderType {
 	if x != nil {
 		return x.OauthProvider
 	}
-	return OauthProviderType_OAUTH_PROVIDER_TYPE_UNSPECIFIED
+	return OAuthProviderType_OAUTH_PROVIDER_TYPE_UNSPECIFIED
 }
 
 func (x *TokenMeta) GetBlocked() bool {
@@ -3183,7 +3183,7 @@ var file_nuntio_users_v1alpha1_users_messages_proto_rawDesc = []byte{
 	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x3c, 0x0a, 0x04, 0x74,
 	0x79, 0x70, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x28, 0x2e, 0x6e, 0x75, 0x6e, 0x74,
 	0x69, 0x6f, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x73, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61,
-	0x31, 0x2e, 0x4f, 0x61, 0x75, 0x74, 0x68, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x54,
+	0x31, 0x2e, 0x4f, 0x41, 0x75, 0x74, 0x68, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x54,
 	0x79, 0x70, 0x65, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x65, 0x63,
 	0x72, 0x65, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x65, 0x63, 0x72, 0x65,
 	0x74, 0x12, 0x12, 0x0a, 0x04, 0x6c, 0x6f, 0x67, 0x6f, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52,
@@ -3380,7 +3380,7 @@ var file_nuntio_users_v1alpha1_users_messages_proto_rawDesc = []byte{
 	0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x4f, 0x0a, 0x0e, 0x6f, 0x61, 0x75, 0x74, 0x68,
 	0x5f, 0x70, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x18, 0x08, 0x20, 0x01, 0x28, 0x0e, 0x32,
 	0x28, 0x2e, 0x6e, 0x75, 0x6e, 0x74, 0x69, 0x6f, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x73, 0x2e, 0x76,
-	0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x4f, 0x61, 0x75, 0x74, 0x68, 0x50, 0x72, 0x6f,
+	0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x4f, 0x41, 0x75, 0x74, 0x68, 0x50, 0x72, 0x6f,
 	0x76, 0x69, 0x64, 0x65, 0x72, 0x54, 0x79, 0x70, 0x65, 0x52, 0x0d, 0x6f, 0x61, 0x75, 0x74, 0x68,
 	0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x12, 0x18, 0x0a, 0x07, 0x62, 0x6c, 0x6f, 0x63,
 	0x6b, 0x65, 0x64, 0x18, 0x09, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x62, 0x6c, 0x6f, 0x63, 0x6b,
@@ -3610,7 +3610,7 @@ var file_nuntio_users_v1alpha1_users_messages_proto_rawDesc = []byte{
 	0x50, 0x41, 0x53, 0x53, 0x57, 0x4f, 0x52, 0x44, 0x10, 0x05, 0x12, 0x21, 0x0a, 0x1d, 0x54, 0x45,
 	0x4d, 0x50, 0x4c, 0x41, 0x54, 0x45, 0x5f, 0x54, 0x59, 0x50, 0x45, 0x5f, 0x54, 0x45, 0x58, 0x54,
 	0x5f, 0x4d, 0x41, 0x47, 0x49, 0x43, 0x5f, 0x4c, 0x49, 0x4e, 0x4b, 0x10, 0x06, 0x2a, 0x8a, 0x01,
-	0x0a, 0x11, 0x4f, 0x61, 0x75, 0x74, 0x68, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x54,
+	0x0a, 0x11, 0x4f, 0x41, 0x75, 0x74, 0x68, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x54,
 	0x79, 0x70, 0x65, 0x12, 0x23, 0x0a, 0x1f, 0x4f, 0x41, 0x55, 0x54, 0x48, 0x5f, 0x50, 0x52, 0x4f,
 	0x56, 0x49, 0x44, 0x45, 0x52, 0x5f, 0x54, 0x59, 0x50, 0x45, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45,
 	0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x27, 0x0a, 0x23, 0x4f, 0x41, 0x55, 0x54,
@@ -3654,7 +3654,7 @@ var file_nuntio_users_v1alpha1_users_messages_proto_goTypes = []interface{}{
 	(LoginStatus)(0),              // 8: nuntio.users.v1alpha1.LoginStatus
 	(DeviceInfo)(0),               // 9: nuntio.users.v1alpha1.DeviceInfo
 	(TemplateType)(0),             // 10: nuntio.users.v1alpha1.TemplateType
-	(OauthProviderType)(0),        // 11: nuntio.users.v1alpha1.OauthProviderType
+	(OAuthProviderType)(0),        // 11: nuntio.users.v1alpha1.OAuthProviderType
 	(Filter_SortBy)(0),            // 12: nuntio.users.v1alpha1.Filter.SortBy
 	(Filter_Order)(0),             // 13: nuntio.users.v1alpha1.Filter.Order
 	(*Image)(nil),                 // 14: nuntio.users.v1alpha1.Image
@@ -3707,7 +3707,7 @@ var file_nuntio_users_v1alpha1_users_messages_proto_depIdxs = []int32{
 	44, // 13: nuntio.users.v1alpha1.Contact.accepted_at:type_name -> google.protobuf.Timestamp
 	44, // 14: nuntio.users.v1alpha1.Contact.sent_at:type_name -> google.protobuf.Timestamp
 	10, // 15: nuntio.users.v1alpha1.Template.type:type_name -> nuntio.users.v1alpha1.TemplateType
-	11, // 16: nuntio.users.v1alpha1.OAuthProvider.type:type_name -> nuntio.users.v1alpha1.OauthProviderType
+	11, // 16: nuntio.users.v1alpha1.OAuthProvider.type:type_name -> nuntio.users.v1alpha1.OAuthProviderType
 	14, // 17: nuntio.users.v1alpha1.Namespace.logo:type_name -> nuntio.users.v1alpha1.Image
 	44, // 18: nuntio.users.v1alpha1.Namespace.created_at:type_name -> google.protobuf.Timestamp
 	44, // 19: nuntio.users.v1alpha1.Namespace.updated_at:type_name -> google.protobuf.Timestamp
@@ -3736,7 +3736,7 @@ var file_nuntio_users_v1alpha1_users_messages_proto_depIdxs = []int32{
 	2,  // 42: nuntio.users.v1alpha1.TokenMeta.login_type:type_name -> nuntio.users.v1alpha1.LoginType
 	44, // 43: nuntio.users.v1alpha1.TokenMeta.blocked_at:type_name -> google.protobuf.Timestamp
 	44, // 44: nuntio.users.v1alpha1.TokenMeta.created_at:type_name -> google.protobuf.Timestamp
-	11, // 45: nuntio.users.v1alpha1.TokenMeta.oauth_provider:type_name -> nuntio.users.v1alpha1.OauthProviderType
+	11, // 45: nuntio.users.v1alpha1.TokenMeta.oauth_provider:type_name -> nuntio.users.v1alpha1.OAuthProviderType
 	44, // 46: nuntio.users.v1alpha1.TokenMeta.expires_at:type_name -> google.protobuf.Timestamp
 	44, // 47: nuntio.users.v1alpha1.TokenMeta.used_at:type_name -> google.protobuf.Timestamp
 	9,  // 48: nuntio.users.v1alpha1.TokenMeta.device:type_name -> nuntio.users.v1alpha1.DeviceInfo
