@@ -85,6 +85,8 @@ message AuthenticationServiceUpdateOAuth2ProviderRequest {
     string private_key = 3;
     // The type of provider
     OAuthProviderType provider = 4;
+    // If the provider is enabled or not
+    bool enabled = 5;
 }
 
 // The response of a Authentication.UpdateOAuth2Provider RPC
