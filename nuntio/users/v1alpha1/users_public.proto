@@ -29,6 +29,8 @@ service PublicService {
   rpc Delete(PublicServiceDeleteRequest) returns (PublicServiceDeleteResponse) {}
   // Refresh logged in token pair
   rpc RefreshToken(PublicServiceRefreshTokenRequest) returns (PublicServiceRefreshTokenResponse) {}
+  // Initialize auth returns auth information to frontend client
+  rpc InitializeAuth(PublicServiceInitializeAuthRequest)  returns (PublicServiceInitializeAuthResponse) {}
 }
 
 // The request of a Public.Login RPC
@@ -114,4 +116,34 @@ message PublicServiceRefreshTokenRequest {
 // The response of a Public.Delete RPC
 message PublicServiceRefreshTokenResponse {
   TokenPair token_pair = 1;
+}
+
+// The request of a Public.AuthenticationServiceInitializeAuthRequest RPC
+message PublicServiceInitializeAuthRequest {
+  // The namespace to perform action in
+  string namespace = 1;
+  // Optional redirect address for OAuth2
+  optional string redirect_addr = 2;
+}
+
+// The response of a Public.AuthenticationServiceInitializeAuthRequest RPC
+message PublicServiceInitializeAuthResponse {
+  // The name of the namespace
+  string name = 1;
+  // The logo of the namespace
+  string logo = 2;
+  // If signup is enabled
+  bool enable_signup = 3;
+  // If login is enabled
+  bool enable_login = 4;
+  // If to validate password
+  bool validate_password = 5;
+  // The public key of Users
+  string public_key = 6;
+  // Array of supported login types
+  repeated LoginType supported_login_mechanisms = 7;   
+  // Array of callbacks
+  repeated string callbacks = 8;
+  // Map of oauth2 providers
+  repeated OAuthProvider oauth_providers = 9;
 }

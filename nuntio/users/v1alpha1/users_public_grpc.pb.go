@@ -38,6 +38,8 @@ type PublicServiceClient interface {
 	Delete(ctx context.Context, in *PublicServiceDeleteRequest, opts ...grpc.CallOption) (*PublicServiceDeleteResponse, error)
 	// Refresh logged in token pair
 	RefreshToken(ctx context.Context, in *PublicServiceRefreshTokenRequest, opts ...grpc.CallOption) (*PublicServiceRefreshTokenResponse, error)
+	// Initialize auth returns auth information to frontend client
+	InitializeAuth(ctx context.Context, in *PublicServiceInitializeAuthRequest, opts ...grpc.CallOption) (*PublicServiceInitializeAuthResponse, error)
 }
 
 type publicServiceClient struct {
@@ -120,6 +122,15 @@ func (c *publicServiceClient) RefreshToken(ctx context.Context, in *PublicServic
 	return out, nil
 }
 
+func (c *publicServiceClient) InitializeAuth(ctx context.Context, in *PublicServiceInitializeAuthRequest, opts ...grpc.CallOption) (*PublicServiceInitializeAuthResponse, error) {
+	out := new(PublicServiceInitializeAuthResponse)
+	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.PublicService/InitializeAuth", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PublicServiceServer is the server API for PublicService service.
 // All implementations should embed UnimplementedPublicServiceServer
 // for forward compatibility
@@ -140,6 +151,8 @@ type PublicServiceServer interface {
 	Delete(context.Context, *PublicServiceDeleteRequest) (*PublicServiceDeleteResponse, error)
 	// Refresh logged in token pair
 	RefreshToken(context.Context, *PublicServiceRefreshTokenRequest) (*PublicServiceRefreshTokenResponse, error)
+	// Initialize auth returns auth information to frontend client
+	InitializeAuth(context.Context, *PublicServiceInitializeAuthRequest) (*PublicServiceInitializeAuthResponse, error)
 }
 
 // UnimplementedPublicServiceServer should be embedded to have forward compatible implementations.
@@ -169,6 +182,9 @@ func (UnimplementedPublicServiceServer) Delete(context.Context, *PublicServiceDe
 }
 func (UnimplementedPublicServiceServer) RefreshToken(context.Context, *PublicServiceRefreshTokenRequest) (*PublicServiceRefreshTokenResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RefreshToken not implemented")
+}
+func (UnimplementedPublicServiceServer) InitializeAuth(context.Context, *PublicServiceInitializeAuthRequest) (*PublicServiceInitializeAuthResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method InitializeAuth not implemented")
 }
 
 // UnsafePublicServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -326,6 +342,24 @@ func _PublicService_RefreshToken_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PublicService_InitializeAuth_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PublicServiceInitializeAuthRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PublicServiceServer).InitializeAuth(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nuntio.users.v1alpha1.PublicService/InitializeAuth",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PublicServiceServer).InitializeAuth(ctx, req.(*PublicServiceInitializeAuthRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PublicService_ServiceDesc is the grpc.ServiceDesc for PublicService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -364,6 +398,10 @@ var PublicService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RefreshToken",
 			Handler:    _PublicService_RefreshToken_Handler,
+		},
+		{
+			MethodName: "InitializeAuth",
+			Handler:    _PublicService_InitializeAuth_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -25,6 +25,8 @@ type AuthenticationServiceClient interface {
 	// Updates a specific OAuth2 Provider
 	Ping(ctx context.Context, in *AuthenticationServicePingRequest, opts ...grpc.CallOption) (*AuthenticationServicePingResponse, error)
 	// Updates a specific OAuth2 Provider
+	GetOAuth2Providers(ctx context.Context, in *AuthenticationServiceGetOAuth2ProvidersRequest, opts ...grpc.CallOption) (*AuthenticationServiceGetOAuth2ProvidersResponse, error)
+	// Updates a specific OAuth2 Provider
 	UpdateOAuth2Provider(ctx context.Context, in *AuthenticationServiceUpdateOAuth2ProviderRequest, opts ...grpc.CallOption) (*AuthenticationServiceUpdateOAuth2ProviderResponse, error)
 	// Update allowed callbacks in Users
 	UpdateCallbacks(ctx context.Context, in *AuthenticationServiceUpdateCallbacksRequest, opts ...grpc.CallOption) (*AuthenticationServiceUpdateCallbacksResponse, error)
@@ -60,14 +62,14 @@ type AuthenticationServiceClient interface {
 	ResetPassword(ctx context.Context, in *AuthenticationServiceResetPasswordRequest, opts ...grpc.CallOption) (*AuthenticationServiceResetPasswordResponse, error)
 	// Continue with OAuth2 provider
 	ContinueWith(ctx context.Context, in *AuthenticationServiceContinueWithRequest, opts ...grpc.CallOption) (*AuthenticationServiceContinueWithResponse, error)
+	// Redirect handles the callback from the OAuth2 provider
+	Redirect(ctx context.Context, in *AuthenticationServiceRedirectRequest, opts ...grpc.CallOption) (*AuthenticationServiceRedirectResponse, error)
 	// Logout blocks tokens of a given session
 	Logout(ctx context.Context, in *AuthenticationServiceLogoutRequest, opts ...grpc.CallOption) (*AuthenticationServiceLogoutResponse, error)
 	// Login issues a token pair after validating credentials
 	Login(ctx context.Context, in *AuthenticationServiceLoginRequest, opts ...grpc.CallOption) (*AuthenticationServiceLoginResponse, error)
 	// Refreshes the access token and issues new refresh token
 	RefreshToken(ctx context.Context, in *AuthenticationServiceRefreshTokenRequest, opts ...grpc.CallOption) (*AuthenticationServiceRefreshTokenResponse, error)
-	// Initialize auth returns auth information to frontend client
-	InitializeAuth(ctx context.Context, in *AuthenticationServiceInitializeAuthRequest, opts ...grpc.CallOption) (*AuthenticationServiceInitializeAuthResponse, error)
 	// SendMagicEmail sends a code to your email to login
 	SendMagicEmail(ctx context.Context, in *AuthenticationServiceSendMagicEmailRequest, opts ...grpc.CallOption) (*AuthenticationServiceSendMagicEmailResponse, error)
 	// SendMagicEmail sends a code to your phone to login
@@ -87,6 +89,15 @@ func NewAuthenticationServiceClient(cc grpc.ClientConnInterface) AuthenticationS
 func (c *authenticationServiceClient) Ping(ctx context.Context, in *AuthenticationServicePingRequest, opts ...grpc.CallOption) (*AuthenticationServicePingResponse, error) {
 	out := new(AuthenticationServicePingResponse)
 	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.AuthenticationService/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authenticationServiceClient) GetOAuth2Providers(ctx context.Context, in *AuthenticationServiceGetOAuth2ProvidersRequest, opts ...grpc.CallOption) (*AuthenticationServiceGetOAuth2ProvidersResponse, error) {
+	out := new(AuthenticationServiceGetOAuth2ProvidersResponse)
+	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.AuthenticationService/GetOAuth2Providers", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -255,6 +266,15 @@ func (c *authenticationServiceClient) ContinueWith(ctx context.Context, in *Auth
 	return out, nil
 }
 
+func (c *authenticationServiceClient) Redirect(ctx context.Context, in *AuthenticationServiceRedirectRequest, opts ...grpc.CallOption) (*AuthenticationServiceRedirectResponse, error) {
+	out := new(AuthenticationServiceRedirectResponse)
+	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.AuthenticationService/Redirect", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *authenticationServiceClient) Logout(ctx context.Context, in *AuthenticationServiceLogoutRequest, opts ...grpc.CallOption) (*AuthenticationServiceLogoutResponse, error) {
 	out := new(AuthenticationServiceLogoutResponse)
 	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.AuthenticationService/Logout", in, out, opts...)
@@ -276,15 +296,6 @@ func (c *authenticationServiceClient) Login(ctx context.Context, in *Authenticat
 func (c *authenticationServiceClient) RefreshToken(ctx context.Context, in *AuthenticationServiceRefreshTokenRequest, opts ...grpc.CallOption) (*AuthenticationServiceRefreshTokenResponse, error) {
 	out := new(AuthenticationServiceRefreshTokenResponse)
 	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.AuthenticationService/RefreshToken", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *authenticationServiceClient) InitializeAuth(ctx context.Context, in *AuthenticationServiceInitializeAuthRequest, opts ...grpc.CallOption) (*AuthenticationServiceInitializeAuthResponse, error) {
-	out := new(AuthenticationServiceInitializeAuthResponse)
-	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.AuthenticationService/InitializeAuth", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -325,6 +336,8 @@ type AuthenticationServiceServer interface {
 	// Updates a specific OAuth2 Provider
 	Ping(context.Context, *AuthenticationServicePingRequest) (*AuthenticationServicePingResponse, error)
 	// Updates a specific OAuth2 Provider
+	GetOAuth2Providers(context.Context, *AuthenticationServiceGetOAuth2ProvidersRequest) (*AuthenticationServiceGetOAuth2ProvidersResponse, error)
+	// Updates a specific OAuth2 Provider
 	UpdateOAuth2Provider(context.Context, *AuthenticationServiceUpdateOAuth2ProviderRequest) (*AuthenticationServiceUpdateOAuth2ProviderResponse, error)
 	// Update allowed callbacks in Users
 	UpdateCallbacks(context.Context, *AuthenticationServiceUpdateCallbacksRequest) (*AuthenticationServiceUpdateCallbacksResponse, error)
@@ -360,14 +373,14 @@ type AuthenticationServiceServer interface {
 	ResetPassword(context.Context, *AuthenticationServiceResetPasswordRequest) (*AuthenticationServiceResetPasswordResponse, error)
 	// Continue with OAuth2 provider
 	ContinueWith(context.Context, *AuthenticationServiceContinueWithRequest) (*AuthenticationServiceContinueWithResponse, error)
+	// Redirect handles the callback from the OAuth2 provider
+	Redirect(context.Context, *AuthenticationServiceRedirectRequest) (*AuthenticationServiceRedirectResponse, error)
 	// Logout blocks tokens of a given session
 	Logout(context.Context, *AuthenticationServiceLogoutRequest) (*AuthenticationServiceLogoutResponse, error)
 	// Login issues a token pair after validating credentials
 	Login(context.Context, *AuthenticationServiceLoginRequest) (*AuthenticationServiceLoginResponse, error)
 	// Refreshes the access token and issues new refresh token
 	RefreshToken(context.Context, *AuthenticationServiceRefreshTokenRequest) (*AuthenticationServiceRefreshTokenResponse, error)
-	// Initialize auth returns auth information to frontend client
-	InitializeAuth(context.Context, *AuthenticationServiceInitializeAuthRequest) (*AuthenticationServiceInitializeAuthResponse, error)
 	// SendMagicEmail sends a code to your email to login
 	SendMagicEmail(context.Context, *AuthenticationServiceSendMagicEmailRequest) (*AuthenticationServiceSendMagicEmailResponse, error)
 	// SendMagicEmail sends a code to your phone to login
@@ -382,6 +395,9 @@ type UnimplementedAuthenticationServiceServer struct {
 
 func (UnimplementedAuthenticationServiceServer) Ping(context.Context, *AuthenticationServicePingRequest) (*AuthenticationServicePingResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Ping not implemented")
+}
+func (UnimplementedAuthenticationServiceServer) GetOAuth2Providers(context.Context, *AuthenticationServiceGetOAuth2ProvidersRequest) (*AuthenticationServiceGetOAuth2ProvidersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOAuth2Providers not implemented")
 }
 func (UnimplementedAuthenticationServiceServer) UpdateOAuth2Provider(context.Context, *AuthenticationServiceUpdateOAuth2ProviderRequest) (*AuthenticationServiceUpdateOAuth2ProviderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateOAuth2Provider not implemented")
@@ -437,6 +453,9 @@ func (UnimplementedAuthenticationServiceServer) ResetPassword(context.Context, *
 func (UnimplementedAuthenticationServiceServer) ContinueWith(context.Context, *AuthenticationServiceContinueWithRequest) (*AuthenticationServiceContinueWithResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ContinueWith not implemented")
 }
+func (UnimplementedAuthenticationServiceServer) Redirect(context.Context, *AuthenticationServiceRedirectRequest) (*AuthenticationServiceRedirectResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Redirect not implemented")
+}
 func (UnimplementedAuthenticationServiceServer) Logout(context.Context, *AuthenticationServiceLogoutRequest) (*AuthenticationServiceLogoutResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Logout not implemented")
 }
@@ -445,9 +464,6 @@ func (UnimplementedAuthenticationServiceServer) Login(context.Context, *Authenti
 }
 func (UnimplementedAuthenticationServiceServer) RefreshToken(context.Context, *AuthenticationServiceRefreshTokenRequest) (*AuthenticationServiceRefreshTokenResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RefreshToken not implemented")
-}
-func (UnimplementedAuthenticationServiceServer) InitializeAuth(context.Context, *AuthenticationServiceInitializeAuthRequest) (*AuthenticationServiceInitializeAuthResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method InitializeAuth not implemented")
 }
 func (UnimplementedAuthenticationServiceServer) SendMagicEmail(context.Context, *AuthenticationServiceSendMagicEmailRequest) (*AuthenticationServiceSendMagicEmailResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendMagicEmail not implemented")
@@ -484,6 +500,24 @@ func _AuthenticationService_Ping_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthenticationServiceServer).Ping(ctx, req.(*AuthenticationServicePingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthenticationService_GetOAuth2Providers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AuthenticationServiceGetOAuth2ProvidersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthenticationServiceServer).GetOAuth2Providers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nuntio.users.v1alpha1.AuthenticationService/GetOAuth2Providers",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthenticationServiceServer).GetOAuth2Providers(ctx, req.(*AuthenticationServiceGetOAuth2ProvidersRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -812,6 +846,24 @@ func _AuthenticationService_ContinueWith_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AuthenticationService_Redirect_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AuthenticationServiceRedirectRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthenticationServiceServer).Redirect(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nuntio.users.v1alpha1.AuthenticationService/Redirect",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthenticationServiceServer).Redirect(ctx, req.(*AuthenticationServiceRedirectRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _AuthenticationService_Logout_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AuthenticationServiceLogoutRequest)
 	if err := dec(in); err != nil {
@@ -862,24 +914,6 @@ func _AuthenticationService_RefreshToken_Handler(srv interface{}, ctx context.Co
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthenticationServiceServer).RefreshToken(ctx, req.(*AuthenticationServiceRefreshTokenRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AuthenticationService_InitializeAuth_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AuthenticationServiceInitializeAuthRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AuthenticationServiceServer).InitializeAuth(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/nuntio.users.v1alpha1.AuthenticationService/InitializeAuth",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthenticationServiceServer).InitializeAuth(ctx, req.(*AuthenticationServiceInitializeAuthRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -948,6 +982,10 @@ var AuthenticationService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Ping",
 			Handler:    _AuthenticationService_Ping_Handler,
+		},
+		{
+			MethodName: "GetOAuth2Providers",
+			Handler:    _AuthenticationService_GetOAuth2Providers_Handler,
 		},
 		{
 			MethodName: "UpdateOAuth2Provider",
@@ -1022,6 +1060,10 @@ var AuthenticationService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _AuthenticationService_ContinueWith_Handler,
 		},
 		{
+			MethodName: "Redirect",
+			Handler:    _AuthenticationService_Redirect_Handler,
+		},
+		{
 			MethodName: "Logout",
 			Handler:    _AuthenticationService_Logout_Handler,
 		},
@@ -1032,10 +1074,6 @@ var AuthenticationService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RefreshToken",
 			Handler:    _AuthenticationService_RefreshToken_Handler,
-		},
-		{
-			MethodName: "InitializeAuth",
-			Handler:    _AuthenticationService_InitializeAuth_Handler,
 		},
 		{
 			MethodName: "SendMagicEmail",

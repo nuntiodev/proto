@@ -85,6 +85,7 @@ message NamespaceServiceGetRequest {
 // The response of a Namespace.Get RPC
 message NamespaceServiceGetResponse {
     Namespace namespace = 1;
+    string redirect_url = 2;
 }
 
 // The request of a Namespace.PublicKey RPC

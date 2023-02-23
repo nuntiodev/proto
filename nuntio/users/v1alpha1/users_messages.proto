@@ -189,7 +189,6 @@ message OAuthProvider {
     bool enabled = 6;
     string url = 7;
     repeated string scopes = 8;
-    string redirect_url = 9;
   }
 
 message Namespace {

@@ -3,6 +3,7 @@ syntax = "proto3";
 package nuntio.users.v1alpha1;
 
 import "nuntio/users/v1alpha1/users_messages.proto";
+import "google/api/annotations.proto";
 
 option go_package = "./nuntio/users/v1alpha1";
 option csharp_namespace = "nuntio.users.v1alpha1";
@@ -14,6 +15,8 @@ option php_namespace = "Nuntio\\Users\\v1alpha1";
 service AuthenticationService {
     // Updates a specific OAuth2 Provider
     rpc Ping(AuthenticationServicePingRequest) returns (AuthenticationServicePingResponse) {}
+    // Updates a specific OAuth2 Provider
+    rpc GetOAuth2Providers(AuthenticationServiceGetOAuth2ProvidersRequest) returns (AuthenticationServiceGetOAuth2ProvidersResponse) {}
     // Updates a specific OAuth2 Provider
     rpc UpdateOAuth2Provider(AuthenticationServiceUpdateOAuth2ProviderRequest) returns (AuthenticationServiceUpdateOAuth2ProviderResponse) {}
     // Update allowed callbacks in Users
@@ -50,14 +53,14 @@ service AuthenticationService {
     rpc ResetPassword(AuthenticationServiceResetPasswordRequest) returns (AuthenticationServiceResetPasswordResponse) {}
     // Continue with OAuth2 provider
     rpc ContinueWith(AuthenticationServiceContinueWithRequest) returns (AuthenticationServiceContinueWithResponse) {}
+    // Redirect handles the callback from the OAuth2 provider
+    rpc Redirect(AuthenticationServiceRedirectRequest) returns (AuthenticationServiceRedirectResponse) {}
     // Logout blocks tokens of a given session
     rpc Logout(AuthenticationServiceLogoutRequest) returns (AuthenticationServiceLogoutResponse) {}
     // Login issues a token pair after validating credentials
     rpc Login(AuthenticationServiceLoginRequest) returns (AuthenticationServiceLoginResponse) {}
     // Refreshes the access token and issues new refresh token
     rpc RefreshToken(AuthenticationServiceRefreshTokenRequest) returns (AuthenticationServiceRefreshTokenResponse) {}
-    // Initialize auth returns auth information to frontend client
-    rpc InitializeAuth(AuthenticationServiceInitializeAuthRequest)  returns (AuthenticationServiceInitializeAuthResponse) {}
     // SendMagicEmail sends a code to your email to login
     rpc SendMagicEmail(AuthenticationServiceSendMagicEmailRequest)  returns (AuthenticationServiceSendMagicEmailResponse) {}
     // SendMagicEmail sends a code to your phone to login
@@ -436,4 +439,24 @@ message AuthenticationServiceVerifyMagicCodeRequest {
 // The response of a Authentication.VerifyMagicCode RPC
 message AuthenticationServiceVerifyMagicCodeResponse {
     TokenPair token_pair = 1;
+}
+
+// The request of a Authentication.Redirect RPC
+message AuthenticationServiceRedirectRequest {
+    string code = 1;
+}
+
+// The response of a Authentication.Redirect RPC
+message AuthenticationServiceRedirectResponse {}
+
+// The request of a Authentication.GetOAuth2Providers RPC
+message AuthenticationServiceGetOAuth2ProvidersRequest {
+    string namespace = 1;
+    string redirect_addr = 2;
+}
+
+// The response of a Authentication.GetOAuth2Providers RPC
+message AuthenticationServiceGetOAuth2ProvidersResponse {
+    // Map of oauth2 providers
+    repeated OAuthProvider oauth_providers = 1;
 }
