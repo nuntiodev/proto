@@ -182,13 +182,12 @@ message Template {
 
 message OAuthProvider {
     string id = 1;
-    OAuthProviderType type = 2;
-    string secret = 3;
+    string secret = 2;
+    OAuthProviderType type = 3;
     string logo = 4;
     string name = 5;
     bool enabled = 6;
     string url = 7;
-    repeated string scopes = 8;
   }
 
 message Namespace {
