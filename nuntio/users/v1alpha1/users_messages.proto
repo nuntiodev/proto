@@ -188,6 +188,8 @@ message OAuthProvider {
     string name = 5;
     bool enabled = 6;
     string url = 7;
+    bool require_ssl = 8;
+    bool available = 9;
   }
 
 message Namespace {
