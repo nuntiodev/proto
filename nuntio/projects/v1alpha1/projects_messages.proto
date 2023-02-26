@@ -17,6 +17,12 @@ enum APIKeyStatus {
     APIKEY_STATUS_REVOKED = 2;
 }
 
+enum Mode {
+    MODE_UNSPEFICIED = 0;
+    MODE_MULTI_TENANT = 1;
+    MODE_MONO_TENANT = 2;
+}
+
 message File {
     string name = 1;
     google.protobuf.Timestamp created_at = 2;

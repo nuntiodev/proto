@@ -60,20 +60,18 @@ message APIServicePingResponse {}
 
 // The request of a API.CreateAPIKey RPC
 message APIServiceCreateAPIKeyRequest {
-    // the id of the api key
-    string id = 1;
     // the project id related to the api key
-    string project_id = 2;
+    string project_id = 1;
     // init mongo access
-    bool configure_mongo = 3;
+    bool configure_mongo = 2;
     // init postgres access
-    bool configure_postgres = 4;
+    bool configure_postgres = 3;
     // init storage access
-    bool configure_storage = 5;
+    bool configure_storage = 4;
     // init users access
-    bool configure_users = 6;
+    bool configure_users = 5;
     // the name of the api key
-    string name = 7;
+    string name = 6;
 }
 
 // The response of a API.CreateAPIKey RPC
