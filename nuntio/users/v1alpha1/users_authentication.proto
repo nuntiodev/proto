@@ -3,7 +3,6 @@ syntax = "proto3";
 package nuntio.users.v1alpha1;
 
 import "nuntio/users/v1alpha1/users_messages.proto";
-import "google/api/annotations.proto";
 
 option go_package = "./nuntio/users/v1alpha1";
 option csharp_namespace = "nuntio.users.v1alpha1";
