@@ -22,6 +22,10 @@ service NamespaceService {
     rpc Get(NamespaceServiceGetRequest) returns (NamespaceServiceGetResponse) {}
     // Update updates the profile of the namespace
     rpc Update(NamespaceServiceUpdateRequest) returns (NamespaceServiceUpdateResponse) {}
+    // UpdateEmailProvider updates the email provider of the namespace
+    rpc UpdateEmailProvider(NamespaceServiceUpdateEmailProviderRequest) returns (NamespaceServiceUpdateEmailProviderResponse) {}
+    // UpdateTextProvider updates the text provider of the namespace
+    rpc UpdateTextProvider(NamespaceServiceUpdateTextProviderRequest) returns (NamespaceServiceUpdateTextProviderResponse) {}
     // Get public key of system
     rpc PublicKey(NamespaceServicePublicKeyRequest) returns (NamespaceServicePublicKeyResponse) {}
   }
@@ -101,3 +105,28 @@ message NamespaceServicePublicKeyResponse {
     // The id of the namespace
     string namespace = 2;
 }
+
+// The request of a Namespace.UpdateEmailProvider RPC
+message NamespaceServiceUpdateEmailProviderRequest {
+    EmailProviderType type = 1;
+    string public_key = 2;
+    string private_key = 3;
+    string from = 4;
+    string namespace = 5;
+}
+
+// The response of a Namespace.UpdateEmailProvider RPC
+message NamespaceServiceUpdateEmailProviderResponse {}
+
+
+// The request of a Namespace.UpdateTextProvider RPC
+message NamespaceServiceUpdateTextProviderRequest {
+    TextProviderType type = 1;
+    string public_key = 2;
+    string private_key = 3;
+    string from = 4;
+    string namespace = 5;
+}
+
+// The response of a Namespace.UpdateEmailProvider RPC
+message NamespaceServiceUpdateTextProviderResponse {}

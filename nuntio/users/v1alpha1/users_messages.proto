@@ -332,8 +332,8 @@ message EmailProvider {
   
 message TextProvider {
     TextProviderType type = 1;
-    string account_id = 2;
-    string auth_token = 3;
+    string public_key = 2;
+    string private_key = 3;
     string from = 4;
 }
 

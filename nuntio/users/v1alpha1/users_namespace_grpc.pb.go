@@ -32,6 +32,10 @@ type NamespaceServiceClient interface {
 	Get(ctx context.Context, in *NamespaceServiceGetRequest, opts ...grpc.CallOption) (*NamespaceServiceGetResponse, error)
 	// Update updates the profile of the namespace
 	Update(ctx context.Context, in *NamespaceServiceUpdateRequest, opts ...grpc.CallOption) (*NamespaceServiceUpdateResponse, error)
+	// UpdateEmailProvider updates the email provider of the namespace
+	UpdateEmailProvider(ctx context.Context, in *NamespaceServiceUpdateEmailProviderRequest, opts ...grpc.CallOption) (*NamespaceServiceUpdateEmailProviderResponse, error)
+	// UpdateTextProvider updates the text provider of the namespace
+	UpdateTextProvider(ctx context.Context, in *NamespaceServiceUpdateTextProviderRequest, opts ...grpc.CallOption) (*NamespaceServiceUpdateTextProviderResponse, error)
 	// Get public key of system
 	PublicKey(ctx context.Context, in *NamespaceServicePublicKeyRequest, opts ...grpc.CallOption) (*NamespaceServicePublicKeyResponse, error)
 }
@@ -89,6 +93,24 @@ func (c *namespaceServiceClient) Update(ctx context.Context, in *NamespaceServic
 	return out, nil
 }
 
+func (c *namespaceServiceClient) UpdateEmailProvider(ctx context.Context, in *NamespaceServiceUpdateEmailProviderRequest, opts ...grpc.CallOption) (*NamespaceServiceUpdateEmailProviderResponse, error) {
+	out := new(NamespaceServiceUpdateEmailProviderResponse)
+	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.NamespaceService/UpdateEmailProvider", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *namespaceServiceClient) UpdateTextProvider(ctx context.Context, in *NamespaceServiceUpdateTextProviderRequest, opts ...grpc.CallOption) (*NamespaceServiceUpdateTextProviderResponse, error) {
+	out := new(NamespaceServiceUpdateTextProviderResponse)
+	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.NamespaceService/UpdateTextProvider", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *namespaceServiceClient) PublicKey(ctx context.Context, in *NamespaceServicePublicKeyRequest, opts ...grpc.CallOption) (*NamespaceServicePublicKeyResponse, error) {
 	out := new(NamespaceServicePublicKeyResponse)
 	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.NamespaceService/PublicKey", in, out, opts...)
@@ -112,6 +134,10 @@ type NamespaceServiceServer interface {
 	Get(context.Context, *NamespaceServiceGetRequest) (*NamespaceServiceGetResponse, error)
 	// Update updates the profile of the namespace
 	Update(context.Context, *NamespaceServiceUpdateRequest) (*NamespaceServiceUpdateResponse, error)
+	// UpdateEmailProvider updates the email provider of the namespace
+	UpdateEmailProvider(context.Context, *NamespaceServiceUpdateEmailProviderRequest) (*NamespaceServiceUpdateEmailProviderResponse, error)
+	// UpdateTextProvider updates the text provider of the namespace
+	UpdateTextProvider(context.Context, *NamespaceServiceUpdateTextProviderRequest) (*NamespaceServiceUpdateTextProviderResponse, error)
 	// Get public key of system
 	PublicKey(context.Context, *NamespaceServicePublicKeyRequest) (*NamespaceServicePublicKeyResponse, error)
 }
@@ -134,6 +160,12 @@ func (UnimplementedNamespaceServiceServer) Get(context.Context, *NamespaceServic
 }
 func (UnimplementedNamespaceServiceServer) Update(context.Context, *NamespaceServiceUpdateRequest) (*NamespaceServiceUpdateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+}
+func (UnimplementedNamespaceServiceServer) UpdateEmailProvider(context.Context, *NamespaceServiceUpdateEmailProviderRequest) (*NamespaceServiceUpdateEmailProviderResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateEmailProvider not implemented")
+}
+func (UnimplementedNamespaceServiceServer) UpdateTextProvider(context.Context, *NamespaceServiceUpdateTextProviderRequest) (*NamespaceServiceUpdateTextProviderResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTextProvider not implemented")
 }
 func (UnimplementedNamespaceServiceServer) PublicKey(context.Context, *NamespaceServicePublicKeyRequest) (*NamespaceServicePublicKeyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PublicKey not implemented")
@@ -240,6 +272,42 @@ func _NamespaceService_Update_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _NamespaceService_UpdateEmailProvider_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NamespaceServiceUpdateEmailProviderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NamespaceServiceServer).UpdateEmailProvider(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nuntio.users.v1alpha1.NamespaceService/UpdateEmailProvider",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NamespaceServiceServer).UpdateEmailProvider(ctx, req.(*NamespaceServiceUpdateEmailProviderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NamespaceService_UpdateTextProvider_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NamespaceServiceUpdateTextProviderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NamespaceServiceServer).UpdateTextProvider(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nuntio.users.v1alpha1.NamespaceService/UpdateTextProvider",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NamespaceServiceServer).UpdateTextProvider(ctx, req.(*NamespaceServiceUpdateTextProviderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _NamespaceService_PublicKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(NamespaceServicePublicKeyRequest)
 	if err := dec(in); err != nil {
@@ -284,6 +352,14 @@ var NamespaceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Update",
 			Handler:    _NamespaceService_Update_Handler,
+		},
+		{
+			MethodName: "UpdateEmailProvider",
+			Handler:    _NamespaceService_UpdateEmailProvider_Handler,
+		},
+		{
+			MethodName: "UpdateTextProvider",
+			Handler:    _NamespaceService_UpdateTextProvider_Handler,
 		},
 		{
 			MethodName: "PublicKey",
