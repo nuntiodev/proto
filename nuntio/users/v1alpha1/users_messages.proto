@@ -190,7 +190,18 @@ message OAuthProvider {
     string url = 7;
     bool require_ssl = 8;
     bool available = 9;
-  }
+}
+
+message OAuthProviders {
+    OAuthProviders google = 1;
+}
+
+message Templates {
+    Template reset_password_email = 1;
+    Template reset_password_text = 2;
+    Template verify_email = 3;
+    Template verify_phone_number = 4;
+}
 
 message Namespace {
     optional string name = 1;
@@ -205,13 +216,13 @@ message Namespace {
     optional Bcrypt bcrypt = 10;
     optional Scrypt scrypt = 11;
     repeated LoginType supported_login_mechanisms = 12;
-    map<string, Template> templates = 13;
+    Templates templates = 13;
     optional int32 access_token_ttl = 14;
     optional int32 refresh_token_ttl = 15;
     optional int32 verification_code_ttl = 16;
     repeated string callbacks = 17;
     string id = 18;
-    repeated OAuthProvider oauth_providers = 19;
+    OAuthProviders oauth_providers = 19;
     EmailProvider email_provider = 20;
     TextProvider text_provider = 21;
 }

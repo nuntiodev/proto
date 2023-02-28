@@ -19,7 +19,7 @@ service MembersService {
   // RemoveMember removes a member from a namespace
   rpc Remove(MembersServiceRemoveRequest) returns (MembersServiceRemoveResponse) {}
   // AddProject adds a project to a members list of projects
-  rpc AddProject(MembersServiceAddProjectRequest) returns (MembersServiceAddProjectResponse) {}
+  rpc AddToProject(MembersServiceAddToProjectRequest) returns (MembersServiceAddToProjectResponse) {}
   // ListMembers returns a list of claimed and unclaimed members
   rpc ListMembers(MembersServiceListMembersRequest) returns (MembersServiceListMembersResponse) {}
 }
@@ -56,16 +56,16 @@ message MembersServiceRemoveRequest {
 message MembersServiceRemoveResponse {} 
 
 
-// The request of a Member.AddProject RPC
-message MembersServiceAddProjectRequest {
+// The request of a Member.AdTodProject RPC
+message MembersServiceAddToProjectRequest {
     // the id of the namespace
     string namespace = 1;
     // your secret code to add the project
     string code = 2;
 }
 
-// The response of a Member.AddProject RPC
-message MembersServiceAddProjectResponse {}
+// The response of a Member.AddToProject RPC
+message MembersServiceAddToProjectResponse {}
 
 
 // The request of a Member.ListMembers RPC

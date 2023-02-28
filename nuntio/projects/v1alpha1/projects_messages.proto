@@ -17,6 +17,13 @@ enum APIKeyStatus {
     APIKEY_STATUS_REVOKED = 2;
 }
 
+enum MemberStatus {
+    MEMBER_STATUS_UNSPEFICIED = 0;
+    MEMBER_STATUS_INVITED = 1;
+    MEMBER_STATUS_ACCEPTED = 2;
+    MEMBER_STATUS_CREATED = 3;
+}
+
 enum Mode {
     MODE_UNSPEFICIED = 0;
     MODE_MULTI_TENANT = 1;
@@ -77,9 +84,11 @@ message AccessToken {
 
 message Member {
     string id = 1;
-    google.protobuf.Timestamp created_at = 2;
-    google.protobuf.Timestamp updated_at = 3;
-    string password = 4;
+    string email = 2;
+    google.protobuf.Timestamp created_at = 3;
+    google.protobuf.Timestamp updated_at = 4;
+    string password = 5;
+    MemberStatus status = 6;
 }
 
 message Project {

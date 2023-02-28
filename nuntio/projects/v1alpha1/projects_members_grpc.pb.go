@@ -29,7 +29,7 @@ type MembersServiceClient interface {
 	// RemoveMember removes a member from a namespace
 	Remove(ctx context.Context, in *MembersServiceRemoveRequest, opts ...grpc.CallOption) (*MembersServiceRemoveResponse, error)
 	// AddProject adds a project to a members list of projects
-	AddProject(ctx context.Context, in *MembersServiceAddProjectRequest, opts ...grpc.CallOption) (*MembersServiceAddProjectResponse, error)
+	AddToProject(ctx context.Context, in *MembersServiceAddToProjectRequest, opts ...grpc.CallOption) (*MembersServiceAddToProjectResponse, error)
 	// ListMembers returns a list of claimed and unclaimed members
 	ListMembers(ctx context.Context, in *MembersServiceListMembersRequest, opts ...grpc.CallOption) (*MembersServiceListMembersResponse, error)
 }
@@ -69,9 +69,9 @@ func (c *membersServiceClient) Remove(ctx context.Context, in *MembersServiceRem
 	return out, nil
 }
 
-func (c *membersServiceClient) AddProject(ctx context.Context, in *MembersServiceAddProjectRequest, opts ...grpc.CallOption) (*MembersServiceAddProjectResponse, error) {
-	out := new(MembersServiceAddProjectResponse)
-	err := c.cc.Invoke(ctx, "/nuntio.projects.v1alpha1.MembersService/AddProject", in, out, opts...)
+func (c *membersServiceClient) AddToProject(ctx context.Context, in *MembersServiceAddToProjectRequest, opts ...grpc.CallOption) (*MembersServiceAddToProjectResponse, error) {
+	out := new(MembersServiceAddToProjectResponse)
+	err := c.cc.Invoke(ctx, "/nuntio.projects.v1alpha1.MembersService/AddToProject", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -98,7 +98,7 @@ type MembersServiceServer interface {
 	// RemoveMember removes a member from a namespace
 	Remove(context.Context, *MembersServiceRemoveRequest) (*MembersServiceRemoveResponse, error)
 	// AddProject adds a project to a members list of projects
-	AddProject(context.Context, *MembersServiceAddProjectRequest) (*MembersServiceAddProjectResponse, error)
+	AddToProject(context.Context, *MembersServiceAddToProjectRequest) (*MembersServiceAddToProjectResponse, error)
 	// ListMembers returns a list of claimed and unclaimed members
 	ListMembers(context.Context, *MembersServiceListMembersRequest) (*MembersServiceListMembersResponse, error)
 }
@@ -116,8 +116,8 @@ func (UnimplementedMembersServiceServer) Add(context.Context, *MembersServiceAdd
 func (UnimplementedMembersServiceServer) Remove(context.Context, *MembersServiceRemoveRequest) (*MembersServiceRemoveResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Remove not implemented")
 }
-func (UnimplementedMembersServiceServer) AddProject(context.Context, *MembersServiceAddProjectRequest) (*MembersServiceAddProjectResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddProject not implemented")
+func (UnimplementedMembersServiceServer) AddToProject(context.Context, *MembersServiceAddToProjectRequest) (*MembersServiceAddToProjectResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddToProject not implemented")
 }
 func (UnimplementedMembersServiceServer) ListMembers(context.Context, *MembersServiceListMembersRequest) (*MembersServiceListMembersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListMembers not implemented")
@@ -188,20 +188,20 @@ func _MembersService_Remove_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MembersService_AddProject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MembersServiceAddProjectRequest)
+func _MembersService_AddToProject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MembersServiceAddToProjectRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MembersServiceServer).AddProject(ctx, in)
+		return srv.(MembersServiceServer).AddToProject(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/nuntio.projects.v1alpha1.MembersService/AddProject",
+		FullMethod: "/nuntio.projects.v1alpha1.MembersService/AddToProject",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MembersServiceServer).AddProject(ctx, req.(*MembersServiceAddProjectRequest))
+		return srv.(MembersServiceServer).AddToProject(ctx, req.(*MembersServiceAddToProjectRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -244,8 +244,8 @@ var MembersService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _MembersService_Remove_Handler,
 		},
 		{
-			MethodName: "AddProject",
-			Handler:    _MembersService_AddProject_Handler,
+			MethodName: "AddToProject",
+			Handler:    _MembersService_AddToProject_Handler,
 		},
 		{
 			MethodName: "ListMembers",
