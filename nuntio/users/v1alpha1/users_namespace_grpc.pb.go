@@ -36,6 +36,18 @@ type NamespaceServiceClient interface {
 	UpdateEmailProvider(ctx context.Context, in *NamespaceServiceUpdateEmailProviderRequest, opts ...grpc.CallOption) (*NamespaceServiceUpdateEmailProviderResponse, error)
 	// UpdateTextProvider updates the text provider of the namespace
 	UpdateTextProvider(ctx context.Context, in *NamespaceServiceUpdateTextProviderRequest, opts ...grpc.CallOption) (*NamespaceServiceUpdateTextProviderResponse, error)
+	// Updates a specific OAuth2 Provider
+	UpdateOAuth2Provider(ctx context.Context, in *NamespaceServiceUpdateOAuth2ProviderRequest, opts ...grpc.CallOption) (*NamespaceServiceUpdateOAuth2ProviderResponse, error)
+	// Update allowed callbacks in Users
+	UpdateCallbacks(ctx context.Context, in *NamespaceServiceUpdateCallbacksRequest, opts ...grpc.CallOption) (*NamespaceServiceUpdateCallbacksResponse, error)
+	// Set default hashing algorithm
+	UpdateHashingAlgorithm(ctx context.Context, in *NamespaceServiceUpdateHashingAlgorithmRequest, opts ...grpc.CallOption) (*NamespaceServiceUpdateHashingAlgorithmResponse, error)
+	// Set supported login settings
+	UpdateLoginSettings(ctx context.Context, in *NamespaceServiceUpdateLoginSettingsRequest, opts ...grpc.CallOption) (*NamespaceServiceUpdateLoginSettingsResponse, error)
+	// Update token settings (eg. ttl)
+	UpdateTokenSettings(ctx context.Context, in *NamespaceServiceUpdateTokenSettingsRequest, opts ...grpc.CallOption) (*NamespaceServiceUpdateTokenSettingsResponse, error)
+	// Update email or text template
+	UpdateTemplate(ctx context.Context, in *NamespaceServiceUpdateTemplateRequest, opts ...grpc.CallOption) (*NamespaceServiceUpdateTemplateResponse, error)
 	// Get public key of system
 	PublicKey(ctx context.Context, in *NamespaceServicePublicKeyRequest, opts ...grpc.CallOption) (*NamespaceServicePublicKeyResponse, error)
 }
@@ -111,6 +123,60 @@ func (c *namespaceServiceClient) UpdateTextProvider(ctx context.Context, in *Nam
 	return out, nil
 }
 
+func (c *namespaceServiceClient) UpdateOAuth2Provider(ctx context.Context, in *NamespaceServiceUpdateOAuth2ProviderRequest, opts ...grpc.CallOption) (*NamespaceServiceUpdateOAuth2ProviderResponse, error) {
+	out := new(NamespaceServiceUpdateOAuth2ProviderResponse)
+	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.NamespaceService/UpdateOAuth2Provider", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *namespaceServiceClient) UpdateCallbacks(ctx context.Context, in *NamespaceServiceUpdateCallbacksRequest, opts ...grpc.CallOption) (*NamespaceServiceUpdateCallbacksResponse, error) {
+	out := new(NamespaceServiceUpdateCallbacksResponse)
+	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.NamespaceService/UpdateCallbacks", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *namespaceServiceClient) UpdateHashingAlgorithm(ctx context.Context, in *NamespaceServiceUpdateHashingAlgorithmRequest, opts ...grpc.CallOption) (*NamespaceServiceUpdateHashingAlgorithmResponse, error) {
+	out := new(NamespaceServiceUpdateHashingAlgorithmResponse)
+	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.NamespaceService/UpdateHashingAlgorithm", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *namespaceServiceClient) UpdateLoginSettings(ctx context.Context, in *NamespaceServiceUpdateLoginSettingsRequest, opts ...grpc.CallOption) (*NamespaceServiceUpdateLoginSettingsResponse, error) {
+	out := new(NamespaceServiceUpdateLoginSettingsResponse)
+	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.NamespaceService/UpdateLoginSettings", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *namespaceServiceClient) UpdateTokenSettings(ctx context.Context, in *NamespaceServiceUpdateTokenSettingsRequest, opts ...grpc.CallOption) (*NamespaceServiceUpdateTokenSettingsResponse, error) {
+	out := new(NamespaceServiceUpdateTokenSettingsResponse)
+	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.NamespaceService/UpdateTokenSettings", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *namespaceServiceClient) UpdateTemplate(ctx context.Context, in *NamespaceServiceUpdateTemplateRequest, opts ...grpc.CallOption) (*NamespaceServiceUpdateTemplateResponse, error) {
+	out := new(NamespaceServiceUpdateTemplateResponse)
+	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.NamespaceService/UpdateTemplate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *namespaceServiceClient) PublicKey(ctx context.Context, in *NamespaceServicePublicKeyRequest, opts ...grpc.CallOption) (*NamespaceServicePublicKeyResponse, error) {
 	out := new(NamespaceServicePublicKeyResponse)
 	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.NamespaceService/PublicKey", in, out, opts...)
@@ -138,6 +204,18 @@ type NamespaceServiceServer interface {
 	UpdateEmailProvider(context.Context, *NamespaceServiceUpdateEmailProviderRequest) (*NamespaceServiceUpdateEmailProviderResponse, error)
 	// UpdateTextProvider updates the text provider of the namespace
 	UpdateTextProvider(context.Context, *NamespaceServiceUpdateTextProviderRequest) (*NamespaceServiceUpdateTextProviderResponse, error)
+	// Updates a specific OAuth2 Provider
+	UpdateOAuth2Provider(context.Context, *NamespaceServiceUpdateOAuth2ProviderRequest) (*NamespaceServiceUpdateOAuth2ProviderResponse, error)
+	// Update allowed callbacks in Users
+	UpdateCallbacks(context.Context, *NamespaceServiceUpdateCallbacksRequest) (*NamespaceServiceUpdateCallbacksResponse, error)
+	// Set default hashing algorithm
+	UpdateHashingAlgorithm(context.Context, *NamespaceServiceUpdateHashingAlgorithmRequest) (*NamespaceServiceUpdateHashingAlgorithmResponse, error)
+	// Set supported login settings
+	UpdateLoginSettings(context.Context, *NamespaceServiceUpdateLoginSettingsRequest) (*NamespaceServiceUpdateLoginSettingsResponse, error)
+	// Update token settings (eg. ttl)
+	UpdateTokenSettings(context.Context, *NamespaceServiceUpdateTokenSettingsRequest) (*NamespaceServiceUpdateTokenSettingsResponse, error)
+	// Update email or text template
+	UpdateTemplate(context.Context, *NamespaceServiceUpdateTemplateRequest) (*NamespaceServiceUpdateTemplateResponse, error)
 	// Get public key of system
 	PublicKey(context.Context, *NamespaceServicePublicKeyRequest) (*NamespaceServicePublicKeyResponse, error)
 }
@@ -166,6 +244,24 @@ func (UnimplementedNamespaceServiceServer) UpdateEmailProvider(context.Context, 
 }
 func (UnimplementedNamespaceServiceServer) UpdateTextProvider(context.Context, *NamespaceServiceUpdateTextProviderRequest) (*NamespaceServiceUpdateTextProviderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateTextProvider not implemented")
+}
+func (UnimplementedNamespaceServiceServer) UpdateOAuth2Provider(context.Context, *NamespaceServiceUpdateOAuth2ProviderRequest) (*NamespaceServiceUpdateOAuth2ProviderResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateOAuth2Provider not implemented")
+}
+func (UnimplementedNamespaceServiceServer) UpdateCallbacks(context.Context, *NamespaceServiceUpdateCallbacksRequest) (*NamespaceServiceUpdateCallbacksResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCallbacks not implemented")
+}
+func (UnimplementedNamespaceServiceServer) UpdateHashingAlgorithm(context.Context, *NamespaceServiceUpdateHashingAlgorithmRequest) (*NamespaceServiceUpdateHashingAlgorithmResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateHashingAlgorithm not implemented")
+}
+func (UnimplementedNamespaceServiceServer) UpdateLoginSettings(context.Context, *NamespaceServiceUpdateLoginSettingsRequest) (*NamespaceServiceUpdateLoginSettingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateLoginSettings not implemented")
+}
+func (UnimplementedNamespaceServiceServer) UpdateTokenSettings(context.Context, *NamespaceServiceUpdateTokenSettingsRequest) (*NamespaceServiceUpdateTokenSettingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTokenSettings not implemented")
+}
+func (UnimplementedNamespaceServiceServer) UpdateTemplate(context.Context, *NamespaceServiceUpdateTemplateRequest) (*NamespaceServiceUpdateTemplateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTemplate not implemented")
 }
 func (UnimplementedNamespaceServiceServer) PublicKey(context.Context, *NamespaceServicePublicKeyRequest) (*NamespaceServicePublicKeyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PublicKey not implemented")
@@ -308,6 +404,114 @@ func _NamespaceService_UpdateTextProvider_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _NamespaceService_UpdateOAuth2Provider_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NamespaceServiceUpdateOAuth2ProviderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NamespaceServiceServer).UpdateOAuth2Provider(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nuntio.users.v1alpha1.NamespaceService/UpdateOAuth2Provider",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NamespaceServiceServer).UpdateOAuth2Provider(ctx, req.(*NamespaceServiceUpdateOAuth2ProviderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NamespaceService_UpdateCallbacks_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NamespaceServiceUpdateCallbacksRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NamespaceServiceServer).UpdateCallbacks(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nuntio.users.v1alpha1.NamespaceService/UpdateCallbacks",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NamespaceServiceServer).UpdateCallbacks(ctx, req.(*NamespaceServiceUpdateCallbacksRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NamespaceService_UpdateHashingAlgorithm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NamespaceServiceUpdateHashingAlgorithmRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NamespaceServiceServer).UpdateHashingAlgorithm(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nuntio.users.v1alpha1.NamespaceService/UpdateHashingAlgorithm",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NamespaceServiceServer).UpdateHashingAlgorithm(ctx, req.(*NamespaceServiceUpdateHashingAlgorithmRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NamespaceService_UpdateLoginSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NamespaceServiceUpdateLoginSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NamespaceServiceServer).UpdateLoginSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nuntio.users.v1alpha1.NamespaceService/UpdateLoginSettings",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NamespaceServiceServer).UpdateLoginSettings(ctx, req.(*NamespaceServiceUpdateLoginSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NamespaceService_UpdateTokenSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NamespaceServiceUpdateTokenSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NamespaceServiceServer).UpdateTokenSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nuntio.users.v1alpha1.NamespaceService/UpdateTokenSettings",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NamespaceServiceServer).UpdateTokenSettings(ctx, req.(*NamespaceServiceUpdateTokenSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NamespaceService_UpdateTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NamespaceServiceUpdateTemplateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NamespaceServiceServer).UpdateTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nuntio.users.v1alpha1.NamespaceService/UpdateTemplate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NamespaceServiceServer).UpdateTemplate(ctx, req.(*NamespaceServiceUpdateTemplateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _NamespaceService_PublicKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(NamespaceServicePublicKeyRequest)
 	if err := dec(in); err != nil {
@@ -360,6 +564,30 @@ var NamespaceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateTextProvider",
 			Handler:    _NamespaceService_UpdateTextProvider_Handler,
+		},
+		{
+			MethodName: "UpdateOAuth2Provider",
+			Handler:    _NamespaceService_UpdateOAuth2Provider_Handler,
+		},
+		{
+			MethodName: "UpdateCallbacks",
+			Handler:    _NamespaceService_UpdateCallbacks_Handler,
+		},
+		{
+			MethodName: "UpdateHashingAlgorithm",
+			Handler:    _NamespaceService_UpdateHashingAlgorithm_Handler,
+		},
+		{
+			MethodName: "UpdateLoginSettings",
+			Handler:    _NamespaceService_UpdateLoginSettings_Handler,
+		},
+		{
+			MethodName: "UpdateTokenSettings",
+			Handler:    _NamespaceService_UpdateTokenSettings_Handler,
+		},
+		{
+			MethodName: "UpdateTemplate",
+			Handler:    _NamespaceService_UpdateTemplate_Handler,
 		},
 		{
 			MethodName: "PublicKey",

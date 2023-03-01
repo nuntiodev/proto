@@ -16,18 +16,6 @@ service AuthenticationService {
     rpc Ping(AuthenticationServicePingRequest) returns (AuthenticationServicePingResponse) {}
     // Updates a specific OAuth2 Provider
     rpc GetOAuth2Providers(AuthenticationServiceGetOAuth2ProvidersRequest) returns (AuthenticationServiceGetOAuth2ProvidersResponse) {}
-    // Updates a specific OAuth2 Provider
-    rpc UpdateOAuth2Provider(AuthenticationServiceUpdateOAuth2ProviderRequest) returns (AuthenticationServiceUpdateOAuth2ProviderResponse) {}
-    // Update allowed callbacks in Users
-    rpc UpdateCallbacks(AuthenticationServiceUpdateCallbacksRequest) returns (AuthenticationServiceUpdateCallbacksResponse) {}
-    // Set default hashing algorithm
-    rpc UpdateHashingAlgorithm(AuthenticationServiceUpdateHashingAlgorithmRequest) returns (AuthenticationServiceUpdateHashingAlgorithmResponse) {}
-    // Set supported login settings
-    rpc UpdateLoginSettings(AuthenticationServiceUpdateLoginSettingsRequest) returns (AuthenticationServiceUpdateLoginSettingsResponse) {}
-    // Update token settings (eg. ttl)
-    rpc UpdateTokenSettings(AuthenticationServiceUpdateTokenSettingsRequest)returns (AuthenticationServiceUpdateTokenSettingsResponse) {}
-    // Update email or text template
-    rpc UpdateTemplate(AuthenticationServiceUpdateTemplateRequest) returns (AuthenticationServiceUpdateTemplateResponse) {}
     // Validate user credentials
     rpc ValidateCredentials(AuthenticationServiceValidateCredentialsRequest) returns (AuthenticationServiceValidateCredentialsResponse) {}
     // Create token pair for user
@@ -73,76 +61,6 @@ message AuthenticationServicePingRequest {}
 
 // The response of a Authentication.Ping RPC
 message AuthenticationServicePingResponse {}
-
-// The request of a Authentication.UpdateOAuth2Provider RPC
-message AuthenticationServiceUpdateOAuth2ProviderRequest {
-    // The namespace to perform action in
-    string namespace = 1;
-    // The public key of the provider
-    string public_key = 2;
-    // The public key of the provider
-    string private_key = 3;
-    // The type of provider
-    OAuthProviderType provider = 4;
-    // If the provider is enabled or not
-    bool enabled = 5;
-}
-
-// The response of a Authentication.UpdateOAuth2Provider RPC
-message AuthenticationServiceUpdateCallbacksResponse {}
-
-// The response of a Authentication.UpdateOAuth2Provider RPC
-message AuthenticationServiceUpdateOAuth2ProviderResponse {}
-
-// The request of a Authentication.UpdateCallbacks RPC
-message AuthenticationServiceUpdateCallbacksRequest {
-    // The callbacks to be updated
-    repeated string callbacks = 1;
-    // The namespace to perform action in
-    string namespace = 2;
-}
-
-// The request of a Authentication.UpdateHashingAlgorithm RPC
-message AuthenticationServiceUpdateHashingAlgorithmRequest {
-    // The hashing algorithm to use as default
-    HashingAlgorithm algorithm = 1;
-    // The Bcrypt values to update
-    Bcrypt bcrypt = 2;
-    // The Scrypt values to update
-    Scrypt scrypt = 3;
-    // The namespace to perform action in
-    string namespace = 4;
-}
-
-// The response of a Authentication.UpdateHashingAlgorithm RPC
-message AuthenticationServiceUpdateHashingAlgorithmResponse {}
-
-// The request of a Authentication.UpdateTokenSettings RPC
-message AuthenticationServiceUpdateTokenSettingsRequest {
-    // Defines for how long the access token lives
-    int32 access_token_ttl = 1;
-    // Defines for how long the access refresh lives
-    int32 refresh_token_ttl = 2;
-    // Defines for how long the verification code is valid
-    int32 verification_code_ttl = 3;
-    // The namespace to perform action in
-    string namespace = 4;
-}
-
-// The response of a Authentication.UpdateTokenSettings RPC
-message AuthenticationServiceUpdateTokenSettingsResponse {}
-
-// The request of a Authentication.UpdateTemplate RPC
-message AuthenticationServiceUpdateTemplateRequest {
-    // The template to update
-    Template template = 1;
-    // The namespace to perform action in
-    string namespace = 2;
-}
-
-// The response of a Authentication.UpdateTemplate RPC
-message AuthenticationServiceUpdateTemplateResponse {}
-
 
 // The request of a Authentication.ValidateCredentials RPC
 message AuthenticationServiceValidateCredentialsRequest {
@@ -392,23 +310,6 @@ message AuthenticationServiceBlockTokenRequest {
 // The response of a Authentication.BlockToken RPC
 message AuthenticationServiceBlockTokenResponse {}
 
-// The request of a Authentication.UpdateLoginMechanisms RPC
-message AuthenticationServiceUpdateLoginSettingsRequest {
-    // Array of supported login types
-    repeated LoginType supported_login_mechanisms = 1;  
-    // The namespace to perform action in
-    string namespace = 2;
-    // to enable/disable singup
-    optional bool enable_signup = 3;
-    // to enable/disable login
-    optional bool enable_login = 4;
-    // to enable/disable password validation
-    optional bool validate_password = 5;
-}
-
-// The request of a Authentication.UpdateLoginMechanisms RPC
-message AuthenticationServiceUpdateLoginSettingsResponse {}
-
 // The request of a Authentication.SendMagicEmail RPC
 message AuthenticationServiceSendMagicEmailRequest {
     // The namespace to perform action in
@@ -462,6 +363,5 @@ message AuthenticationServiceGetOAuth2ProvidersRequest {
 
 // The response of a Authentication.GetOAuth2Providers RPC
 message AuthenticationServiceGetOAuth2ProvidersResponse {
-    // Map of oauth2 providers
-    repeated OAuthProvider oauth_providers = 1;
+    OAuthProviders oauth_providers = 1;
 }

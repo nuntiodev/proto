@@ -173,27 +173,25 @@ enum OAuthProviderType {
 }  
 
 message Template {
-    string body = 1;
+    optional string body = 1;
     TemplateType type = 2;
-    string subject = 3;
-    bool enabled = 4;
+    optional string subject = 3;
+    optional bool enabled = 4;
     repeated string format = 5;
 }
 
 message OAuthProvider {
-    string id = 1;
-    string secret = 2;
+    string public_key = 1;
+    string private_key = 2;
     OAuthProviderType type = 3;
-    string logo = 4;
-    string name = 5;
-    bool enabled = 6;
-    string url = 7;
-    bool require_ssl = 8;
-    bool available = 9;
+    bool enabled = 4;
+    string url = 5;
+    bool require_ssl = 6;
+    bool available = 7;
 }
 
 message OAuthProviders {
-    OAuthProviders google = 1;
+    OAuthProvider google = 1;
 }
 
 message Templates {
@@ -201,6 +199,8 @@ message Templates {
     Template reset_password_text = 2;
     Template verify_email = 3;
     Template verify_phone_number = 4;
+    Template magic_email = 5;
+    Template magic_text = 6;
 }
 
 message Namespace {

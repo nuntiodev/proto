@@ -26,18 +26,6 @@ type AuthenticationServiceClient interface {
 	Ping(ctx context.Context, in *AuthenticationServicePingRequest, opts ...grpc.CallOption) (*AuthenticationServicePingResponse, error)
 	// Updates a specific OAuth2 Provider
 	GetOAuth2Providers(ctx context.Context, in *AuthenticationServiceGetOAuth2ProvidersRequest, opts ...grpc.CallOption) (*AuthenticationServiceGetOAuth2ProvidersResponse, error)
-	// Updates a specific OAuth2 Provider
-	UpdateOAuth2Provider(ctx context.Context, in *AuthenticationServiceUpdateOAuth2ProviderRequest, opts ...grpc.CallOption) (*AuthenticationServiceUpdateOAuth2ProviderResponse, error)
-	// Update allowed callbacks in Users
-	UpdateCallbacks(ctx context.Context, in *AuthenticationServiceUpdateCallbacksRequest, opts ...grpc.CallOption) (*AuthenticationServiceUpdateCallbacksResponse, error)
-	// Set default hashing algorithm
-	UpdateHashingAlgorithm(ctx context.Context, in *AuthenticationServiceUpdateHashingAlgorithmRequest, opts ...grpc.CallOption) (*AuthenticationServiceUpdateHashingAlgorithmResponse, error)
-	// Set supported login settings
-	UpdateLoginSettings(ctx context.Context, in *AuthenticationServiceUpdateLoginSettingsRequest, opts ...grpc.CallOption) (*AuthenticationServiceUpdateLoginSettingsResponse, error)
-	// Update token settings (eg. ttl)
-	UpdateTokenSettings(ctx context.Context, in *AuthenticationServiceUpdateTokenSettingsRequest, opts ...grpc.CallOption) (*AuthenticationServiceUpdateTokenSettingsResponse, error)
-	// Update email or text template
-	UpdateTemplate(ctx context.Context, in *AuthenticationServiceUpdateTemplateRequest, opts ...grpc.CallOption) (*AuthenticationServiceUpdateTemplateResponse, error)
 	// Validate user credentials
 	ValidateCredentials(ctx context.Context, in *AuthenticationServiceValidateCredentialsRequest, opts ...grpc.CallOption) (*AuthenticationServiceValidateCredentialsResponse, error)
 	// Create token pair for user
@@ -98,60 +86,6 @@ func (c *authenticationServiceClient) Ping(ctx context.Context, in *Authenticati
 func (c *authenticationServiceClient) GetOAuth2Providers(ctx context.Context, in *AuthenticationServiceGetOAuth2ProvidersRequest, opts ...grpc.CallOption) (*AuthenticationServiceGetOAuth2ProvidersResponse, error) {
 	out := new(AuthenticationServiceGetOAuth2ProvidersResponse)
 	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.AuthenticationService/GetOAuth2Providers", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *authenticationServiceClient) UpdateOAuth2Provider(ctx context.Context, in *AuthenticationServiceUpdateOAuth2ProviderRequest, opts ...grpc.CallOption) (*AuthenticationServiceUpdateOAuth2ProviderResponse, error) {
-	out := new(AuthenticationServiceUpdateOAuth2ProviderResponse)
-	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.AuthenticationService/UpdateOAuth2Provider", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *authenticationServiceClient) UpdateCallbacks(ctx context.Context, in *AuthenticationServiceUpdateCallbacksRequest, opts ...grpc.CallOption) (*AuthenticationServiceUpdateCallbacksResponse, error) {
-	out := new(AuthenticationServiceUpdateCallbacksResponse)
-	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.AuthenticationService/UpdateCallbacks", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *authenticationServiceClient) UpdateHashingAlgorithm(ctx context.Context, in *AuthenticationServiceUpdateHashingAlgorithmRequest, opts ...grpc.CallOption) (*AuthenticationServiceUpdateHashingAlgorithmResponse, error) {
-	out := new(AuthenticationServiceUpdateHashingAlgorithmResponse)
-	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.AuthenticationService/UpdateHashingAlgorithm", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *authenticationServiceClient) UpdateLoginSettings(ctx context.Context, in *AuthenticationServiceUpdateLoginSettingsRequest, opts ...grpc.CallOption) (*AuthenticationServiceUpdateLoginSettingsResponse, error) {
-	out := new(AuthenticationServiceUpdateLoginSettingsResponse)
-	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.AuthenticationService/UpdateLoginSettings", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *authenticationServiceClient) UpdateTokenSettings(ctx context.Context, in *AuthenticationServiceUpdateTokenSettingsRequest, opts ...grpc.CallOption) (*AuthenticationServiceUpdateTokenSettingsResponse, error) {
-	out := new(AuthenticationServiceUpdateTokenSettingsResponse)
-	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.AuthenticationService/UpdateTokenSettings", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *authenticationServiceClient) UpdateTemplate(ctx context.Context, in *AuthenticationServiceUpdateTemplateRequest, opts ...grpc.CallOption) (*AuthenticationServiceUpdateTemplateResponse, error) {
-	out := new(AuthenticationServiceUpdateTemplateResponse)
-	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.AuthenticationService/UpdateTemplate", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -337,18 +271,6 @@ type AuthenticationServiceServer interface {
 	Ping(context.Context, *AuthenticationServicePingRequest) (*AuthenticationServicePingResponse, error)
 	// Updates a specific OAuth2 Provider
 	GetOAuth2Providers(context.Context, *AuthenticationServiceGetOAuth2ProvidersRequest) (*AuthenticationServiceGetOAuth2ProvidersResponse, error)
-	// Updates a specific OAuth2 Provider
-	UpdateOAuth2Provider(context.Context, *AuthenticationServiceUpdateOAuth2ProviderRequest) (*AuthenticationServiceUpdateOAuth2ProviderResponse, error)
-	// Update allowed callbacks in Users
-	UpdateCallbacks(context.Context, *AuthenticationServiceUpdateCallbacksRequest) (*AuthenticationServiceUpdateCallbacksResponse, error)
-	// Set default hashing algorithm
-	UpdateHashingAlgorithm(context.Context, *AuthenticationServiceUpdateHashingAlgorithmRequest) (*AuthenticationServiceUpdateHashingAlgorithmResponse, error)
-	// Set supported login settings
-	UpdateLoginSettings(context.Context, *AuthenticationServiceUpdateLoginSettingsRequest) (*AuthenticationServiceUpdateLoginSettingsResponse, error)
-	// Update token settings (eg. ttl)
-	UpdateTokenSettings(context.Context, *AuthenticationServiceUpdateTokenSettingsRequest) (*AuthenticationServiceUpdateTokenSettingsResponse, error)
-	// Update email or text template
-	UpdateTemplate(context.Context, *AuthenticationServiceUpdateTemplateRequest) (*AuthenticationServiceUpdateTemplateResponse, error)
 	// Validate user credentials
 	ValidateCredentials(context.Context, *AuthenticationServiceValidateCredentialsRequest) (*AuthenticationServiceValidateCredentialsResponse, error)
 	// Create token pair for user
@@ -398,24 +320,6 @@ func (UnimplementedAuthenticationServiceServer) Ping(context.Context, *Authentic
 }
 func (UnimplementedAuthenticationServiceServer) GetOAuth2Providers(context.Context, *AuthenticationServiceGetOAuth2ProvidersRequest) (*AuthenticationServiceGetOAuth2ProvidersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOAuth2Providers not implemented")
-}
-func (UnimplementedAuthenticationServiceServer) UpdateOAuth2Provider(context.Context, *AuthenticationServiceUpdateOAuth2ProviderRequest) (*AuthenticationServiceUpdateOAuth2ProviderResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateOAuth2Provider not implemented")
-}
-func (UnimplementedAuthenticationServiceServer) UpdateCallbacks(context.Context, *AuthenticationServiceUpdateCallbacksRequest) (*AuthenticationServiceUpdateCallbacksResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateCallbacks not implemented")
-}
-func (UnimplementedAuthenticationServiceServer) UpdateHashingAlgorithm(context.Context, *AuthenticationServiceUpdateHashingAlgorithmRequest) (*AuthenticationServiceUpdateHashingAlgorithmResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateHashingAlgorithm not implemented")
-}
-func (UnimplementedAuthenticationServiceServer) UpdateLoginSettings(context.Context, *AuthenticationServiceUpdateLoginSettingsRequest) (*AuthenticationServiceUpdateLoginSettingsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateLoginSettings not implemented")
-}
-func (UnimplementedAuthenticationServiceServer) UpdateTokenSettings(context.Context, *AuthenticationServiceUpdateTokenSettingsRequest) (*AuthenticationServiceUpdateTokenSettingsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateTokenSettings not implemented")
-}
-func (UnimplementedAuthenticationServiceServer) UpdateTemplate(context.Context, *AuthenticationServiceUpdateTemplateRequest) (*AuthenticationServiceUpdateTemplateResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateTemplate not implemented")
 }
 func (UnimplementedAuthenticationServiceServer) ValidateCredentials(context.Context, *AuthenticationServiceValidateCredentialsRequest) (*AuthenticationServiceValidateCredentialsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ValidateCredentials not implemented")
@@ -518,114 +422,6 @@ func _AuthenticationService_GetOAuth2Providers_Handler(srv interface{}, ctx cont
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthenticationServiceServer).GetOAuth2Providers(ctx, req.(*AuthenticationServiceGetOAuth2ProvidersRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AuthenticationService_UpdateOAuth2Provider_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AuthenticationServiceUpdateOAuth2ProviderRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AuthenticationServiceServer).UpdateOAuth2Provider(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/nuntio.users.v1alpha1.AuthenticationService/UpdateOAuth2Provider",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthenticationServiceServer).UpdateOAuth2Provider(ctx, req.(*AuthenticationServiceUpdateOAuth2ProviderRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AuthenticationService_UpdateCallbacks_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AuthenticationServiceUpdateCallbacksRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AuthenticationServiceServer).UpdateCallbacks(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/nuntio.users.v1alpha1.AuthenticationService/UpdateCallbacks",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthenticationServiceServer).UpdateCallbacks(ctx, req.(*AuthenticationServiceUpdateCallbacksRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AuthenticationService_UpdateHashingAlgorithm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AuthenticationServiceUpdateHashingAlgorithmRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AuthenticationServiceServer).UpdateHashingAlgorithm(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/nuntio.users.v1alpha1.AuthenticationService/UpdateHashingAlgorithm",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthenticationServiceServer).UpdateHashingAlgorithm(ctx, req.(*AuthenticationServiceUpdateHashingAlgorithmRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AuthenticationService_UpdateLoginSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AuthenticationServiceUpdateLoginSettingsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AuthenticationServiceServer).UpdateLoginSettings(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/nuntio.users.v1alpha1.AuthenticationService/UpdateLoginSettings",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthenticationServiceServer).UpdateLoginSettings(ctx, req.(*AuthenticationServiceUpdateLoginSettingsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AuthenticationService_UpdateTokenSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AuthenticationServiceUpdateTokenSettingsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AuthenticationServiceServer).UpdateTokenSettings(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/nuntio.users.v1alpha1.AuthenticationService/UpdateTokenSettings",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthenticationServiceServer).UpdateTokenSettings(ctx, req.(*AuthenticationServiceUpdateTokenSettingsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AuthenticationService_UpdateTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AuthenticationServiceUpdateTemplateRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AuthenticationServiceServer).UpdateTemplate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/nuntio.users.v1alpha1.AuthenticationService/UpdateTemplate",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthenticationServiceServer).UpdateTemplate(ctx, req.(*AuthenticationServiceUpdateTemplateRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -986,30 +782,6 @@ var AuthenticationService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOAuth2Providers",
 			Handler:    _AuthenticationService_GetOAuth2Providers_Handler,
-		},
-		{
-			MethodName: "UpdateOAuth2Provider",
-			Handler:    _AuthenticationService_UpdateOAuth2Provider_Handler,
-		},
-		{
-			MethodName: "UpdateCallbacks",
-			Handler:    _AuthenticationService_UpdateCallbacks_Handler,
-		},
-		{
-			MethodName: "UpdateHashingAlgorithm",
-			Handler:    _AuthenticationService_UpdateHashingAlgorithm_Handler,
-		},
-		{
-			MethodName: "UpdateLoginSettings",
-			Handler:    _AuthenticationService_UpdateLoginSettings_Handler,
-		},
-		{
-			MethodName: "UpdateTokenSettings",
-			Handler:    _AuthenticationService_UpdateTokenSettings_Handler,
-		},
-		{
-			MethodName: "UpdateTemplate",
-			Handler:    _AuthenticationService_UpdateTemplate_Handler,
 		},
 		{
 			MethodName: "ValidateCredentials",

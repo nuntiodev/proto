@@ -26,6 +26,18 @@ service NamespaceService {
     rpc UpdateEmailProvider(NamespaceServiceUpdateEmailProviderRequest) returns (NamespaceServiceUpdateEmailProviderResponse) {}
     // UpdateTextProvider updates the text provider of the namespace
     rpc UpdateTextProvider(NamespaceServiceUpdateTextProviderRequest) returns (NamespaceServiceUpdateTextProviderResponse) {}
+   // Updates a specific OAuth2 Provider
+   rpc UpdateOAuth2Provider(NamespaceServiceUpdateOAuth2ProviderRequest) returns (NamespaceServiceUpdateOAuth2ProviderResponse) {}
+   // Update allowed callbacks in Users
+   rpc UpdateCallbacks(NamespaceServiceUpdateCallbacksRequest) returns (NamespaceServiceUpdateCallbacksResponse) {}
+   // Set default hashing algorithm
+   rpc UpdateHashingAlgorithm(NamespaceServiceUpdateHashingAlgorithmRequest) returns (NamespaceServiceUpdateHashingAlgorithmResponse) {}
+   // Set supported login settings
+   rpc UpdateLoginSettings(NamespaceServiceUpdateLoginSettingsRequest) returns (NamespaceServiceUpdateLoginSettingsResponse) {}
+   // Update token settings (eg. ttl)
+   rpc UpdateTokenSettings(NamespaceServiceUpdateTokenSettingsRequest)returns (NamespaceServiceUpdateTokenSettingsResponse) {}
+   // Update email or text template
+   rpc UpdateTemplate(NamespaceServiceUpdateTemplateRequest) returns (NamespaceServiceUpdateTemplateResponse) {}
     // Get public key of system
     rpc PublicKey(NamespaceServicePublicKeyRequest) returns (NamespaceServicePublicKeyResponse) {}
   }
@@ -130,3 +142,89 @@ message NamespaceServiceUpdateTextProviderRequest {
 
 // The response of a Namespace.UpdateEmailProvider RPC
 message NamespaceServiceUpdateTextProviderResponse {}
+
+// The request of a Authentication.UpdateOAuth2Provider RPC
+message NamespaceServiceUpdateOAuth2ProviderRequest {
+    // The namespace to perform action in
+    string namespace = 1;
+    // The public key of the provider
+    string public_key = 2;
+    // The public key of the provider
+    string private_key = 3;
+    // The type of provider
+    OAuthProviderType provider = 4;
+    // If the provider is enabled or not
+    bool enabled = 5;
+}
+
+// The response of a Authentication.UpdateOAuth2Provider RPC
+message NamespaceServiceUpdateOAuth2ProviderResponse {}
+
+// The request of a Authentication.UpdateCallbacks RPC
+message NamespaceServiceUpdateCallbacksRequest {
+    // The callbacks to be updated
+    repeated string callbacks = 1;
+    // The namespace to perform action in
+    string namespace = 2;
+}
+
+// The response of a Authentication.UpdateOAuth2Provider RPC
+message NamespaceServiceUpdateCallbacksResponse {}
+
+// The request of a Authentication.UpdateHashingAlgorithm RPC
+message NamespaceServiceUpdateHashingAlgorithmRequest {
+    // The hashing algorithm to use as default
+    HashingAlgorithm algorithm = 1;
+    // The Bcrypt values to update
+    Bcrypt bcrypt = 2;
+    // The Scrypt values to update
+    Scrypt scrypt = 3;
+    // The namespace to perform action in
+    string namespace = 4;
+}
+
+// The response of a Authentication.UpdateHashingAlgorithm RPC
+message NamespaceServiceUpdateHashingAlgorithmResponse {}
+
+// The request of a Authentication.UpdateLoginMechanisms RPC
+message NamespaceServiceUpdateLoginSettingsRequest {
+    // Array of supported login types
+    repeated LoginType supported_login_mechanisms = 1;  
+    // The namespace to perform action in
+    string namespace = 2;
+    // to enable/disable singup
+    optional bool enable_signup = 3;
+    // to enable/disable login
+    optional bool enable_login = 4;
+    // to enable/disable password validation
+    optional bool validate_password = 5;
+}
+
+// The request of a Authentication.UpdateLoginMechanisms RPC
+message NamespaceServiceUpdateLoginSettingsResponse {}
+
+// The request of a Authentication.UpdateTokenSettings RPC
+message NamespaceServiceUpdateTokenSettingsRequest {
+    // Defines for how long the access token lives
+    int32 access_token_ttl = 1;
+    // Defines for how long the access refresh lives
+    int32 refresh_token_ttl = 2;
+    // Defines for how long the verification code is valid
+    int32 verification_code_ttl = 3;
+    // The namespace to perform action in
+    string namespace = 4;
+}
+
+// The response of a Authentication.UpdateTokenSettings RPC
+message NamespaceServiceUpdateTokenSettingsResponse {}
+
+// The request of a Authentication.UpdateTemplate RPC
+message NamespaceServiceUpdateTemplateRequest {
+    // The template to update
+    Template template = 1;
+    // The namespace to perform action in
+    string namespace = 2;
+}
+
+// The response of a Authentication.UpdateTemplate RPC
+message NamespaceServiceUpdateTemplateResponse {}
