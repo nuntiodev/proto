@@ -8009,7 +8009,7 @@ proto.nuntio.users.v1alpha1.AuthenticationServiceInitializeAuthResponse.prototyp
 
 
 /**
- * repeated LoginType supported_login_mechanisms = 7;
+ * repeated LoginType login_mechanisms = 7;
  * @return {!Array<!proto.nuntio.users.v1alpha1.LoginType>}
  */
 proto.nuntio.users.v1alpha1.AuthenticationServiceInitializeAuthResponse.prototype.getSupportedLoginMechanismsList = function() {
@@ -8517,7 +8517,7 @@ proto.nuntio.users.v1alpha1.AuthenticationServiceUpdateLoginSettingsRequest.seri
 
 
 /**
- * repeated LoginType supported_login_mechanisms = 1;
+ * repeated LoginType login_mechanisms = 1;
  * @return {!Array<!proto.nuntio.users.v1alpha1.LoginType>}
  */
 proto.nuntio.users.v1alpha1.AuthenticationServiceUpdateLoginSettingsRequest.prototype.getSupportedLoginMechanismsList = function() {

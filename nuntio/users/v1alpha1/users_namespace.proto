@@ -189,7 +189,7 @@ message NamespaceServiceUpdateHashingAlgorithmResponse {}
 // The request of a Authentication.UpdateLoginMechanisms RPC
 message NamespaceServiceUpdateLoginSettingsRequest {
     // Array of supported login types
-    repeated LoginType supported_login_mechanisms = 1;  
+    repeated LoginType login_mechanisms = 1;  
     // The namespace to perform action in
     string namespace = 2;
     // to enable/disable singup
@@ -198,6 +198,10 @@ message NamespaceServiceUpdateLoginSettingsRequest {
     optional bool enable_login = 4;
     // to enable/disable password validation
     optional bool validate_password = 5;
+    // will enable verification of emails before issuing tokens
+    optional bool verify_email = 6;
+    // will enable phone number verifications before issuing tokens
+    optional bool verify_phone_number = 7;
 }
 
 // The request of a Authentication.UpdateLoginMechanisms RPC

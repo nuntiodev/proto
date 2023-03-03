@@ -4648,7 +4648,7 @@ proto.nuntio.users.v1alpha1.Namespace.prototype.hasScrypt = function() {
 
 
 /**
- * repeated LoginType supported_login_mechanisms = 12;
+ * repeated LoginType login_mechanisms = 12;
  * @return {!Array<!proto.nuntio.users.v1alpha1.LoginType>}
  */
 proto.nuntio.users.v1alpha1.Namespace.prototype.getSupportedLoginMechanismsList = function() {

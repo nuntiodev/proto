@@ -141,7 +141,7 @@ message PublicServiceInitializeAuthResponse {
   // The public key of Users
   string public_key = 6;
   // Array of supported login types
-  repeated LoginType supported_login_mechanisms = 7;   
+  repeated LoginType login_mechanisms = 7;   
   // Array of callbacks
   repeated string callbacks = 8;
   OAuthProviders oauth_providers = 9;

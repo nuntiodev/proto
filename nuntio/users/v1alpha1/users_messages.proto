@@ -176,8 +176,7 @@ message Template {
     optional string body = 1;
     TemplateType type = 2;
     optional string subject = 3;
-    optional bool enabled = 4;
-    repeated string format = 5;
+    repeated string format = 4;
 }
 
 message OAuthProvider {
@@ -192,6 +191,7 @@ message OAuthProvider {
 
 message OAuthProviders {
     OAuthProvider google = 1;
+    OAuthProvider github = 2;
 }
 
 message Templates {
@@ -204,27 +204,28 @@ message Templates {
 }
 
 message Namespace {
-    optional string name = 1;
-    optional Image logo = 2;
-    optional bool enable_signup = 3;
-    optional bool enable_login = 4;
-    google.protobuf.Timestamp created_at = 5;
-    google.protobuf.Timestamp updated_at = 6;
-    optional bool validate_password = 7;
-    optional string public_key = 8;
+    string id = 1;
+    optional string name = 2;
+    optional Image logo = 3;
+    optional bool enable_signup = 4;
+    optional bool enable_login = 5;
+    google.protobuf.Timestamp created_at = 6;
+    google.protobuf.Timestamp updated_at = 7;
+    optional bool validate_password = 8;
     HashingAlgorithm hashing_algorithm = 9;
     optional Bcrypt bcrypt = 10;
     optional Scrypt scrypt = 11;
-    repeated LoginType supported_login_mechanisms = 12;
-    Templates templates = 13;
-    optional int32 access_token_ttl = 14;
-    optional int32 refresh_token_ttl = 15;
-    optional int32 verification_code_ttl = 16;
-    repeated string callbacks = 17;
-    string id = 18;
-    OAuthProviders oauth_providers = 19;
-    EmailProvider email_provider = 20;
-    TextProvider text_provider = 21;
+    repeated LoginType login_mechanisms = 12;
+    optional int32 access_token_ttl = 13;
+    optional int32 refresh_token_ttl = 14;
+    optional int32 verification_code_ttl = 15;
+    repeated string callbacks = 16;
+    OAuthProviders oauth_providers = 17;
+    EmailProvider email_provider = 18;
+    TextProvider text_provider = 19;
+    Templates templates = 20;
+    optional bool verify_email = 21;
+    optional bool verify_phone_number = 22;
 }
 
 message GroupMeta {
