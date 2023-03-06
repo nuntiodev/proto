@@ -210,11 +210,11 @@ message NamespaceServiceUpdateLoginSettingsResponse {}
 // The request of a Authentication.UpdateTokenSettings RPC
 message NamespaceServiceUpdateTokenSettingsRequest {
     // Defines for how long the access token lives
-    int32 access_token_ttl = 1;
+    optional int32 access_token_ttl = 1;
     // Defines for how long the access refresh lives
-    int32 refresh_token_ttl = 2;
+    optional int32 refresh_token_ttl = 2;
     // Defines for how long the verification code is valid
-    int32 verification_code_ttl = 3;
+    optional int32 verification_code_ttl = 3;
     // The namespace to perform action in
     string namespace = 4;
 }
