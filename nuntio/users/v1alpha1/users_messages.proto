@@ -207,25 +207,23 @@ message Namespace {
     string id = 1;
     optional string name = 2;
     optional Image logo = 3;
-    optional bool enable_signup = 4;
-    optional bool enable_login = 5;
-    google.protobuf.Timestamp created_at = 6;
-    google.protobuf.Timestamp updated_at = 7;
-    optional bool validate_password = 8;
-    HashingAlgorithm hashing_algorithm = 9;
-    optional Bcrypt bcrypt = 10;
-    optional Scrypt scrypt = 11;
-    repeated LoginType login_mechanisms = 12;
-    optional int32 access_token_ttl = 13;
-    optional int32 refresh_token_ttl = 14;
-    optional int32 verification_code_ttl = 15;
-    repeated string callbacks = 16;
-    OAuthProviders oauth_providers = 17;
-    EmailProvider email_provider = 18;
-    TextProvider text_provider = 19;
-    Templates templates = 20;
-    optional bool verify_email = 21;
-    optional bool verify_phone_number = 22;
+    google.protobuf.Timestamp created_at = 4;
+    google.protobuf.Timestamp updated_at = 5;
+    optional bool validate_password = 6;
+    HashingAlgorithm hashing_algorithm = 7;
+    optional Bcrypt bcrypt = 8;
+    optional Scrypt scrypt = 9;
+    repeated LoginType login_mechanisms = 10;
+    optional int32 access_token_ttl = 11;
+    optional int32 refresh_token_ttl = 12;
+    optional int32 verification_code_ttl = 13;
+    repeated string callbacks = 14;
+    OAuthProviders oauth_providers = 15;
+    EmailProvider email_provider = 16;
+    TextProvider text_provider = 17;
+    Templates templates = 18;
+    optional bool verify_email = 19;
+    optional bool verify_phone_number = 20;
 }
 
 message GroupMeta {
