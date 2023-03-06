@@ -278,9 +278,8 @@ message TokenMeta {
 }
 
 message AccessToken {
-    string refresh_token_id = 1;
-    string jwt = 2;
-    TokenMeta meta = 3;
+    string jwt = 1;
+    string id = 2;
 }
 
 message RefreshToken {

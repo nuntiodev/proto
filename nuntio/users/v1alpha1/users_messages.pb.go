@@ -2442,9 +2442,8 @@ type AccessToken struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	RefreshTokenId string     `protobuf:"bytes,1,opt,name=refresh_token_id,json=refreshTokenId,proto3" json:"refresh_token_id,omitempty"`
-	Jwt            string     `protobuf:"bytes,2,opt,name=jwt,proto3" json:"jwt,omitempty"`
-	Meta           *TokenMeta `protobuf:"bytes,3,opt,name=meta,proto3" json:"meta,omitempty"`
+	Jwt string `protobuf:"bytes,1,opt,name=jwt,proto3" json:"jwt,omitempty"`
+	Id  string `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
 }
 
 func (x *AccessToken) Reset() {
@@ -2479,13 +2478,6 @@ func (*AccessToken) Descriptor() ([]byte, []int) {
 	return file_nuntio_users_v1alpha1_users_messages_proto_rawDescGZIP(), []int{19}
 }
 
-func (x *AccessToken) GetRefreshTokenId() string {
-	if x != nil {
-		return x.RefreshTokenId
-	}
-	return ""
-}
-
 func (x *AccessToken) GetJwt() string {
 	if x != nil {
 		return x.Jwt
@@ -2493,11 +2485,11 @@ func (x *AccessToken) GetJwt() string {
 	return ""
 }
 
-func (x *AccessToken) GetMeta() *TokenMeta {
+func (x *AccessToken) GetId() string {
 	if x != nil {
-		return x.Meta
+		return x.Id
 	}
-	return nil
+	return ""
 }
 
 type RefreshToken struct {
@@ -3542,14 +3534,9 @@ var file_nuntio_users_v1alpha1_users_messages_proto_rawDesc = []byte{
 	0x20, 0x01, 0x28, 0x0e, 0x32, 0x21, 0x2e, 0x6e, 0x75, 0x6e, 0x74, 0x69, 0x6f, 0x2e, 0x75, 0x73,
 	0x65, 0x72, 0x73, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31, 0x2e, 0x44, 0x65, 0x76,
 	0x69, 0x63, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x06, 0x64, 0x65, 0x76, 0x69, 0x63, 0x65, 0x22,
-	0x7f, 0x0a, 0x0b, 0x41, 0x63, 0x63, 0x65, 0x73, 0x73, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x12, 0x28,
-	0x0a, 0x10, 0x72, 0x65, 0x66, 0x72, 0x65, 0x73, 0x68, 0x5f, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x5f,
-	0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0e, 0x72, 0x65, 0x66, 0x72, 0x65, 0x73,
-	0x68, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x49, 0x64, 0x12, 0x10, 0x0a, 0x03, 0x6a, 0x77, 0x74, 0x18,
-	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6a, 0x77, 0x74, 0x12, 0x34, 0x0a, 0x04, 0x6d, 0x65,
-	0x74, 0x61, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x20, 0x2e, 0x6e, 0x75, 0x6e, 0x74, 0x69,
-	0x6f, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x73, 0x2e, 0x76, 0x31, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x31,
-	0x2e, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x4d, 0x65, 0x74, 0x61, 0x52, 0x04, 0x6d, 0x65, 0x74, 0x61,
+	0x2f, 0x0a, 0x0b, 0x41, 0x63, 0x63, 0x65, 0x73, 0x73, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x12, 0x10,
+	0x0a, 0x03, 0x6a, 0x77, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6a, 0x77, 0x74,
+	0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64,
 	0x22, 0x56, 0x0a, 0x0c, 0x52, 0x65, 0x66, 0x72, 0x65, 0x73, 0x68, 0x54, 0x6f, 0x6b, 0x65, 0x6e,
 	0x12, 0x10, 0x0a, 0x03, 0x6a, 0x77, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6a,
 	0x77, 0x74, 0x12, 0x34, 0x0a, 0x04, 0x6d, 0x65, 0x74, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b,
@@ -3896,23 +3883,22 @@ var file_nuntio_users_v1alpha1_users_messages_proto_depIdxs = []int32{
 	45, // 54: nuntio.users.v1alpha1.TokenMeta.expires_at:type_name -> google.protobuf.Timestamp
 	45, // 55: nuntio.users.v1alpha1.TokenMeta.used_at:type_name -> google.protobuf.Timestamp
 	9,  // 56: nuntio.users.v1alpha1.TokenMeta.device:type_name -> nuntio.users.v1alpha1.DeviceInfo
-	32, // 57: nuntio.users.v1alpha1.AccessToken.meta:type_name -> nuntio.users.v1alpha1.TokenMeta
-	32, // 58: nuntio.users.v1alpha1.RefreshToken.meta:type_name -> nuntio.users.v1alpha1.TokenMeta
-	33, // 59: nuntio.users.v1alpha1.TokenPair.access_token:type_name -> nuntio.users.v1alpha1.AccessToken
-	34, // 60: nuntio.users.v1alpha1.TokenPair.refresh_token:type_name -> nuntio.users.v1alpha1.RefreshToken
-	45, // 61: nuntio.users.v1alpha1.File.created_at:type_name -> google.protobuf.Timestamp
-	46, // 62: nuntio.users.v1alpha1.File.duration:type_name -> google.protobuf.Duration
-	12, // 63: nuntio.users.v1alpha1.Filter.sort:type_name -> nuntio.users.v1alpha1.Filter.SortBy
-	13, // 64: nuntio.users.v1alpha1.Filter.order:type_name -> nuntio.users.v1alpha1.Filter.Order
-	36, // 65: nuntio.users.v1alpha1.Folder.files:type_name -> nuntio.users.v1alpha1.File
-	38, // 66: nuntio.users.v1alpha1.Folder.folders:type_name -> nuntio.users.v1alpha1.Folder
-	6,  // 67: nuntio.users.v1alpha1.EmailProvider.type:type_name -> nuntio.users.v1alpha1.EmailProviderType
-	7,  // 68: nuntio.users.v1alpha1.TextProvider.type:type_name -> nuntio.users.v1alpha1.TextProviderType
-	69, // [69:69] is the sub-list for method output_type
-	69, // [69:69] is the sub-list for method input_type
-	69, // [69:69] is the sub-list for extension type_name
-	69, // [69:69] is the sub-list for extension extendee
-	0,  // [0:69] is the sub-list for field type_name
+	32, // 57: nuntio.users.v1alpha1.RefreshToken.meta:type_name -> nuntio.users.v1alpha1.TokenMeta
+	33, // 58: nuntio.users.v1alpha1.TokenPair.access_token:type_name -> nuntio.users.v1alpha1.AccessToken
+	34, // 59: nuntio.users.v1alpha1.TokenPair.refresh_token:type_name -> nuntio.users.v1alpha1.RefreshToken
+	45, // 60: nuntio.users.v1alpha1.File.created_at:type_name -> google.protobuf.Timestamp
+	46, // 61: nuntio.users.v1alpha1.File.duration:type_name -> google.protobuf.Duration
+	12, // 62: nuntio.users.v1alpha1.Filter.sort:type_name -> nuntio.users.v1alpha1.Filter.SortBy
+	13, // 63: nuntio.users.v1alpha1.Filter.order:type_name -> nuntio.users.v1alpha1.Filter.Order
+	36, // 64: nuntio.users.v1alpha1.Folder.files:type_name -> nuntio.users.v1alpha1.File
+	38, // 65: nuntio.users.v1alpha1.Folder.folders:type_name -> nuntio.users.v1alpha1.Folder
+	6,  // 66: nuntio.users.v1alpha1.EmailProvider.type:type_name -> nuntio.users.v1alpha1.EmailProviderType
+	7,  // 67: nuntio.users.v1alpha1.TextProvider.type:type_name -> nuntio.users.v1alpha1.TextProviderType
+	68, // [68:68] is the sub-list for method output_type
+	68, // [68:68] is the sub-list for method input_type
+	68, // [68:68] is the sub-list for extension type_name
+	68, // [68:68] is the sub-list for extension extendee
+	0,  // [0:68] is the sub-list for field type_name
 }
 
 func init() { file_nuntio_users_v1alpha1_users_messages_proto_init() }
