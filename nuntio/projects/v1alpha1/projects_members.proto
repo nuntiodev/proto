@@ -14,14 +14,18 @@ option php_namespace = "Nuntio\\projects\\v1alpha1";
 service MembersService {
   // Ping checks if a service is live
   rpc Ping(MembersServicePingRequest) returns (MembersServicePingResponse) {}
-  // AddMember adds a member to a namespace
+  // Add adds a member to a project
   rpc Add(MembersServiceAddRequest) returns (MembersServiceAddResponse) {}
   // RemoveMember removes a member from a namespace
   rpc Remove(MembersServiceRemoveRequest) returns (MembersServiceRemoveResponse) {}
-  // AddProject adds a project to a members list of projects
-  rpc AddToProject(MembersServiceAddToProjectRequest) returns (MembersServiceAddToProjectResponse) {}
+  // Regsiter creates a new member
+  rpc Register(MembersServiceRegisterRequest) returns (MembersServiceRegisterResponse) {}
+  // Authenticates a member
+  rpc Login(MembersServiceLoginRequest) returns (MembersServiceLoginResponse) {}
   // ListMembers returns a list of claimed and unclaimed members
-  rpc ListMembers(MembersServiceListMembersRequest) returns (MembersServiceListMembersResponse) {}
+  rpc List(MembersServiceListRequest) returns (MembersServiceListResponse) {}
+  // ContinueWith logs in a user with an OAuth2 Provider
+  // rpc ContinueWith(MembersServiceListRequest) returns (MembersServiceListResponse) {}
 }
 
 // The request of a Member.Ping RPC
@@ -32,50 +36,81 @@ message MembersServicePingResponse {}
 
 // The request of a Member.AddMember RPC
 message MembersServiceAddRequest {
-    // the email of the user (to auto send request)
+    // the email of the user register
     string email = 1;
-    // the namespace to add
-    string namespace = 2;
+    // the member type to register
+    MemberType type = 2;
+    // the access token used to make the request
+    string access_token = 3;
 }
 
-// The response of a Member.AddMember RPC
-message MembersServiceAddResponse {
-    // the code used to add a namespace
-    string code = 1;
-}
+// The response of a Member.Add RPC
+message MembersServiceAddResponse {}
 
-// The request of a Member.RemoveMember RPC
+// The request of a Member.Remove RPC
 message MembersServiceRemoveRequest {
     // the id of the member
-    string id = 1;
-    // the id of the namespace
-    string namespace = 2;
+    string member_id = 1;
+    // the access token used to make the request
+    string access_token = 3;
+    // transfer to member id
+    string transfer_to_member_id = 4;
 } 
 
-// The response of a Member.RemoveMember RPC
+// The response of a Member.Remove RPC
 message MembersServiceRemoveResponse {} 
 
 
-// The request of a Member.AdTodProject RPC
-message MembersServiceAddToProjectRequest {
-    // the id of the namespace
-    string namespace = 1;
-    // your secret code to add the project
-    string code = 2;
+// The request of a Member.Register RPC
+message MembersServiceRegisterRequest {
+    // the name of the member
+    string name = 1;
+    // the password of the member
+    string password = 2;
+    // the email of the member
+    string email = 3;
 }
 
-// The response of a Member.AddToProject RPC
-message MembersServiceAddToProjectResponse {}
+// The response of a Member.Register RPC
+message MembersServiceRegisterResponse {
+    // the access token for the created user
+    string access_token = 1;
+    // the refresh token for the created user
+    string refresh_token = 2;
+    // the name of the user
+    string name_of_user = 3;
+}
 
 
-// The request of a Member.ListMembers RPC
-message MembersServiceListMembersRequest {
-    // the id of the namespace
-    string namespace = 1;
+// The request of a Member.List RPC
+message MembersServiceListRequest {
+    // where to start listing from
+    optional int32 from = 1;
+    // where to stop listing to
+    optional int32 to = 2;
+    // the access token used to make the request
+    string access_token = 3;
+}
+
+// The response of a Member.List RPC
+message MembersServiceListResponse {
+    // the result of List Members
+    repeated Member members = 1;
+    int64 count = 2;
+}
+
+// The request of a Member.Login RPC
+message MembersServiceLoginRequest {
+    string email = 1;
+    string password = 2;
 }
 
 // The response of a Member.ListMembers RPC
-message MembersServiceListMembersResponse {
-    // the result of List Members
-    repeated Member members = 1;
+message MembersServiceLoginResponse {
+    // the access token for the created user
+    string access_token = 1;
+    // the refresh token for the created user
+    string refresh_token = 2;
+    // the name of the user
+    string name_of_user = 3;
 }
