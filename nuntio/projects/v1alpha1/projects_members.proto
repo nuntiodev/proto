@@ -24,6 +24,10 @@ service MembersService {
   rpc Login(MembersServiceLoginRequest) returns (MembersServiceLoginResponse) {}
   // ListMembers returns a list of claimed and unclaimed members
   rpc List(MembersServiceListRequest) returns (MembersServiceListResponse) {}
+  // RefreshToken refreshes a token and returns a new access/refresh token pair
+  rpc RefreshToken(MembersServiceRefreshTokenRequest) returns (MembersServiceRefreshTokenResponse) {}
+  // UpdateMemberType updates the member type
+  rpc UpdateMemberType(MembersServiceUpdateMemberTypeRequest) returns (MembersServiceUpdateMemberTypeResponse) {}
   // ContinueWith logs in a user with an OAuth2 Provider
   // rpc ContinueWith(MembersServiceListRequest) returns (MembersServiceListResponse) {}
 }
@@ -72,14 +76,7 @@ message MembersServiceRegisterRequest {
 }
 
 // The response of a Member.Register RPC
-message MembersServiceRegisterResponse {
-    // the access token for the created user
-    string access_token = 1;
-    // the refresh token for the created user
-    string refresh_token = 2;
-    // the name of the user
-    string name_of_user = 3;
-}
+message MembersServiceRegisterResponse {}
 
 
 // The request of a Member.List RPC
@@ -113,4 +110,32 @@ message MembersServiceLoginResponse {
     string refresh_token = 2;
     // the name of the user
     string name_of_user = 3;
+    // the id of the user
+    string id = 4;
+    // the type of member
+    MemberType member_type = 5;
 }
+
+// The request of a Member.RefreshToken RPC
+message MembersServiceRefreshTokenRequest {
+    // the refresh token used to issue new tokens
+    string refresh_token = 1;
+}
+
+// The request of a Member.RefreshToken RPC
+message MembersServiceRefreshTokenResponse {
+    // return a new refresh token
+    string refresh_token = 1;
+    // return a new access token
+    string access_token = 2;
+}
+
+// The request of a Member.UpdateMemberType RPC
+message MembersServiceUpdateMemberTypeRequest {
+    string member_id = 1;
+    string access_token = 2;
+    MemberType member_type = 3;
+}
+
+// The request of a Member.UpdateMemberType RPC
+message MembersServiceUpdateMemberTypeResponse {}
