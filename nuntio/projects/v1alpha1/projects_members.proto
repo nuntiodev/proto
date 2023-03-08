@@ -22,6 +22,10 @@ service MembersService {
   rpc Register(MembersServiceRegisterRequest) returns (MembersServiceRegisterResponse) {}
   // Authenticates a member
   rpc Login(MembersServiceLoginRequest) returns (MembersServiceLoginResponse) {}
+  // updates the users password
+  rpc UpdatePassword(MembersServiceUpdatePasswordRequest) returns (MembersServiceUpdatePasswordResponse) {}
+  // updates the members profile
+  rpc UpdateProfile(MembersServiceUpdateProfileRequest) returns (MembersServiceUpdateProfileResponse) {}
   // ListMembers returns a list of claimed and unclaimed members
   rpc List(MembersServiceListRequest) returns (MembersServiceListResponse) {}
   // RefreshToken refreshes a token and returns a new access/refresh token pair
@@ -114,6 +118,8 @@ message MembersServiceLoginResponse {
     string id = 4;
     // the type of member
     MemberType member_type = 5;
+    // the email of the user
+    string email = 6;
 }
 
 // The request of a Member.RefreshToken RPC
@@ -139,3 +145,23 @@ message MembersServiceUpdateMemberTypeRequest {
 
 // The request of a Member.UpdateMemberType RPC
 message MembersServiceUpdateMemberTypeResponse {}
+
+// The request of a Member.UpdatePassword RPC
+message MembersServiceUpdatePasswordRequest {
+    string access_token = 1;
+    string old_password = 2;
+    string new_password = 3;
+}
+
+// The request of a Member.UpdatePassword RPC
+message MembersServiceUpdatePasswordResponse {}
+
+// The request of a Member.UpdateProfile RPC
+message MembersServiceUpdateProfileRequest {
+    string access_token = 1;
+    string name = 2;
+    string email = 3;
+}
+
+// The request of a Member.UpdateProfile RPC
+message MembersServiceUpdateProfileResponse {}

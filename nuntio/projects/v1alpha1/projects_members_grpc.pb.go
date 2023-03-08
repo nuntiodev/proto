@@ -32,6 +32,10 @@ type MembersServiceClient interface {
 	Register(ctx context.Context, in *MembersServiceRegisterRequest, opts ...grpc.CallOption) (*MembersServiceRegisterResponse, error)
 	// Authenticates a member
 	Login(ctx context.Context, in *MembersServiceLoginRequest, opts ...grpc.CallOption) (*MembersServiceLoginResponse, error)
+	// updates the users password
+	UpdatePassword(ctx context.Context, in *MembersServiceUpdatePasswordRequest, opts ...grpc.CallOption) (*MembersServiceUpdatePasswordResponse, error)
+	// updates the members profile
+	UpdateProfile(ctx context.Context, in *MembersServiceUpdateProfileRequest, opts ...grpc.CallOption) (*MembersServiceUpdateProfileResponse, error)
 	// ListMembers returns a list of claimed and unclaimed members
 	List(ctx context.Context, in *MembersServiceListRequest, opts ...grpc.CallOption) (*MembersServiceListResponse, error)
 	// RefreshToken refreshes a token and returns a new access/refresh token pair
@@ -93,6 +97,24 @@ func (c *membersServiceClient) Login(ctx context.Context, in *MembersServiceLogi
 	return out, nil
 }
 
+func (c *membersServiceClient) UpdatePassword(ctx context.Context, in *MembersServiceUpdatePasswordRequest, opts ...grpc.CallOption) (*MembersServiceUpdatePasswordResponse, error) {
+	out := new(MembersServiceUpdatePasswordResponse)
+	err := c.cc.Invoke(ctx, "/nuntio.projects.v1alpha1.MembersService/UpdatePassword", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *membersServiceClient) UpdateProfile(ctx context.Context, in *MembersServiceUpdateProfileRequest, opts ...grpc.CallOption) (*MembersServiceUpdateProfileResponse, error) {
+	out := new(MembersServiceUpdateProfileResponse)
+	err := c.cc.Invoke(ctx, "/nuntio.projects.v1alpha1.MembersService/UpdateProfile", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *membersServiceClient) List(ctx context.Context, in *MembersServiceListRequest, opts ...grpc.CallOption) (*MembersServiceListResponse, error) {
 	out := new(MembersServiceListResponse)
 	err := c.cc.Invoke(ctx, "/nuntio.projects.v1alpha1.MembersService/List", in, out, opts...)
@@ -134,6 +156,10 @@ type MembersServiceServer interface {
 	Register(context.Context, *MembersServiceRegisterRequest) (*MembersServiceRegisterResponse, error)
 	// Authenticates a member
 	Login(context.Context, *MembersServiceLoginRequest) (*MembersServiceLoginResponse, error)
+	// updates the users password
+	UpdatePassword(context.Context, *MembersServiceUpdatePasswordRequest) (*MembersServiceUpdatePasswordResponse, error)
+	// updates the members profile
+	UpdateProfile(context.Context, *MembersServiceUpdateProfileRequest) (*MembersServiceUpdateProfileResponse, error)
 	// ListMembers returns a list of claimed and unclaimed members
 	List(context.Context, *MembersServiceListRequest) (*MembersServiceListResponse, error)
 	// RefreshToken refreshes a token and returns a new access/refresh token pair
@@ -160,6 +186,12 @@ func (UnimplementedMembersServiceServer) Register(context.Context, *MembersServi
 }
 func (UnimplementedMembersServiceServer) Login(context.Context, *MembersServiceLoginRequest) (*MembersServiceLoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
+}
+func (UnimplementedMembersServiceServer) UpdatePassword(context.Context, *MembersServiceUpdatePasswordRequest) (*MembersServiceUpdatePasswordResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePassword not implemented")
+}
+func (UnimplementedMembersServiceServer) UpdateProfile(context.Context, *MembersServiceUpdateProfileRequest) (*MembersServiceUpdateProfileResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateProfile not implemented")
 }
 func (UnimplementedMembersServiceServer) List(context.Context, *MembersServiceListRequest) (*MembersServiceListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
@@ -272,6 +304,42 @@ func _MembersService_Login_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MembersService_UpdatePassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MembersServiceUpdatePasswordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MembersServiceServer).UpdatePassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nuntio.projects.v1alpha1.MembersService/UpdatePassword",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MembersServiceServer).UpdatePassword(ctx, req.(*MembersServiceUpdatePasswordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MembersService_UpdateProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MembersServiceUpdateProfileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MembersServiceServer).UpdateProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nuntio.projects.v1alpha1.MembersService/UpdateProfile",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MembersServiceServer).UpdateProfile(ctx, req.(*MembersServiceUpdateProfileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _MembersService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(MembersServiceListRequest)
 	if err := dec(in); err != nil {
@@ -352,6 +420,14 @@ var MembersService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Login",
 			Handler:    _MembersService_Login_Handler,
+		},
+		{
+			MethodName: "UpdatePassword",
+			Handler:    _MembersService_UpdatePassword_Handler,
+		},
+		{
+			MethodName: "UpdateProfile",
+			Handler:    _MembersService_UpdateProfile_Handler,
 		},
 		{
 			MethodName: "List",
