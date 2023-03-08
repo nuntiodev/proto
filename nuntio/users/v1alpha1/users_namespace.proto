@@ -192,10 +192,6 @@ message NamespaceServiceUpdateLoginSettingsRequest {
     repeated LoginType login_mechanisms = 1;  
     // The namespace to perform action in
     string namespace = 2;
-    // to enable/disable singup
-    optional bool enable_signup = 3;
-    // to enable/disable login
-    optional bool enable_login = 4;
     // to enable/disable password validation
     optional bool validate_password = 5;
     // will enable verification of emails before issuing tokens
