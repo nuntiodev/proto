@@ -21,7 +21,21 @@ enum MemberStatus {
     MEMBER_STATUS_UNSPEFICIED = 0;
     MEMBER_STATUS_INVITED = 1;
     MEMBER_STATUS_ACCEPTED = 2;
-    MEMBER_STATUS_CREATED = 3;
+    MEMBER_STATUS_UNKNOWN_CREATED = 3;
+}
+
+enum MemberType {
+    MEMBER_TYPE_UNSPECIFIED = 0;
+    MEMBER_TYPE_OWNER = 1;
+    MEMBER_TYPE_DEVELOPER = 2;
+    MEMBER_TYPE_ADMIN = 3;
+    MEMBER_TYPE_NOT_ALLOWED = 4;
+}
+
+enum TokenType {
+    TOKEN_TYPE_UNSPECIFIED = 0;
+    TOKEN_TYPE_ACCESS_TOKEN = 1;
+    TOKEN_TYPE_REFRESH_TOKEN = 2;
 }
 
 enum Mode {
@@ -85,21 +99,22 @@ message AccessToken {
 message Member {
     string id = 1;
     string email = 2;
-    google.protobuf.Timestamp created_at = 3;
-    google.protobuf.Timestamp updated_at = 4;
-    string password = 5;
-    MemberStatus status = 6;
+    string name = 3;
+    google.protobuf.Timestamp created_at = 4;
+    google.protobuf.Timestamp updated_at = 5;
+    string password = 6;
+    MemberStatus status = 7;
+    MemberType type = 8;
 }
 
 message Project {
     string id = 1;
     string name = 2;
-    Image logo = 3;
-    google.protobuf.Timestamp created_at = 4;
-    google.protobuf.Timestamp updated_at = 5;
-    string owner_id = 6;
-    bool users_configured = 7;
-    bool mongo_configured = 8;
-    bool postgres_configured = 9;
-    bool storage_configured = 10;
+    google.protobuf.Timestamp created_at = 3;
+    google.protobuf.Timestamp updated_at = 4;
+    string owner_id = 5;
+    bool users_configured = 6;
+    bool mongo_configured = 7;
+    bool postgres_configured = 8;
+    bool storage_configured = 9;
 }
