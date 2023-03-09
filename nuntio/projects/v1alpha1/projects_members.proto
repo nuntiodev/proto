@@ -159,8 +159,8 @@ message MembersServiceUpdatePasswordResponse {}
 // The request of a Member.UpdateProfile RPC
 message MembersServiceUpdateProfileRequest {
     string access_token = 1;
-    string name = 2;
-    string email = 3;
+    optional string name = 2;
+    optional string email = 3;
 }
 
 // The request of a Member.UpdateProfile RPC
