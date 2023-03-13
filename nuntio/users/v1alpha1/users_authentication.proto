@@ -283,20 +283,16 @@ message AuthenticationServiceInitializeAuthResponse {
     string name = 1;
     // The logo of the namespace
     string logo = 2;
-    // If signup is enabled
-    bool enable_signup = 3;
-    // If login is enabled
-    bool enable_login = 4;
     // If to validate password
-    bool validate_password = 5;
+    bool validate_password = 3;
     // The public key of Users
-    string public_key = 6;
+    string public_key = 4;
     // Array of supported login types
-    repeated LoginType login_mechanisms = 7;   
+    repeated LoginType login_mechanisms = 5; 
     // Array of callbacks
-    repeated string callbacks = 8;
+    repeated string callbacks = 6;
     // Map of oauth2 providers
-    repeated OAuthProvider oauth_providers = 9;
+    repeated OAuthProvider oauth_providers = 7;
 }
 
 // The request of a Authentication.BlockToken RPC

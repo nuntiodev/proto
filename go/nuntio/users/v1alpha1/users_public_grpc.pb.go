@@ -24,7 +24,7 @@ const _ = grpc.SupportPackageIsVersion7
 type PublicServiceClient interface {
 	// Login a user from the frontend
 	Ping(ctx context.Context, in *PublicServicePingRequest, opts ...grpc.CallOption) (*PublicServicePingResponse, error)
-	// Login a user from the frontend
+	// Login authenticats a user and returns a access/refresh token
 	Login(ctx context.Context, in *PublicServiceLoginRequest, opts ...grpc.CallOption) (*PublicServiceLoginResponse, error)
 	// Get the logged in user
 	Get(ctx context.Context, in *PublicServiceGetRequest, opts ...grpc.CallOption) (*PublicServiceGetResponse, error)
@@ -148,7 +148,7 @@ func (c *publicServiceClient) InitializeAuth(ctx context.Context, in *PublicServ
 type PublicServiceServer interface {
 	// Login a user from the frontend
 	Ping(context.Context, *PublicServicePingRequest) (*PublicServicePingResponse, error)
-	// Login a user from the frontend
+	// Login authenticats a user and returns a access/refresh token
 	Login(context.Context, *PublicServiceLoginRequest) (*PublicServiceLoginResponse, error)
 	// Get the logged in user
 	Get(context.Context, *PublicServiceGetRequest) (*PublicServiceGetResponse, error)

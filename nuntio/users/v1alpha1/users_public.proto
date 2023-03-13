@@ -15,7 +15,7 @@ option php_namespace = "Nuntio\\Users\\v1alpha1";
 service PublicService {
   // Login a user from the frontend
   rpc Ping(PublicServicePingRequest) returns (PublicServicePingResponse) {}
-  // Login a user from the frontend
+  // Login authenticats a user and returns a access/refresh token
   rpc Login(PublicServiceLoginRequest) returns (PublicServiceLoginResponse) {}
   // Get the logged in user
   rpc Get(PublicServiceGetRequest) returns (PublicServiceGetResponse) {}
@@ -135,19 +135,15 @@ message PublicServiceInitializeAuthResponse {
   string name = 1;
   // The logo of the namespace
   string logo = 2;
-  // If signup is enabled
-  bool enable_signup = 3;
-  // If login is enabled
-  bool enable_login = 4;
   // If to validate password
-  bool validate_password = 5;
+  bool validate_password = 3;
   // The public key of Users
-  string public_key = 6;
+  string public_key = 4;
   // Array of supported login types
-  repeated LoginType login_mechanisms = 7;   
+  repeated LoginType login_mechanisms = 5; 
   // Array of callbacks
-  repeated string callbacks = 8;
-  OAuthProviders oauth_providers = 9;
+  repeated string callbacks = 6;
+  OAuthProviders oauth_providers = 7;
 }
 
 // The request of a Public.Ping RPC

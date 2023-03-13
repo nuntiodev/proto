@@ -1568,11 +1568,20 @@ class UsersServiceDeleteManyRequest extends $pb.GeneratedMessage {
 
 class UsersServiceDeleteManyResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'UsersServiceDeleteManyResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'nuntio.users.v1alpha1'), createEmptyInstance: create)
+    ..aInt64(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'count')
     ..hasRequiredFields = false
   ;
 
   UsersServiceDeleteManyResponse._() : super();
-  factory UsersServiceDeleteManyResponse() => create();
+  factory UsersServiceDeleteManyResponse({
+    $fixnum.Int64? count,
+  }) {
+    final _result = create();
+    if (count != null) {
+      _result.count = count;
+    }
+    return _result;
+  }
   factory UsersServiceDeleteManyResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory UsersServiceDeleteManyResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
   @$core.Deprecated(
@@ -1593,6 +1602,15 @@ class UsersServiceDeleteManyResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static UsersServiceDeleteManyResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UsersServiceDeleteManyResponse>(create);
   static UsersServiceDeleteManyResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $fixnum.Int64 get count => $_getI64(0);
+  @$pb.TagNumber(1)
+  set count($fixnum.Int64 v) { $_setInt64(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasCount() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCount() => clearField(1);
 }
 
 class UsersServiceListRequest extends $pb.GeneratedMessage {

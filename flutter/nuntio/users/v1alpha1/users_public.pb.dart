@@ -919,13 +919,11 @@ class PublicServiceInitializeAuthResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'PublicServiceInitializeAuthResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'nuntio.users.v1alpha1'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'name')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'logo')
-    ..aOB(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'enableSignup')
-    ..aOB(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'enableLogin')
-    ..aOB(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'validatePassword')
-    ..aOS(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'publicKey')
-    ..pc<$2.LoginType>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'loginMechanisms', $pb.PbFieldType.PE, valueOf: $2.LoginType.valueOf, enumValues: $2.LoginType.values)
-    ..pPS(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'callbacks')
-    ..aOM<$2.OAuthProviders>(9, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'oauthProviders', subBuilder: $2.OAuthProviders.create)
+    ..aOB(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'validatePassword')
+    ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'publicKey')
+    ..pc<$2.LoginType>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'loginMechanisms', $pb.PbFieldType.PE, valueOf: $2.LoginType.valueOf, enumValues: $2.LoginType.values)
+    ..pPS(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'callbacks')
+    ..aOM<$2.OAuthProviders>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'oauthProviders', subBuilder: $2.OAuthProviders.create)
     ..hasRequiredFields = false
   ;
 
@@ -933,8 +931,6 @@ class PublicServiceInitializeAuthResponse extends $pb.GeneratedMessage {
   factory PublicServiceInitializeAuthResponse({
     $core.String? name,
     $core.String? logo,
-    $core.bool? enableSignup,
-    $core.bool? enableLogin,
     $core.bool? validatePassword,
     $core.String? publicKey,
     $core.Iterable<$2.LoginType>? loginMechanisms,
@@ -947,12 +943,6 @@ class PublicServiceInitializeAuthResponse extends $pb.GeneratedMessage {
     }
     if (logo != null) {
       _result.logo = logo;
-    }
-    if (enableSignup != null) {
-      _result.enableSignup = enableSignup;
-    }
-    if (enableLogin != null) {
-      _result.enableLogin = enableLogin;
     }
     if (validatePassword != null) {
       _result.validatePassword = validatePassword;
@@ -1011,57 +1001,39 @@ class PublicServiceInitializeAuthResponse extends $pb.GeneratedMessage {
   void clearLogo() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.bool get enableSignup => $_getBF(2);
+  $core.bool get validatePassword => $_getBF(2);
   @$pb.TagNumber(3)
-  set enableSignup($core.bool v) { $_setBool(2, v); }
+  set validatePassword($core.bool v) { $_setBool(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasEnableSignup() => $_has(2);
+  $core.bool hasValidatePassword() => $_has(2);
   @$pb.TagNumber(3)
-  void clearEnableSignup() => clearField(3);
+  void clearValidatePassword() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.bool get enableLogin => $_getBF(3);
+  $core.String get publicKey => $_getSZ(3);
   @$pb.TagNumber(4)
-  set enableLogin($core.bool v) { $_setBool(3, v); }
+  set publicKey($core.String v) { $_setString(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasEnableLogin() => $_has(3);
+  $core.bool hasPublicKey() => $_has(3);
   @$pb.TagNumber(4)
-  void clearEnableLogin() => clearField(4);
+  void clearPublicKey() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.bool get validatePassword => $_getBF(4);
-  @$pb.TagNumber(5)
-  set validatePassword($core.bool v) { $_setBool(4, v); }
-  @$pb.TagNumber(5)
-  $core.bool hasValidatePassword() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearValidatePassword() => clearField(5);
+  $core.List<$2.LoginType> get loginMechanisms => $_getList(4);
 
   @$pb.TagNumber(6)
-  $core.String get publicKey => $_getSZ(5);
-  @$pb.TagNumber(6)
-  set publicKey($core.String v) { $_setString(5, v); }
-  @$pb.TagNumber(6)
-  $core.bool hasPublicKey() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearPublicKey() => clearField(6);
+  $core.List<$core.String> get callbacks => $_getList(5);
 
   @$pb.TagNumber(7)
-  $core.List<$2.LoginType> get loginMechanisms => $_getList(6);
-
-  @$pb.TagNumber(8)
-  $core.List<$core.String> get callbacks => $_getList(7);
-
-  @$pb.TagNumber(9)
-  $2.OAuthProviders get oauthProviders => $_getN(8);
-  @$pb.TagNumber(9)
-  set oauthProviders($2.OAuthProviders v) { setField(9, v); }
-  @$pb.TagNumber(9)
-  $core.bool hasOauthProviders() => $_has(8);
-  @$pb.TagNumber(9)
-  void clearOauthProviders() => clearField(9);
-  @$pb.TagNumber(9)
-  $2.OAuthProviders ensureOauthProviders() => $_ensure(8);
+  $2.OAuthProviders get oauthProviders => $_getN(6);
+  @$pb.TagNumber(7)
+  set oauthProviders($2.OAuthProviders v) { setField(7, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasOauthProviders() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearOauthProviders() => clearField(7);
+  @$pb.TagNumber(7)
+  $2.OAuthProviders ensureOauthProviders() => $_ensure(6);
 }
 
 class PublicServicePingRequest extends $pb.GeneratedMessage {

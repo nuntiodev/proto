@@ -9,7 +9,7 @@ import 'dart:core' as $core;
 import 'dart:convert' as $convert;
 import 'dart:typed_data' as $typed_data;
 import 'users_messages.pbjson.dart' as $2;
-import 'google/protobuf/timestamp.pbjson.dart' as $0;
+import '../../../google/protobuf/timestamp.pbjson.dart' as $0;
 
 @$core.Deprecated('Use usersServicePingRequestDescriptor instead')
 const UsersServicePingRequest$json = const {
@@ -306,10 +306,13 @@ final $typed_data.Uint8List usersServiceDeleteManyRequestDescriptor = $convert.b
 @$core.Deprecated('Use usersServiceDeleteManyResponseDescriptor instead')
 const UsersServiceDeleteManyResponse$json = const {
   '1': 'UsersServiceDeleteManyResponse',
+  '2': const [
+    const {'1': 'count', '3': 1, '4': 1, '5': 3, '10': 'count'},
+  ],
 };
 
 /// Descriptor for `UsersServiceDeleteManyResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List usersServiceDeleteManyResponseDescriptor = $convert.base64Decode('Ch5Vc2Vyc1NlcnZpY2VEZWxldGVNYW55UmVzcG9uc2U=');
+final $typed_data.Uint8List usersServiceDeleteManyResponseDescriptor = $convert.base64Decode('Ch5Vc2Vyc1NlcnZpY2VEZWxldGVNYW55UmVzcG9uc2USFAoFY291bnQYASABKANSBWNvdW50');
 @$core.Deprecated('Use usersServiceListRequestDescriptor instead')
 const UsersServiceListRequest$json = const {
   '1': 'UsersServiceListRequest',

@@ -9,7 +9,7 @@ import 'dart:core' as $core;
 import 'dart:convert' as $convert;
 import 'dart:typed_data' as $typed_data;
 import 'users_messages.pbjson.dart' as $2;
-import 'google/protobuf/timestamp.pbjson.dart' as $0;
+import '../../../google/protobuf/timestamp.pbjson.dart' as $0;
 
 @$core.Deprecated('Use authenticationServicePingRequestDescriptor instead')
 const AuthenticationServicePingRequest$json = const {
@@ -338,18 +338,16 @@ const AuthenticationServiceInitializeAuthResponse$json = const {
   '2': const [
     const {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
     const {'1': 'logo', '3': 2, '4': 1, '5': 9, '10': 'logo'},
-    const {'1': 'enable_signup', '3': 3, '4': 1, '5': 8, '10': 'enableSignup'},
-    const {'1': 'enable_login', '3': 4, '4': 1, '5': 8, '10': 'enableLogin'},
-    const {'1': 'validate_password', '3': 5, '4': 1, '5': 8, '10': 'validatePassword'},
-    const {'1': 'public_key', '3': 6, '4': 1, '5': 9, '10': 'publicKey'},
-    const {'1': 'login_mechanisms', '3': 7, '4': 3, '5': 14, '6': '.nuntio.users.v1alpha1.LoginType', '10': 'loginMechanisms'},
-    const {'1': 'callbacks', '3': 8, '4': 3, '5': 9, '10': 'callbacks'},
-    const {'1': 'oauth_providers', '3': 9, '4': 3, '5': 11, '6': '.nuntio.users.v1alpha1.OAuthProvider', '10': 'oauthProviders'},
+    const {'1': 'validate_password', '3': 3, '4': 1, '5': 8, '10': 'validatePassword'},
+    const {'1': 'public_key', '3': 4, '4': 1, '5': 9, '10': 'publicKey'},
+    const {'1': 'login_mechanisms', '3': 5, '4': 3, '5': 14, '6': '.nuntio.users.v1alpha1.LoginType', '10': 'loginMechanisms'},
+    const {'1': 'callbacks', '3': 6, '4': 3, '5': 9, '10': 'callbacks'},
+    const {'1': 'oauth_providers', '3': 7, '4': 3, '5': 11, '6': '.nuntio.users.v1alpha1.OAuthProvider', '10': 'oauthProviders'},
   ],
 };
 
 /// Descriptor for `AuthenticationServiceInitializeAuthResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List authenticationServiceInitializeAuthResponseDescriptor = $convert.base64Decode('CitBdXRoZW50aWNhdGlvblNlcnZpY2VJbml0aWFsaXplQXV0aFJlc3BvbnNlEhIKBG5hbWUYASABKAlSBG5hbWUSEgoEbG9nbxgCIAEoCVIEbG9nbxIjCg1lbmFibGVfc2lnbnVwGAMgASgIUgxlbmFibGVTaWdudXASIQoMZW5hYmxlX2xvZ2luGAQgASgIUgtlbmFibGVMb2dpbhIrChF2YWxpZGF0ZV9wYXNzd29yZBgFIAEoCFIQdmFsaWRhdGVQYXNzd29yZBIdCgpwdWJsaWNfa2V5GAYgASgJUglwdWJsaWNLZXkSSwoQbG9naW5fbWVjaGFuaXNtcxgHIAMoDjIgLm51bnRpby51c2Vycy52MWFscGhhMS5Mb2dpblR5cGVSD2xvZ2luTWVjaGFuaXNtcxIcCgljYWxsYmFja3MYCCADKAlSCWNhbGxiYWNrcxJNCg9vYXV0aF9wcm92aWRlcnMYCSADKAsyJC5udW50aW8udXNlcnMudjFhbHBoYTEuT0F1dGhQcm92aWRlclIOb2F1dGhQcm92aWRlcnM=');
+final $typed_data.Uint8List authenticationServiceInitializeAuthResponseDescriptor = $convert.base64Decode('CitBdXRoZW50aWNhdGlvblNlcnZpY2VJbml0aWFsaXplQXV0aFJlc3BvbnNlEhIKBG5hbWUYASABKAlSBG5hbWUSEgoEbG9nbxgCIAEoCVIEbG9nbxIrChF2YWxpZGF0ZV9wYXNzd29yZBgDIAEoCFIQdmFsaWRhdGVQYXNzd29yZBIdCgpwdWJsaWNfa2V5GAQgASgJUglwdWJsaWNLZXkSSwoQbG9naW5fbWVjaGFuaXNtcxgFIAMoDjIgLm51bnRpby51c2Vycy52MWFscGhhMS5Mb2dpblR5cGVSD2xvZ2luTWVjaGFuaXNtcxIcCgljYWxsYmFja3MYBiADKAlSCWNhbGxiYWNrcxJNCg9vYXV0aF9wcm92aWRlcnMYByADKAsyJC5udW50aW8udXNlcnMudjFhbHBoYTEuT0F1dGhQcm92aWRlclIOb2F1dGhQcm92aWRlcnM=');
 @$core.Deprecated('Use authenticationServiceBlockTokenRequestDescriptor instead')
 const AuthenticationServiceBlockTokenRequest$json = const {
   '1': 'AuthenticationServiceBlockTokenRequest',
