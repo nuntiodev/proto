@@ -170,6 +170,7 @@ enum OAuthProviderType {
     OAUTH_PROVIDER_TYPE_UNSPECIFIED = 0;
     OAUTH_PROVIDER_TYPE_GOOGLE_PROVIDER = 1;
     OAUTH_PROVIDER_TYPE_GITHUB_PROVIDER = 2;
+    OAUTH_PROVIDER_TYPE_FACEBOOK_PROVIDER = 3;
 }  
 
 message Template {
@@ -192,6 +193,7 @@ message OAuthProvider {
 message OAuthProviders {
     OAuthProvider google = 1;
     OAuthProvider github = 2;
+    OAuthProvider facebook = 3;
 }
 
 message Templates {
