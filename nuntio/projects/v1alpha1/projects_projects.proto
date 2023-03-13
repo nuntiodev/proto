@@ -40,6 +40,8 @@ service ProjectsService {
   rpc EnablePostgres(ProjectsServiceEnablePostgresRequest) returns (ProjectsServiceEnablePostgresResponse) {}
   // Disable Postgres for the project
   rpc DisablePostgres(ProjectsServiceDisablePostgresRequest) returns (ProjectsServiceDisablePostgresResponse) {}
+  // Returns the public key for the service
+  rpc PublicKey(ProjectsServicePublicKeyRequest) returns (ProjectsServicePublicKeyResponse) {}
 }
 
 // The request of a Project.Ping RPC
@@ -213,3 +215,11 @@ message ProjectsServiceDisableUsersRequest {
 
 // The response of a Project.DisableUsers RPC
 message ProjectsServiceDisableUsersResponse {}
+
+// The request of a Project.PublicKey RPC
+message ProjectsServicePublicKeyRequest {}
+
+// The response of a Project.PublicKey RPC
+message ProjectsServicePublicKeyResponse {
+    string public_key = 1;
+}

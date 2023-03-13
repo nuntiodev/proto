@@ -32,8 +32,18 @@ type MembersServiceClient interface {
 	Register(ctx context.Context, in *MembersServiceRegisterRequest, opts ...grpc.CallOption) (*MembersServiceRegisterResponse, error)
 	// Authenticates a member
 	Login(ctx context.Context, in *MembersServiceLoginRequest, opts ...grpc.CallOption) (*MembersServiceLoginResponse, error)
+	// updates the users password
+	UpdatePassword(ctx context.Context, in *MembersServiceUpdatePasswordRequest, opts ...grpc.CallOption) (*MembersServiceUpdatePasswordResponse, error)
+	// updates the members profile
+	UpdateProfile(ctx context.Context, in *MembersServiceUpdateProfileRequest, opts ...grpc.CallOption) (*MembersServiceUpdateProfileResponse, error)
 	// ListMembers returns a list of claimed and unclaimed members
 	List(ctx context.Context, in *MembersServiceListRequest, opts ...grpc.CallOption) (*MembersServiceListResponse, error)
+	// Get returns a specific member
+	Get(ctx context.Context, in *MembersServiceGetRequest, opts ...grpc.CallOption) (*MembersServiceGetResponse, error)
+	// RefreshToken refreshes a token and returns a new access/refresh token pair
+	RefreshToken(ctx context.Context, in *MembersServiceRefreshTokenRequest, opts ...grpc.CallOption) (*MembersServiceRefreshTokenResponse, error)
+	// UpdateMemberType updates the member type
+	UpdateMemberType(ctx context.Context, in *MembersServiceUpdateMemberTypeRequest, opts ...grpc.CallOption) (*MembersServiceUpdateMemberTypeResponse, error)
 }
 
 type membersServiceClient struct {
@@ -89,9 +99,54 @@ func (c *membersServiceClient) Login(ctx context.Context, in *MembersServiceLogi
 	return out, nil
 }
 
+func (c *membersServiceClient) UpdatePassword(ctx context.Context, in *MembersServiceUpdatePasswordRequest, opts ...grpc.CallOption) (*MembersServiceUpdatePasswordResponse, error) {
+	out := new(MembersServiceUpdatePasswordResponse)
+	err := c.cc.Invoke(ctx, "/nuntio.projects.v1alpha1.MembersService/UpdatePassword", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *membersServiceClient) UpdateProfile(ctx context.Context, in *MembersServiceUpdateProfileRequest, opts ...grpc.CallOption) (*MembersServiceUpdateProfileResponse, error) {
+	out := new(MembersServiceUpdateProfileResponse)
+	err := c.cc.Invoke(ctx, "/nuntio.projects.v1alpha1.MembersService/UpdateProfile", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *membersServiceClient) List(ctx context.Context, in *MembersServiceListRequest, opts ...grpc.CallOption) (*MembersServiceListResponse, error) {
 	out := new(MembersServiceListResponse)
 	err := c.cc.Invoke(ctx, "/nuntio.projects.v1alpha1.MembersService/List", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *membersServiceClient) Get(ctx context.Context, in *MembersServiceGetRequest, opts ...grpc.CallOption) (*MembersServiceGetResponse, error) {
+	out := new(MembersServiceGetResponse)
+	err := c.cc.Invoke(ctx, "/nuntio.projects.v1alpha1.MembersService/Get", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *membersServiceClient) RefreshToken(ctx context.Context, in *MembersServiceRefreshTokenRequest, opts ...grpc.CallOption) (*MembersServiceRefreshTokenResponse, error) {
+	out := new(MembersServiceRefreshTokenResponse)
+	err := c.cc.Invoke(ctx, "/nuntio.projects.v1alpha1.MembersService/RefreshToken", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *membersServiceClient) UpdateMemberType(ctx context.Context, in *MembersServiceUpdateMemberTypeRequest, opts ...grpc.CallOption) (*MembersServiceUpdateMemberTypeResponse, error) {
+	out := new(MembersServiceUpdateMemberTypeResponse)
+	err := c.cc.Invoke(ctx, "/nuntio.projects.v1alpha1.MembersService/UpdateMemberType", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -112,8 +167,18 @@ type MembersServiceServer interface {
 	Register(context.Context, *MembersServiceRegisterRequest) (*MembersServiceRegisterResponse, error)
 	// Authenticates a member
 	Login(context.Context, *MembersServiceLoginRequest) (*MembersServiceLoginResponse, error)
+	// updates the users password
+	UpdatePassword(context.Context, *MembersServiceUpdatePasswordRequest) (*MembersServiceUpdatePasswordResponse, error)
+	// updates the members profile
+	UpdateProfile(context.Context, *MembersServiceUpdateProfileRequest) (*MembersServiceUpdateProfileResponse, error)
 	// ListMembers returns a list of claimed and unclaimed members
 	List(context.Context, *MembersServiceListRequest) (*MembersServiceListResponse, error)
+	// Get returns a specific member
+	Get(context.Context, *MembersServiceGetRequest) (*MembersServiceGetResponse, error)
+	// RefreshToken refreshes a token and returns a new access/refresh token pair
+	RefreshToken(context.Context, *MembersServiceRefreshTokenRequest) (*MembersServiceRefreshTokenResponse, error)
+	// UpdateMemberType updates the member type
+	UpdateMemberType(context.Context, *MembersServiceUpdateMemberTypeRequest) (*MembersServiceUpdateMemberTypeResponse, error)
 }
 
 // UnimplementedMembersServiceServer should be embedded to have forward compatible implementations.
@@ -135,8 +200,23 @@ func (UnimplementedMembersServiceServer) Register(context.Context, *MembersServi
 func (UnimplementedMembersServiceServer) Login(context.Context, *MembersServiceLoginRequest) (*MembersServiceLoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
 }
+func (UnimplementedMembersServiceServer) UpdatePassword(context.Context, *MembersServiceUpdatePasswordRequest) (*MembersServiceUpdatePasswordResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePassword not implemented")
+}
+func (UnimplementedMembersServiceServer) UpdateProfile(context.Context, *MembersServiceUpdateProfileRequest) (*MembersServiceUpdateProfileResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateProfile not implemented")
+}
 func (UnimplementedMembersServiceServer) List(context.Context, *MembersServiceListRequest) (*MembersServiceListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+}
+func (UnimplementedMembersServiceServer) Get(context.Context, *MembersServiceGetRequest) (*MembersServiceGetResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+}
+func (UnimplementedMembersServiceServer) RefreshToken(context.Context, *MembersServiceRefreshTokenRequest) (*MembersServiceRefreshTokenResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RefreshToken not implemented")
+}
+func (UnimplementedMembersServiceServer) UpdateMemberType(context.Context, *MembersServiceUpdateMemberTypeRequest) (*MembersServiceUpdateMemberTypeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateMemberType not implemented")
 }
 
 // UnsafeMembersServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -240,6 +320,42 @@ func _MembersService_Login_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MembersService_UpdatePassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MembersServiceUpdatePasswordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MembersServiceServer).UpdatePassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nuntio.projects.v1alpha1.MembersService/UpdatePassword",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MembersServiceServer).UpdatePassword(ctx, req.(*MembersServiceUpdatePasswordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MembersService_UpdateProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MembersServiceUpdateProfileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MembersServiceServer).UpdateProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nuntio.projects.v1alpha1.MembersService/UpdateProfile",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MembersServiceServer).UpdateProfile(ctx, req.(*MembersServiceUpdateProfileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _MembersService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(MembersServiceListRequest)
 	if err := dec(in); err != nil {
@@ -254,6 +370,60 @@ func _MembersService_List_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MembersServiceServer).List(ctx, req.(*MembersServiceListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MembersService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MembersServiceGetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MembersServiceServer).Get(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nuntio.projects.v1alpha1.MembersService/Get",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MembersServiceServer).Get(ctx, req.(*MembersServiceGetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MembersService_RefreshToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MembersServiceRefreshTokenRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MembersServiceServer).RefreshToken(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nuntio.projects.v1alpha1.MembersService/RefreshToken",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MembersServiceServer).RefreshToken(ctx, req.(*MembersServiceRefreshTokenRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MembersService_UpdateMemberType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MembersServiceUpdateMemberTypeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MembersServiceServer).UpdateMemberType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nuntio.projects.v1alpha1.MembersService/UpdateMemberType",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MembersServiceServer).UpdateMemberType(ctx, req.(*MembersServiceUpdateMemberTypeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -286,8 +456,28 @@ var MembersService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _MembersService_Login_Handler,
 		},
 		{
+			MethodName: "UpdatePassword",
+			Handler:    _MembersService_UpdatePassword_Handler,
+		},
+		{
+			MethodName: "UpdateProfile",
+			Handler:    _MembersService_UpdateProfile_Handler,
+		},
+		{
 			MethodName: "List",
 			Handler:    _MembersService_List_Handler,
+		},
+		{
+			MethodName: "Get",
+			Handler:    _MembersService_Get_Handler,
+		},
+		{
+			MethodName: "RefreshToken",
+			Handler:    _MembersService_RefreshToken_Handler,
+		},
+		{
+			MethodName: "UpdateMemberType",
+			Handler:    _MembersService_UpdateMemberType_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -22,8 +22,18 @@ service MembersService {
   rpc Register(MembersServiceRegisterRequest) returns (MembersServiceRegisterResponse) {}
   // Authenticates a member
   rpc Login(MembersServiceLoginRequest) returns (MembersServiceLoginResponse) {}
+  // updates the users password
+  rpc UpdatePassword(MembersServiceUpdatePasswordRequest) returns (MembersServiceUpdatePasswordResponse) {}
+  // updates the members profile
+  rpc UpdateProfile(MembersServiceUpdateProfileRequest) returns (MembersServiceUpdateProfileResponse) {}
   // ListMembers returns a list of claimed and unclaimed members
   rpc List(MembersServiceListRequest) returns (MembersServiceListResponse) {}
+  // Get returns a specific member
+  rpc Get(MembersServiceGetRequest) returns (MembersServiceGetResponse) {}
+  // RefreshToken refreshes a token and returns a new access/refresh token pair
+  rpc RefreshToken(MembersServiceRefreshTokenRequest) returns (MembersServiceRefreshTokenResponse) {}
+  // UpdateMemberType updates the member type
+  rpc UpdateMemberType(MembersServiceUpdateMemberTypeRequest) returns (MembersServiceUpdateMemberTypeResponse) {}
   // ContinueWith logs in a user with an OAuth2 Provider
   // rpc ContinueWith(MembersServiceListRequest) returns (MembersServiceListResponse) {}
 }
@@ -51,10 +61,8 @@ message MembersServiceAddResponse {}
 message MembersServiceRemoveRequest {
     // the id of the member
     string member_id = 1;
-    // the access token used to make the request
-    string access_token = 3;
     // transfer to member id
-    string transfer_to_member_id = 4;
+    string transfer_to_member_id = 2;
 } 
 
 // The response of a Member.Remove RPC
@@ -72,14 +80,7 @@ message MembersServiceRegisterRequest {
 }
 
 // The response of a Member.Register RPC
-message MembersServiceRegisterResponse {
-    // the access token for the created user
-    string access_token = 1;
-    // the refresh token for the created user
-    string refresh_token = 2;
-    // the name of the user
-    string name_of_user = 3;
-}
+message MembersServiceRegisterResponse {}
 
 
 // The request of a Member.List RPC
@@ -88,8 +89,6 @@ message MembersServiceListRequest {
     optional int32 from = 1;
     // where to stop listing to
     optional int32 to = 2;
-    // the access token used to make the request
-    string access_token = 3;
 }
 
 // The response of a Member.List RPC
@@ -113,4 +112,64 @@ message MembersServiceLoginResponse {
     string refresh_token = 2;
     // the name of the user
     string name_of_user = 3;
+    // the id of the user
+    string id = 4;
+    // the type of member
+    MemberType member_type = 5;
+    // the email of the user
+    string email = 6;
 }
+
+// The request of a Member.RefreshToken RPC
+message MembersServiceRefreshTokenRequest {
+    // the refresh token used to issue new tokens
+    string refresh_token = 1;
+}
+
+// The request of a Member.RefreshToken RPC
+message MembersServiceRefreshTokenResponse {
+    // return a new refresh token
+    string refresh_token = 1;
+    // return a new access token
+    string access_token = 2;
+}
+
+// The request of a Member.UpdateMemberType RPC
+message MembersServiceUpdateMemberTypeRequest {
+    string member_id = 1;
+    MemberType member_type = 2;
+}
+
+// The request of a Member.UpdateMemberType RPC
+message MembersServiceUpdateMemberTypeResponse {}
+
+// The request of a Member.UpdatePassword RPC
+message MembersServiceUpdatePasswordRequest {
+    string member_id = 1;
+    string old_password = 2;
+    string new_password = 3;
+}
+
+// The request of a Member.UpdatePassword RPC
+message MembersServiceUpdatePasswordResponse {}
+
+// The request of a Member.UpdateProfile RPC
+message MembersServiceUpdateProfileRequest {
+    string member_id = 1;
+    optional string name = 2;
+    optional string email = 3;
+}
+
+// The request of a Member.UpdateProfile RPC
+message MembersServiceUpdateProfileResponse {}
+
+// The request of a Member.Get RPC
+message MembersServiceGetRequest {
+    string member_id = 1;
+}
+
+// The request of a Member.Get RPC
+message MembersServiceGetResponse {
+    Member member = 1;
+}
+

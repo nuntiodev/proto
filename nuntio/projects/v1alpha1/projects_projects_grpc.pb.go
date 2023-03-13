@@ -50,6 +50,8 @@ type ProjectsServiceClient interface {
 	EnablePostgres(ctx context.Context, in *ProjectsServiceEnablePostgresRequest, opts ...grpc.CallOption) (*ProjectsServiceEnablePostgresResponse, error)
 	// Disable Postgres for the project
 	DisablePostgres(ctx context.Context, in *ProjectsServiceDisablePostgresRequest, opts ...grpc.CallOption) (*ProjectsServiceDisablePostgresResponse, error)
+	// Returns the public key for the service
+	PublicKey(ctx context.Context, in *ProjectsServicePublicKeyRequest, opts ...grpc.CallOption) (*ProjectsServicePublicKeyResponse, error)
 }
 
 type projectsServiceClient struct {
@@ -186,6 +188,15 @@ func (c *projectsServiceClient) DisablePostgres(ctx context.Context, in *Project
 	return out, nil
 }
 
+func (c *projectsServiceClient) PublicKey(ctx context.Context, in *ProjectsServicePublicKeyRequest, opts ...grpc.CallOption) (*ProjectsServicePublicKeyResponse, error) {
+	out := new(ProjectsServicePublicKeyResponse)
+	err := c.cc.Invoke(ctx, "/nuntio.projects.v1alpha1.ProjectsService/PublicKey", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ProjectsServiceServer is the server API for ProjectsService service.
 // All implementations should embed UnimplementedProjectsServiceServer
 // for forward compatibility
@@ -218,6 +229,8 @@ type ProjectsServiceServer interface {
 	EnablePostgres(context.Context, *ProjectsServiceEnablePostgresRequest) (*ProjectsServiceEnablePostgresResponse, error)
 	// Disable Postgres for the project
 	DisablePostgres(context.Context, *ProjectsServiceDisablePostgresRequest) (*ProjectsServiceDisablePostgresResponse, error)
+	// Returns the public key for the service
+	PublicKey(context.Context, *ProjectsServicePublicKeyRequest) (*ProjectsServicePublicKeyResponse, error)
 }
 
 // UnimplementedProjectsServiceServer should be embedded to have forward compatible implementations.
@@ -265,6 +278,9 @@ func (UnimplementedProjectsServiceServer) EnablePostgres(context.Context, *Proje
 }
 func (UnimplementedProjectsServiceServer) DisablePostgres(context.Context, *ProjectsServiceDisablePostgresRequest) (*ProjectsServiceDisablePostgresResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DisablePostgres not implemented")
+}
+func (UnimplementedProjectsServiceServer) PublicKey(context.Context, *ProjectsServicePublicKeyRequest) (*ProjectsServicePublicKeyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PublicKey not implemented")
 }
 
 // UnsafeProjectsServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -530,6 +546,24 @@ func _ProjectsService_DisablePostgres_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProjectsService_PublicKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProjectsServicePublicKeyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProjectsServiceServer).PublicKey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nuntio.projects.v1alpha1.ProjectsService/PublicKey",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProjectsServiceServer).PublicKey(ctx, req.(*ProjectsServicePublicKeyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ProjectsService_ServiceDesc is the grpc.ServiceDesc for ProjectsService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -592,6 +626,10 @@ var ProjectsService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DisablePostgres",
 			Handler:    _ProjectsService_DisablePostgres_Handler,
+		},
+		{
+			MethodName: "PublicKey",
+			Handler:    _ProjectsService_PublicKey_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
