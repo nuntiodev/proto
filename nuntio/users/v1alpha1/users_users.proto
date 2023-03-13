@@ -282,7 +282,6 @@ message UsersServiceAddContactResponse {
 message UsersServiceRemoveContactRequest {
     string contact_id = 1;
     string namespace = 2;
-    string user_id = 3;
 }
 
 // The response of a Users.RemoveContact RPC
