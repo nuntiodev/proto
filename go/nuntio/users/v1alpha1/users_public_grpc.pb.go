@@ -26,8 +26,8 @@ type PublicServiceClient interface {
 	Login(ctx context.Context, in *PublicServiceLoginRequest, opts ...grpc.CallOption) (*PublicServiceLoginResponse, error)
 	// Get the logged in user
 	Get(ctx context.Context, in *PublicServiceGetRequest, opts ...grpc.CallOption) (*PublicServiceGetResponse, error)
-	// Create a user
-	Create(ctx context.Context, in *PublicServiceCreateRequest, opts ...grpc.CallOption) (*PublicServiceCreateResponse, error)
+	// Register creates a new user
+	Register(ctx context.Context, in *PublicServiceRegisterRequest, opts ...grpc.CallOption) (*PublicServiceRegisterResponse, error)
 	// Send reset password email to the user
 	SendResetPasswordEmail(ctx context.Context, in *PublicServiceSendResetPasswordEmailRequest, opts ...grpc.CallOption) (*PublicServiceSendResetPasswordEmailResponse, error)
 	// Send reset password text to the user
@@ -68,9 +68,9 @@ func (c *publicServiceClient) Get(ctx context.Context, in *PublicServiceGetReque
 	return out, nil
 }
 
-func (c *publicServiceClient) Create(ctx context.Context, in *PublicServiceCreateRequest, opts ...grpc.CallOption) (*PublicServiceCreateResponse, error) {
-	out := new(PublicServiceCreateResponse)
-	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.PublicService/Create", in, out, opts...)
+func (c *publicServiceClient) Register(ctx context.Context, in *PublicServiceRegisterRequest, opts ...grpc.CallOption) (*PublicServiceRegisterResponse, error) {
+	out := new(PublicServiceRegisterResponse)
+	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.PublicService/Register", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -139,8 +139,8 @@ type PublicServiceServer interface {
 	Login(context.Context, *PublicServiceLoginRequest) (*PublicServiceLoginResponse, error)
 	// Get the logged in user
 	Get(context.Context, *PublicServiceGetRequest) (*PublicServiceGetResponse, error)
-	// Create a user
-	Create(context.Context, *PublicServiceCreateRequest) (*PublicServiceCreateResponse, error)
+	// Register creates a new user
+	Register(context.Context, *PublicServiceRegisterRequest) (*PublicServiceRegisterResponse, error)
 	// Send reset password email to the user
 	SendResetPasswordEmail(context.Context, *PublicServiceSendResetPasswordEmailRequest) (*PublicServiceSendResetPasswordEmailResponse, error)
 	// Send reset password text to the user
@@ -165,8 +165,8 @@ func (UnimplementedPublicServiceServer) Login(context.Context, *PublicServiceLog
 func (UnimplementedPublicServiceServer) Get(context.Context, *PublicServiceGetRequest) (*PublicServiceGetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedPublicServiceServer) Create(context.Context, *PublicServiceCreateRequest) (*PublicServiceCreateResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+func (UnimplementedPublicServiceServer) Register(context.Context, *PublicServiceRegisterRequest) (*PublicServiceRegisterResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Register not implemented")
 }
 func (UnimplementedPublicServiceServer) SendResetPasswordEmail(context.Context, *PublicServiceSendResetPasswordEmailRequest) (*PublicServiceSendResetPasswordEmailResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendResetPasswordEmail not implemented")
@@ -234,20 +234,20 @@ func _PublicService_Get_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PublicService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PublicServiceCreateRequest)
+func _PublicService_Register_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PublicServiceRegisterRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PublicServiceServer).Create(ctx, in)
+		return srv.(PublicServiceServer).Register(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/nuntio.users.v1alpha1.PublicService/Create",
+		FullMethod: "/nuntio.users.v1alpha1.PublicService/Register",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PublicServiceServer).Create(ctx, req.(*PublicServiceCreateRequest))
+		return srv.(PublicServiceServer).Register(ctx, req.(*PublicServiceRegisterRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -376,8 +376,8 @@ var PublicService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _PublicService_Get_Handler,
 		},
 		{
-			MethodName: "Create",
-			Handler:    _PublicService_Create_Handler,
+			MethodName: "Register",
+			Handler:    _PublicService_Register_Handler,
 		},
 		{
 			MethodName: "SendResetPasswordEmail",

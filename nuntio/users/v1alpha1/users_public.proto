@@ -17,8 +17,8 @@ service PublicService {
   rpc Login(PublicServiceLoginRequest) returns (PublicServiceLoginResponse) {}
   // Get the logged in user
   rpc Get(PublicServiceGetRequest) returns (PublicServiceGetResponse) {}
-  // Create a user
-  rpc Create(PublicServiceCreateRequest) returns (PublicServiceCreateResponse) {}
+  // Register creates a new user
+  rpc Register(PublicServiceRegisterRequest) returns (PublicServiceRegisterResponse) {}
   // Send reset password email to the user
   rpc SendResetPasswordEmail(PublicServiceSendResetPasswordEmailRequest) returns (PublicServiceSendResetPasswordEmailResponse) {}
   // Send reset password text to the user
@@ -57,13 +57,13 @@ message PublicServiceGetResponse {
 }
 
 // The request of a Public.Create RPC
-message PublicServiceCreateRequest {
+message PublicServiceRegisterRequest {
   User user = 1;
   string namespace = 2;
 }
 
 // The response of a Public.Create RPC
-message PublicServiceCreateResponse {}
+message PublicServiceRegisterResponse {}
 
 // The request of a Public.SendResetPasswordEmail RPC
 message PublicServiceSendResetPasswordEmailRequest {
