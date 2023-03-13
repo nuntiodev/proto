@@ -23,6 +23,8 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PublicServiceClient interface {
 	// Login a user from the frontend
+	Ping(ctx context.Context, in *PublicServicePingRequest, opts ...grpc.CallOption) (*PublicServicePingResponse, error)
+	// Login a user from the frontend
 	Login(ctx context.Context, in *PublicServiceLoginRequest, opts ...grpc.CallOption) (*PublicServiceLoginResponse, error)
 	// Get the logged in user
 	Get(ctx context.Context, in *PublicServiceGetRequest, opts ...grpc.CallOption) (*PublicServiceGetResponse, error)
@@ -48,6 +50,15 @@ type publicServiceClient struct {
 
 func NewPublicServiceClient(cc grpc.ClientConnInterface) PublicServiceClient {
 	return &publicServiceClient{cc}
+}
+
+func (c *publicServiceClient) Ping(ctx context.Context, in *PublicServicePingRequest, opts ...grpc.CallOption) (*PublicServicePingResponse, error) {
+	out := new(PublicServicePingResponse)
+	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.PublicService/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *publicServiceClient) Login(ctx context.Context, in *PublicServiceLoginRequest, opts ...grpc.CallOption) (*PublicServiceLoginResponse, error) {
@@ -136,6 +147,8 @@ func (c *publicServiceClient) InitializeAuth(ctx context.Context, in *PublicServ
 // for forward compatibility
 type PublicServiceServer interface {
 	// Login a user from the frontend
+	Ping(context.Context, *PublicServicePingRequest) (*PublicServicePingResponse, error)
+	// Login a user from the frontend
 	Login(context.Context, *PublicServiceLoginRequest) (*PublicServiceLoginResponse, error)
 	// Get the logged in user
 	Get(context.Context, *PublicServiceGetRequest) (*PublicServiceGetResponse, error)
@@ -159,6 +172,9 @@ type PublicServiceServer interface {
 type UnimplementedPublicServiceServer struct {
 }
 
+func (UnimplementedPublicServiceServer) Ping(context.Context, *PublicServicePingRequest) (*PublicServicePingResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Ping not implemented")
+}
 func (UnimplementedPublicServiceServer) Login(context.Context, *PublicServiceLoginRequest) (*PublicServiceLoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
 }
@@ -196,6 +212,24 @@ type UnsafePublicServiceServer interface {
 
 func RegisterPublicServiceServer(s grpc.ServiceRegistrar, srv PublicServiceServer) {
 	s.RegisterService(&PublicService_ServiceDesc, srv)
+}
+
+func _PublicService_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PublicServicePingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PublicServiceServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nuntio.users.v1alpha1.PublicService/Ping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PublicServiceServer).Ping(ctx, req.(*PublicServicePingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _PublicService_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -367,6 +401,10 @@ var PublicService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "nuntio.users.v1alpha1.PublicService",
 	HandlerType: (*PublicServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Ping",
+			Handler:    _PublicService_Ping_Handler,
+		},
 		{
 			MethodName: "Login",
 			Handler:    _PublicService_Login_Handler,
