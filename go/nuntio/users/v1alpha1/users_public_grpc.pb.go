@@ -23,11 +23,13 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PublicServiceClient interface {
 	// Login a user from the frontend
+	Ping(ctx context.Context, in *PublicServicePingRequest, opts ...grpc.CallOption) (*PublicServicePingResponse, error)
+	// Login a user from the frontend
 	Login(ctx context.Context, in *PublicServiceLoginRequest, opts ...grpc.CallOption) (*PublicServiceLoginResponse, error)
 	// Get the logged in user
 	Get(ctx context.Context, in *PublicServiceGetRequest, opts ...grpc.CallOption) (*PublicServiceGetResponse, error)
-	// Create a user
-	Create(ctx context.Context, in *PublicServiceCreateRequest, opts ...grpc.CallOption) (*PublicServiceCreateResponse, error)
+	// Register creates a new user
+	Register(ctx context.Context, in *PublicServiceRegisterRequest, opts ...grpc.CallOption) (*PublicServiceRegisterResponse, error)
 	// Send reset password email to the user
 	SendResetPasswordEmail(ctx context.Context, in *PublicServiceSendResetPasswordEmailRequest, opts ...grpc.CallOption) (*PublicServiceSendResetPasswordEmailResponse, error)
 	// Send reset password text to the user
@@ -50,6 +52,15 @@ func NewPublicServiceClient(cc grpc.ClientConnInterface) PublicServiceClient {
 	return &publicServiceClient{cc}
 }
 
+func (c *publicServiceClient) Ping(ctx context.Context, in *PublicServicePingRequest, opts ...grpc.CallOption) (*PublicServicePingResponse, error) {
+	out := new(PublicServicePingResponse)
+	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.PublicService/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *publicServiceClient) Login(ctx context.Context, in *PublicServiceLoginRequest, opts ...grpc.CallOption) (*PublicServiceLoginResponse, error) {
 	out := new(PublicServiceLoginResponse)
 	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.PublicService/Login", in, out, opts...)
@@ -68,9 +79,9 @@ func (c *publicServiceClient) Get(ctx context.Context, in *PublicServiceGetReque
 	return out, nil
 }
 
-func (c *publicServiceClient) Create(ctx context.Context, in *PublicServiceCreateRequest, opts ...grpc.CallOption) (*PublicServiceCreateResponse, error) {
-	out := new(PublicServiceCreateResponse)
-	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.PublicService/Create", in, out, opts...)
+func (c *publicServiceClient) Register(ctx context.Context, in *PublicServiceRegisterRequest, opts ...grpc.CallOption) (*PublicServiceRegisterResponse, error) {
+	out := new(PublicServiceRegisterResponse)
+	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.PublicService/Register", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -136,11 +147,13 @@ func (c *publicServiceClient) InitializeAuth(ctx context.Context, in *PublicServ
 // for forward compatibility
 type PublicServiceServer interface {
 	// Login a user from the frontend
+	Ping(context.Context, *PublicServicePingRequest) (*PublicServicePingResponse, error)
+	// Login a user from the frontend
 	Login(context.Context, *PublicServiceLoginRequest) (*PublicServiceLoginResponse, error)
 	// Get the logged in user
 	Get(context.Context, *PublicServiceGetRequest) (*PublicServiceGetResponse, error)
-	// Create a user
-	Create(context.Context, *PublicServiceCreateRequest) (*PublicServiceCreateResponse, error)
+	// Register creates a new user
+	Register(context.Context, *PublicServiceRegisterRequest) (*PublicServiceRegisterResponse, error)
 	// Send reset password email to the user
 	SendResetPasswordEmail(context.Context, *PublicServiceSendResetPasswordEmailRequest) (*PublicServiceSendResetPasswordEmailResponse, error)
 	// Send reset password text to the user
@@ -159,14 +172,17 @@ type PublicServiceServer interface {
 type UnimplementedPublicServiceServer struct {
 }
 
+func (UnimplementedPublicServiceServer) Ping(context.Context, *PublicServicePingRequest) (*PublicServicePingResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Ping not implemented")
+}
 func (UnimplementedPublicServiceServer) Login(context.Context, *PublicServiceLoginRequest) (*PublicServiceLoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
 }
 func (UnimplementedPublicServiceServer) Get(context.Context, *PublicServiceGetRequest) (*PublicServiceGetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedPublicServiceServer) Create(context.Context, *PublicServiceCreateRequest) (*PublicServiceCreateResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+func (UnimplementedPublicServiceServer) Register(context.Context, *PublicServiceRegisterRequest) (*PublicServiceRegisterResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Register not implemented")
 }
 func (UnimplementedPublicServiceServer) SendResetPasswordEmail(context.Context, *PublicServiceSendResetPasswordEmailRequest) (*PublicServiceSendResetPasswordEmailResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendResetPasswordEmail not implemented")
@@ -196,6 +212,24 @@ type UnsafePublicServiceServer interface {
 
 func RegisterPublicServiceServer(s grpc.ServiceRegistrar, srv PublicServiceServer) {
 	s.RegisterService(&PublicService_ServiceDesc, srv)
+}
+
+func _PublicService_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PublicServicePingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PublicServiceServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nuntio.users.v1alpha1.PublicService/Ping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PublicServiceServer).Ping(ctx, req.(*PublicServicePingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _PublicService_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -234,20 +268,20 @@ func _PublicService_Get_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PublicService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PublicServiceCreateRequest)
+func _PublicService_Register_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PublicServiceRegisterRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PublicServiceServer).Create(ctx, in)
+		return srv.(PublicServiceServer).Register(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/nuntio.users.v1alpha1.PublicService/Create",
+		FullMethod: "/nuntio.users.v1alpha1.PublicService/Register",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PublicServiceServer).Create(ctx, req.(*PublicServiceCreateRequest))
+		return srv.(PublicServiceServer).Register(ctx, req.(*PublicServiceRegisterRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -368,6 +402,10 @@ var PublicService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*PublicServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
+			MethodName: "Ping",
+			Handler:    _PublicService_Ping_Handler,
+		},
+		{
 			MethodName: "Login",
 			Handler:    _PublicService_Login_Handler,
 		},
@@ -376,8 +414,8 @@ var PublicService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _PublicService_Get_Handler,
 		},
 		{
-			MethodName: "Create",
-			Handler:    _PublicService_Create_Handler,
+			MethodName: "Register",
+			Handler:    _PublicService_Register_Handler,
 		},
 		{
 			MethodName: "SendResetPasswordEmail",
