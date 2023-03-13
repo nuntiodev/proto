@@ -28,8 +28,6 @@ service APIService {
   rpc GetAPIKey(APIServiceGetAPIKeyRequest) returns (APIServiceGetAPIKeyResponse) {}
   // ListAPIKeys returns the requested API key to the user
   rpc ListAPIKeys(APIServiceListAPIKeysRequest) returns (APIServiceListAPIKeysResponse) {}
-  // PublicKey returns the requested public key used to generate access tokens
-  rpc PublicKey(APIServicePublicKeyRequest) returns (APIServicePublicKeyResponse) {}
   // ValidateAccessToken validates the requested acces token with the public key
   rpc ValidateAccessToken(APIServiceValidateAccessTokenRequest) returns (APIServiceValidateAccessTokenResponse) {}
   // EnableMongoAccess configures the api key to work with the Mongo database

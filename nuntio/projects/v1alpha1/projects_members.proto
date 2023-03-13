@@ -28,6 +28,8 @@ service MembersService {
   rpc UpdateProfile(MembersServiceUpdateProfileRequest) returns (MembersServiceUpdateProfileResponse) {}
   // ListMembers returns a list of claimed and unclaimed members
   rpc List(MembersServiceListRequest) returns (MembersServiceListResponse) {}
+  // Get returns a specific member
+  rpc Get(MembersServiceGetRequest) returns (MembersServiceGetResponse) {}
   // RefreshToken refreshes a token and returns a new access/refresh token pair
   rpc RefreshToken(MembersServiceRefreshTokenRequest) returns (MembersServiceRefreshTokenResponse) {}
   // UpdateMemberType updates the member type
@@ -160,3 +162,14 @@ message MembersServiceUpdateProfileRequest {
 
 // The request of a Member.UpdateProfile RPC
 message MembersServiceUpdateProfileResponse {}
+
+// The request of a Member.Get RPC
+message MembersServiceGetRequest {
+    string member_id = 1;
+}
+
+// The request of a Member.Get RPC
+message MembersServiceGetResponse {
+    Member member = 1;
+}
+

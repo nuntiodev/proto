@@ -38,8 +38,6 @@ type APIServiceClient interface {
 	GetAPIKey(ctx context.Context, in *APIServiceGetAPIKeyRequest, opts ...grpc.CallOption) (*APIServiceGetAPIKeyResponse, error)
 	// ListAPIKeys returns the requested API key to the user
 	ListAPIKeys(ctx context.Context, in *APIServiceListAPIKeysRequest, opts ...grpc.CallOption) (*APIServiceListAPIKeysResponse, error)
-	// PublicKey returns the requested public key used to generate access tokens
-	PublicKey(ctx context.Context, in *APIServicePublicKeyRequest, opts ...grpc.CallOption) (*APIServicePublicKeyResponse, error)
 	// ValidateAccessToken validates the requested acces token with the public key
 	ValidateAccessToken(ctx context.Context, in *APIServiceValidateAccessTokenRequest, opts ...grpc.CallOption) (*APIServiceValidateAccessTokenResponse, error)
 	// EnableMongoAccess configures the api key to work with the Mongo database
@@ -136,15 +134,6 @@ func (c *aPIServiceClient) GetAPIKey(ctx context.Context, in *APIServiceGetAPIKe
 func (c *aPIServiceClient) ListAPIKeys(ctx context.Context, in *APIServiceListAPIKeysRequest, opts ...grpc.CallOption) (*APIServiceListAPIKeysResponse, error) {
 	out := new(APIServiceListAPIKeysResponse)
 	err := c.cc.Invoke(ctx, "/nuntio.projects.v1alpha1.APIService/ListAPIKeys", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *aPIServiceClient) PublicKey(ctx context.Context, in *APIServicePublicKeyRequest, opts ...grpc.CallOption) (*APIServicePublicKeyResponse, error) {
-	out := new(APIServicePublicKeyResponse)
-	err := c.cc.Invoke(ctx, "/nuntio.projects.v1alpha1.APIService/PublicKey", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -261,8 +250,6 @@ type APIServiceServer interface {
 	GetAPIKey(context.Context, *APIServiceGetAPIKeyRequest) (*APIServiceGetAPIKeyResponse, error)
 	// ListAPIKeys returns the requested API key to the user
 	ListAPIKeys(context.Context, *APIServiceListAPIKeysRequest) (*APIServiceListAPIKeysResponse, error)
-	// PublicKey returns the requested public key used to generate access tokens
-	PublicKey(context.Context, *APIServicePublicKeyRequest) (*APIServicePublicKeyResponse, error)
 	// ValidateAccessToken validates the requested acces token with the public key
 	ValidateAccessToken(context.Context, *APIServiceValidateAccessTokenRequest) (*APIServiceValidateAccessTokenResponse, error)
 	// EnableMongoAccess configures the api key to work with the Mongo database
@@ -312,9 +299,6 @@ func (UnimplementedAPIServiceServer) GetAPIKey(context.Context, *APIServiceGetAP
 }
 func (UnimplementedAPIServiceServer) ListAPIKeys(context.Context, *APIServiceListAPIKeysRequest) (*APIServiceListAPIKeysResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAPIKeys not implemented")
-}
-func (UnimplementedAPIServiceServer) PublicKey(context.Context, *APIServicePublicKeyRequest) (*APIServicePublicKeyResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PublicKey not implemented")
 }
 func (UnimplementedAPIServiceServer) ValidateAccessToken(context.Context, *APIServiceValidateAccessTokenRequest) (*APIServiceValidateAccessTokenResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ValidateAccessToken not implemented")
@@ -498,24 +482,6 @@ func _APIService_ListAPIKeys_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(APIServiceServer).ListAPIKeys(ctx, req.(*APIServiceListAPIKeysRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _APIService_PublicKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(APIServicePublicKeyRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(APIServiceServer).PublicKey(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/nuntio.projects.v1alpha1.APIService/PublicKey",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(APIServiceServer).PublicKey(ctx, req.(*APIServicePublicKeyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -738,10 +704,6 @@ var APIService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListAPIKeys",
 			Handler:    _APIService_ListAPIKeys_Handler,
-		},
-		{
-			MethodName: "PublicKey",
-			Handler:    _APIService_PublicKey_Handler,
 		},
 		{
 			MethodName: "ValidateAccessToken",
