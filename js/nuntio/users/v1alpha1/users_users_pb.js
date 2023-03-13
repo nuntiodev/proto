@@ -6319,8 +6319,7 @@ proto.nuntio.users.v1alpha1.UsersServiceRemoveContactRequest.prototype.toObject 
 proto.nuntio.users.v1alpha1.UsersServiceRemoveContactRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     contactId: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    namespace: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    userId: jspb.Message.getFieldWithDefault(msg, 3, "")
+    namespace: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -6365,10 +6364,6 @@ proto.nuntio.users.v1alpha1.UsersServiceRemoveContactRequest.deserializeBinaryFr
       var value = /** @type {string} */ (reader.readString());
       msg.setNamespace(value);
       break;
-    case 3:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setUserId(value);
-      break;
     default:
       reader.skipField();
       break;
@@ -6412,13 +6407,6 @@ proto.nuntio.users.v1alpha1.UsersServiceRemoveContactRequest.serializeBinaryToWr
       f
     );
   }
-  f = message.getUserId();
-  if (f.length > 0) {
-    writer.writeString(
-      3,
-      f
-    );
-  }
 };
 
 
@@ -6455,24 +6443,6 @@ proto.nuntio.users.v1alpha1.UsersServiceRemoveContactRequest.prototype.getNamesp
  */
 proto.nuntio.users.v1alpha1.UsersServiceRemoveContactRequest.prototype.setNamespace = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
-};
-
-
-/**
- * optional string user_id = 3;
- * @return {string}
- */
-proto.nuntio.users.v1alpha1.UsersServiceRemoveContactRequest.prototype.getUserId = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.nuntio.users.v1alpha1.UsersServiceRemoveContactRequest} returns this
- */
-proto.nuntio.users.v1alpha1.UsersServiceRemoveContactRequest.prototype.setUserId = function(value) {
-  return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 

@@ -2,17 +2,17 @@
 version: v1
 plugins:
   - name: go
-    out: .
+    out: ./go
     opt: paths=source_relative
   - name: go-grpc
-    out: .
+    out: ./go
     opt: 
       - paths=source_relative
       - require_unimplemented_servers=false
 
-#  - name: js
-#    out: .
-#    opt: import_style=commonjs,binary
+  - name: js
+    out: ./js
+    opt: import_style=commonjs,binary
 
 #  - name: grpc
 #    out: .
