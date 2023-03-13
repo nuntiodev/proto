@@ -10,8 +10,8 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../../google/protobuf/timestamp.pb.dart' as $0;
-import '../../../google/protobuf/duration.pb.dart' as $1;
+import 'google/protobuf/timestamp.pb.dart' as $0;
+import 'google/protobuf/duration.pb.dart' as $1;
 
 import 'users_messages.pbenum.dart';
 

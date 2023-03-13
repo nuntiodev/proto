@@ -16,7 +16,7 @@ plugins:
 
   - name: dart
     out: ./flutter
-
+# protoc -I. --dart_out=grpc:./flutter/nuntio/users/v1alpha1 ./nuntio/users/v1alpha1/*.proto google/protobuf/timestamp.proto google/protobuf/duration.proto
 #  - name: grpc
 #    out: .
 #    opt: grpc_js

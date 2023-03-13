@@ -9,7 +9,7 @@ import 'dart:core' as $core;
 import 'dart:convert' as $convert;
 import 'dart:typed_data' as $typed_data;
 import 'users_messages.pbjson.dart' as $2;
-import '../../../google/protobuf/timestamp.pbjson.dart' as $0;
+import 'google/protobuf/timestamp.pbjson.dart' as $0;
 
 @$core.Deprecated('Use authenticationServicePingRequestDescriptor instead')
 const AuthenticationServicePingRequest$json = const {
