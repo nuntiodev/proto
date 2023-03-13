@@ -232,8 +232,6 @@ message UsersServiceSearchRequest {
     int32 to = 4;
     // To list only within a group
     optional string group_id = 5;
-
-    
 }
 
 // The request of a Users.GetMany RPC
@@ -251,7 +249,10 @@ message UsersServiceDeleteManyRequest {
 }
 
 // The response of a Users.DeleteMany RPC
-message UsersServiceDeleteManyResponse {}
+message UsersServiceDeleteManyResponse {
+    //number of users deleted
+    int64 count = 1;
+}
 
 // The request of a Users.List RPC
 message UsersServiceListRequest {
