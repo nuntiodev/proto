@@ -45,6 +45,7 @@ message PublicServiceLoginRequest {
 // The response of a Public.Delete RPC
 message PublicServiceLoginResponse {
     TokenPair token_pair = 1;
+    LoginStatus status = 2;
 }
 
 // The request of a Public.Get RPC

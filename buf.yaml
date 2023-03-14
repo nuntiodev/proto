@@ -1,5 +1,7 @@
 version: v1
 name: buf.build/nuntioapis/nuntioapis
+deps:
+  - buf.build/googleapis/googleapis
 build:
   excludes:
     - node_modules
@@ -9,3 +11,5 @@ lint:
 breaking:
   use:
     - FILE
+
+#buf -v generate buf.build/googleapis/googleapis
