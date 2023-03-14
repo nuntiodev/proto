@@ -178,6 +178,11 @@ class UsersClient {
   static Future<void> logout() async {
     await http.post(
       Uri.parse("$_uri/public/logout"),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ${await _getAccessToken()}',
+      },
     );
     _storage.deleteAll();
     if (onLogout != null) onLogout!();

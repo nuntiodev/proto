@@ -230,12 +230,8 @@ message AuthenticationServiceContinueWithResponse {
 
 // The request of a Authentication.Logout RPC
 message AuthenticationServiceLogoutRequest {
-    // ID of the access token to logout
-    string access_token_id = 1;
-    // The jwt of the access token to logout
-    string jwt = 2;
-    // The namespace to perform action in
-    string namespace = 3;
+    // The session to logout
+    string access_token = 1;
 }
 
 // The response of a Authentication.Logout RPC
