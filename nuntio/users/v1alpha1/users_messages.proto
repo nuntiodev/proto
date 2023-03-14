@@ -282,11 +282,13 @@ message TokenMeta {
 message AccessToken {
     string jwt = 1;
     string id = 2;
+    google.protobuf.Timestamp expires_at = 3;
 }
 
 message RefreshToken {
     string jwt = 1;
     TokenMeta meta = 2;
+    google.protobuf.Timestamp expires_at = 3;
 }
 
 message TokenPair {

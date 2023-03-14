@@ -516,22 +516,24 @@ const AccessToken$json = const {
   '2': const [
     const {'1': 'jwt', '3': 1, '4': 1, '5': 9, '10': 'jwt'},
     const {'1': 'id', '3': 2, '4': 1, '5': 9, '10': 'id'},
+    const {'1': 'expires_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'expiresAt'},
   ],
 };
 
 /// Descriptor for `AccessToken`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List accessTokenDescriptor = $convert.base64Decode('CgtBY2Nlc3NUb2tlbhIQCgNqd3QYASABKAlSA2p3dBIOCgJpZBgCIAEoCVICaWQ=');
+final $typed_data.Uint8List accessTokenDescriptor = $convert.base64Decode('CgtBY2Nlc3NUb2tlbhIQCgNqd3QYASABKAlSA2p3dBIOCgJpZBgCIAEoCVICaWQSOQoKZXhwaXJlc19hdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCWV4cGlyZXNBdA==');
 @$core.Deprecated('Use refreshTokenDescriptor instead')
 const RefreshToken$json = const {
   '1': 'RefreshToken',
   '2': const [
     const {'1': 'jwt', '3': 1, '4': 1, '5': 9, '10': 'jwt'},
     const {'1': 'meta', '3': 2, '4': 1, '5': 11, '6': '.nuntio.users.v1alpha1.TokenMeta', '10': 'meta'},
+    const {'1': 'expires_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'expiresAt'},
   ],
 };
 
 /// Descriptor for `RefreshToken`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List refreshTokenDescriptor = $convert.base64Decode('CgxSZWZyZXNoVG9rZW4SEAoDand0GAEgASgJUgNqd3QSNAoEbWV0YRgCIAEoCzIgLm51bnRpby51c2Vycy52MWFscGhhMS5Ub2tlbk1ldGFSBG1ldGE=');
+final $typed_data.Uint8List refreshTokenDescriptor = $convert.base64Decode('CgxSZWZyZXNoVG9rZW4SEAoDand0GAEgASgJUgNqd3QSNAoEbWV0YRgCIAEoCzIgLm51bnRpby51c2Vycy52MWFscGhhMS5Ub2tlbk1ldGFSBG1ldGESOQoKZXhwaXJlc19hdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCWV4cGlyZXNBdA==');
 @$core.Deprecated('Use tokenPairDescriptor instead')
 const TokenPair$json = const {
   '1': 'TokenPair',

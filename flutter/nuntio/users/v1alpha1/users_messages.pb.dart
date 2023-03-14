@@ -2342,6 +2342,7 @@ class AccessToken extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AccessToken', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'nuntio.users.v1alpha1'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'jwt')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id')
+    ..aOM<$0.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'expiresAt', subBuilder: $0.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -2349,6 +2350,7 @@ class AccessToken extends $pb.GeneratedMessage {
   factory AccessToken({
     $core.String? jwt,
     $core.String? id,
+    $0.Timestamp? expiresAt,
   }) {
     final _result = create();
     if (jwt != null) {
@@ -2356,6 +2358,9 @@ class AccessToken extends $pb.GeneratedMessage {
     }
     if (id != null) {
       _result.id = id;
+    }
+    if (expiresAt != null) {
+      _result.expiresAt = expiresAt;
     }
     return _result;
   }
@@ -2397,12 +2402,24 @@ class AccessToken extends $pb.GeneratedMessage {
   $core.bool hasId() => $_has(1);
   @$pb.TagNumber(2)
   void clearId() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $0.Timestamp get expiresAt => $_getN(2);
+  @$pb.TagNumber(3)
+  set expiresAt($0.Timestamp v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasExpiresAt() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearExpiresAt() => clearField(3);
+  @$pb.TagNumber(3)
+  $0.Timestamp ensureExpiresAt() => $_ensure(2);
 }
 
 class RefreshToken extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'RefreshToken', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'nuntio.users.v1alpha1'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'jwt')
     ..aOM<TokenMeta>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'meta', subBuilder: TokenMeta.create)
+    ..aOM<$0.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'expiresAt', subBuilder: $0.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -2410,6 +2427,7 @@ class RefreshToken extends $pb.GeneratedMessage {
   factory RefreshToken({
     $core.String? jwt,
     TokenMeta? meta,
+    $0.Timestamp? expiresAt,
   }) {
     final _result = create();
     if (jwt != null) {
@@ -2417,6 +2435,9 @@ class RefreshToken extends $pb.GeneratedMessage {
     }
     if (meta != null) {
       _result.meta = meta;
+    }
+    if (expiresAt != null) {
+      _result.expiresAt = expiresAt;
     }
     return _result;
   }
@@ -2460,6 +2481,17 @@ class RefreshToken extends $pb.GeneratedMessage {
   void clearMeta() => clearField(2);
   @$pb.TagNumber(2)
   TokenMeta ensureMeta() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  $0.Timestamp get expiresAt => $_getN(2);
+  @$pb.TagNumber(3)
+  set expiresAt($0.Timestamp v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasExpiresAt() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearExpiresAt() => clearField(3);
+  @$pb.TagNumber(3)
+  $0.Timestamp ensureExpiresAt() => $_ensure(2);
 }
 
 class TokenPair extends $pb.GeneratedMessage {
