@@ -154,6 +154,82 @@ class PublicServiceLoginResponse extends $pb.GeneratedMessage {
   void clearStatus() => clearField(2);
 }
 
+class PublicServiceLogoutRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'PublicServiceLogoutRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'nuntio.users.v1alpha1'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessToken', protoName: 'accessToken')
+    ..hasRequiredFields = false
+  ;
+
+  PublicServiceLogoutRequest._() : super();
+  factory PublicServiceLogoutRequest({
+    $core.String? accessToken,
+  }) {
+    final _result = create();
+    if (accessToken != null) {
+      _result.accessToken = accessToken;
+    }
+    return _result;
+  }
+  factory PublicServiceLogoutRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory PublicServiceLogoutRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  PublicServiceLogoutRequest clone() => PublicServiceLogoutRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  PublicServiceLogoutRequest copyWith(void Function(PublicServiceLogoutRequest) updates) => super.copyWith((message) => updates(message as PublicServiceLogoutRequest)) as PublicServiceLogoutRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static PublicServiceLogoutRequest create() => PublicServiceLogoutRequest._();
+  PublicServiceLogoutRequest createEmptyInstance() => create();
+  static $pb.PbList<PublicServiceLogoutRequest> createRepeated() => $pb.PbList<PublicServiceLogoutRequest>();
+  @$core.pragma('dart2js:noInline')
+  static PublicServiceLogoutRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PublicServiceLogoutRequest>(create);
+  static PublicServiceLogoutRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get accessToken => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set accessToken($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasAccessToken() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAccessToken() => clearField(1);
+}
+
+class PublicServiceLogoutResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'PublicServiceLogoutResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'nuntio.users.v1alpha1'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  PublicServiceLogoutResponse._() : super();
+  factory PublicServiceLogoutResponse() => create();
+  factory PublicServiceLogoutResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory PublicServiceLogoutResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  PublicServiceLogoutResponse clone() => PublicServiceLogoutResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  PublicServiceLogoutResponse copyWith(void Function(PublicServiceLogoutResponse) updates) => super.copyWith((message) => updates(message as PublicServiceLogoutResponse)) as PublicServiceLogoutResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static PublicServiceLogoutResponse create() => PublicServiceLogoutResponse._();
+  PublicServiceLogoutResponse createEmptyInstance() => create();
+  static $pb.PbList<PublicServiceLogoutResponse> createRepeated() => $pb.PbList<PublicServiceLogoutResponse>();
+  @$core.pragma('dart2js:noInline')
+  static PublicServiceLogoutResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PublicServiceLogoutResponse>(create);
+  static PublicServiceLogoutResponse? _defaultInstance;
+}
+
 class PublicServiceGetRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'PublicServiceGetRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'nuntio.users.v1alpha1'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessToken')
@@ -1119,6 +1195,10 @@ class PublicServiceApi {
   $async.Future<PublicServiceLoginResponse> login($pb.ClientContext? ctx, PublicServiceLoginRequest request) {
     var emptyResponse = PublicServiceLoginResponse();
     return _client.invoke<PublicServiceLoginResponse>(ctx, 'PublicService', 'Login', request, emptyResponse);
+  }
+  $async.Future<PublicServiceLogoutResponse> logout($pb.ClientContext? ctx, PublicServiceLogoutRequest request) {
+    var emptyResponse = PublicServiceLogoutResponse();
+    return _client.invoke<PublicServiceLogoutResponse>(ctx, 'PublicService', 'Logout', request, emptyResponse);
   }
   $async.Future<PublicServiceGetResponse> get($pb.ClientContext? ctx, PublicServiceGetRequest request) {
     var emptyResponse = PublicServiceGetResponse();

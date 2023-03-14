@@ -18,6 +18,7 @@ export 'users_public.pb.dart';
 abstract class PublicServiceBase extends $pb.GeneratedService {
   $async.Future<$6.PublicServicePingResponse> ping($pb.ServerContext ctx, $6.PublicServicePingRequest request);
   $async.Future<$6.PublicServiceLoginResponse> login($pb.ServerContext ctx, $6.PublicServiceLoginRequest request);
+  $async.Future<$6.PublicServiceLogoutResponse> logout($pb.ServerContext ctx, $6.PublicServiceLogoutRequest request);
   $async.Future<$6.PublicServiceGetResponse> get($pb.ServerContext ctx, $6.PublicServiceGetRequest request);
   $async.Future<$6.PublicServiceRegisterResponse> register($pb.ServerContext ctx, $6.PublicServiceRegisterRequest request);
   $async.Future<$6.PublicServiceSendResetPasswordEmailResponse> sendResetPasswordEmail($pb.ServerContext ctx, $6.PublicServiceSendResetPasswordEmailRequest request);
@@ -31,6 +32,7 @@ abstract class PublicServiceBase extends $pb.GeneratedService {
     switch (method) {
       case 'Ping': return $6.PublicServicePingRequest();
       case 'Login': return $6.PublicServiceLoginRequest();
+      case 'Logout': return $6.PublicServiceLogoutRequest();
       case 'Get': return $6.PublicServiceGetRequest();
       case 'Register': return $6.PublicServiceRegisterRequest();
       case 'SendResetPasswordEmail': return $6.PublicServiceSendResetPasswordEmailRequest();
@@ -47,6 +49,7 @@ abstract class PublicServiceBase extends $pb.GeneratedService {
     switch (method) {
       case 'Ping': return this.ping(ctx, request as $6.PublicServicePingRequest);
       case 'Login': return this.login(ctx, request as $6.PublicServiceLoginRequest);
+      case 'Logout': return this.logout(ctx, request as $6.PublicServiceLogoutRequest);
       case 'Get': return this.get(ctx, request as $6.PublicServiceGetRequest);
       case 'Register': return this.register(ctx, request as $6.PublicServiceRegisterRequest);
       case 'SendResetPasswordEmail': return this.sendResetPasswordEmail(ctx, request as $6.PublicServiceSendResetPasswordEmailRequest);

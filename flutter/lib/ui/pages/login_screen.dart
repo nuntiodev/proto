@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:nuntio/client/users/users.dart';
 import 'package:nuntio/localizations/nuntio_icons.dart';
@@ -35,6 +36,25 @@ class _LoginScreenState extends State<LoginScreen> {
         this.setState(() {
           _buttonState = ButtonState.loading;
         }),
+        if (kIsWeb) { UsersClient.loginWeb(
+          identifier: UserIdentifier(email: _identifierController.text),
+          password: _passwordController.text,
+        ).then((_) {
+          this.setState(() {
+            _buttonState = ButtonState.success;
+          });
+        }).catchError((err) {
+          this.setState(() {
+            _buttonState = ButtonState.fail;
+          });
+          return err;
+        }).whenComplete(() => {
+          Future.delayed(
+              const Duration(seconds: 3),
+                  () => this.setState(() {
+                _buttonState = ButtonState.idle;
+              }))
+        }),},
         UsersClient.login(
           identifier: UserIdentifier(email: _identifierController.text),
           password: _passwordController.text,
@@ -53,7 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   () => this.setState(() {
                         _buttonState = ButtonState.idle;
                       }))
-            })
+            }),
       };
 
   @override

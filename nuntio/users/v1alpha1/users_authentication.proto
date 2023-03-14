@@ -298,7 +298,7 @@ message AuthenticationServiceInitializeAuthResponse {
 // The request of a Authentication.BlockToken RPC
 message AuthenticationServiceBlockTokenRequest {
     // token id to block
-    optional string token_id = 1;
+    string token_id = 1;
     // The namespace to perform action in
     string namespace = 2;
 }

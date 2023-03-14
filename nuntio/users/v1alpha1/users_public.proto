@@ -17,6 +17,8 @@ service PublicService {
   rpc Ping(PublicServicePingRequest) returns (PublicServicePingResponse) {}
   // Login authenticats a user and returns a access/refresh token
   rpc Login(PublicServiceLoginRequest) returns (PublicServiceLoginResponse) {}
+  // Logout validates the access token and blocks it afterwards
+  rpc Logout(PublicServiceLogoutRequest) returns (PublicServiceLogoutResponse) {}
   // Get the logged in user
   rpc Get(PublicServiceGetRequest) returns (PublicServiceGetResponse) {}
   // Register creates a new user
@@ -42,11 +44,20 @@ message PublicServiceLoginRequest {
   string namespace = 3;
 }
 
-// The response of a Public.Delete RPC
+// The response of a Public.Login RPC
 message PublicServiceLoginResponse {
     TokenPair token_pair = 1;
     LoginStatus status = 2;
 }
+
+// The request of a Public.Logout RPC
+message PublicServiceLogoutRequest {
+  string accessToken = 1;
+}
+
+// The response of a Public.Logout RPC
+message PublicServiceLogoutResponse {}
+
 
 // The request of a Public.Get RPC
 message PublicServiceGetRequest {

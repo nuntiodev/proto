@@ -241,6 +241,18 @@ class _UsersAppState extends State<UsersApp> {
   @override
   void initState() {
     super.initState();
+    // register function
+    UsersClient.onLogin = () {
+      this.setState(() {
+        _authState = AuthState.authenticated;
+      });
+    };
+    UsersClient.onLogout = () {
+      this.setState(() {
+        _authState = AuthState.notAuthenticated;
+      });
+    };
+    // check if user is logged in
     UsersClient.get()
         .then((_) => {
               this.setState(() {

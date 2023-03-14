@@ -10,6 +10,10 @@ class UsersClient {
   static late final Uri _uri;
   static late final String _namespace;
 
+  // on auth functions
+  static Function? onLogin;
+  static Function? onLogout;
+
   // initialize auth variables
   static late final String _publicKey;
   static late final bool validatePassword;
@@ -153,12 +157,30 @@ class UsersClient {
           .body));
     _setAccessToken(response.tokenPair.accessToken.jwt);
     _setRefreshToken(response.tokenPair.refreshToken.jwt);
+    if (onLogin != null) onLogin!();
     return response;
   }
 
+  static Future<void> loginWeb(
+      {required UserIdentifier identifier, required String password}) async {
+    PublicServiceLoginRequest request = PublicServiceLoginRequest()
+      ..identifier = identifier
+      ..password = password
+      ..namespace = _namespace;
+    await http.post(
+      Uri.parse("$_uri/public/login-web"),
+      body: jsonEncode(request.toProto3Json()),
+    );
+    if (onLogin != null) onLogin!();
+    return;
+  }
+
   static Future<void> logout() async {
-    // TODO: BLOCK TOKENS -> CREATE USERS LOGOUT PUBLIC ENDPOINT
+    await http.post(
+      Uri.parse("$_uri/public/logout"),
+    );
     _storage.deleteAll();
+    if (onLogout != null) onLogout!();
     return;
   }
 

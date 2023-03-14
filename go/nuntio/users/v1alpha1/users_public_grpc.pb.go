@@ -26,6 +26,8 @@ type PublicServiceClient interface {
 	Ping(ctx context.Context, in *PublicServicePingRequest, opts ...grpc.CallOption) (*PublicServicePingResponse, error)
 	// Login authenticats a user and returns a access/refresh token
 	Login(ctx context.Context, in *PublicServiceLoginRequest, opts ...grpc.CallOption) (*PublicServiceLoginResponse, error)
+	// Logout validates the access token and blocks it afterwards
+	Logout(ctx context.Context, in *PublicServiceLogoutRequest, opts ...grpc.CallOption) (*PublicServiceLogoutResponse, error)
 	// Get the logged in user
 	Get(ctx context.Context, in *PublicServiceGetRequest, opts ...grpc.CallOption) (*PublicServiceGetResponse, error)
 	// Register creates a new user
@@ -64,6 +66,15 @@ func (c *publicServiceClient) Ping(ctx context.Context, in *PublicServicePingReq
 func (c *publicServiceClient) Login(ctx context.Context, in *PublicServiceLoginRequest, opts ...grpc.CallOption) (*PublicServiceLoginResponse, error) {
 	out := new(PublicServiceLoginResponse)
 	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.PublicService/Login", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *publicServiceClient) Logout(ctx context.Context, in *PublicServiceLogoutRequest, opts ...grpc.CallOption) (*PublicServiceLogoutResponse, error) {
+	out := new(PublicServiceLogoutResponse)
+	err := c.cc.Invoke(ctx, "/nuntio.users.v1alpha1.PublicService/Logout", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -150,6 +161,8 @@ type PublicServiceServer interface {
 	Ping(context.Context, *PublicServicePingRequest) (*PublicServicePingResponse, error)
 	// Login authenticats a user and returns a access/refresh token
 	Login(context.Context, *PublicServiceLoginRequest) (*PublicServiceLoginResponse, error)
+	// Logout validates the access token and blocks it afterwards
+	Logout(context.Context, *PublicServiceLogoutRequest) (*PublicServiceLogoutResponse, error)
 	// Get the logged in user
 	Get(context.Context, *PublicServiceGetRequest) (*PublicServiceGetResponse, error)
 	// Register creates a new user
@@ -177,6 +190,9 @@ func (UnimplementedPublicServiceServer) Ping(context.Context, *PublicServicePing
 }
 func (UnimplementedPublicServiceServer) Login(context.Context, *PublicServiceLoginRequest) (*PublicServiceLoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
+}
+func (UnimplementedPublicServiceServer) Logout(context.Context, *PublicServiceLogoutRequest) (*PublicServiceLogoutResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Logout not implemented")
 }
 func (UnimplementedPublicServiceServer) Get(context.Context, *PublicServiceGetRequest) (*PublicServiceGetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
@@ -246,6 +262,24 @@ func _PublicService_Login_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PublicServiceServer).Login(ctx, req.(*PublicServiceLoginRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PublicService_Logout_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PublicServiceLogoutRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PublicServiceServer).Logout(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/nuntio.users.v1alpha1.PublicService/Logout",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PublicServiceServer).Logout(ctx, req.(*PublicServiceLogoutRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -408,6 +442,10 @@ var PublicService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Login",
 			Handler:    _PublicService_Login_Handler,
+		},
+		{
+			MethodName: "Logout",
+			Handler:    _PublicService_Logout_Handler,
 		},
 		{
 			MethodName: "Get",

@@ -352,16 +352,13 @@ final $typed_data.Uint8List authenticationServiceInitializeAuthResponseDescripto
 const AuthenticationServiceBlockTokenRequest$json = const {
   '1': 'AuthenticationServiceBlockTokenRequest',
   '2': const [
-    const {'1': 'token_id', '3': 1, '4': 1, '5': 9, '9': 0, '10': 'tokenId', '17': true},
+    const {'1': 'token_id', '3': 1, '4': 1, '5': 9, '10': 'tokenId'},
     const {'1': 'namespace', '3': 2, '4': 1, '5': 9, '10': 'namespace'},
-  ],
-  '8': const [
-    const {'1': '_token_id'},
   ],
 };
 
 /// Descriptor for `AuthenticationServiceBlockTokenRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List authenticationServiceBlockTokenRequestDescriptor = $convert.base64Decode('CiZBdXRoZW50aWNhdGlvblNlcnZpY2VCbG9ja1Rva2VuUmVxdWVzdBIeCgh0b2tlbl9pZBgBIAEoCUgAUgd0b2tlbklkiAEBEhwKCW5hbWVzcGFjZRgCIAEoCVIJbmFtZXNwYWNlQgsKCV90b2tlbl9pZA==');
+final $typed_data.Uint8List authenticationServiceBlockTokenRequestDescriptor = $convert.base64Decode('CiZBdXRoZW50aWNhdGlvblNlcnZpY2VCbG9ja1Rva2VuUmVxdWVzdBIZCgh0b2tlbl9pZBgBIAEoCVIHdG9rZW5JZBIcCgluYW1lc3BhY2UYAiABKAlSCW5hbWVzcGFjZQ==');
 @$core.Deprecated('Use authenticationServiceBlockTokenResponseDescriptor instead')
 const AuthenticationServiceBlockTokenResponse$json = const {
   '1': 'AuthenticationServiceBlockTokenResponse',

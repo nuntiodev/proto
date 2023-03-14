@@ -34,6 +34,23 @@ const PublicServiceLoginResponse$json = const {
 
 /// Descriptor for `PublicServiceLoginResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List publicServiceLoginResponseDescriptor = $convert.base64Decode('ChpQdWJsaWNTZXJ2aWNlTG9naW5SZXNwb25zZRI/Cgp0b2tlbl9wYWlyGAEgASgLMiAubnVudGlvLnVzZXJzLnYxYWxwaGExLlRva2VuUGFpclIJdG9rZW5QYWlyEjoKBnN0YXR1cxgCIAEoDjIiLm51bnRpby51c2Vycy52MWFscGhhMS5Mb2dpblN0YXR1c1IGc3RhdHVz');
+@$core.Deprecated('Use publicServiceLogoutRequestDescriptor instead')
+const PublicServiceLogoutRequest$json = const {
+  '1': 'PublicServiceLogoutRequest',
+  '2': const [
+    const {'1': 'accessToken', '3': 1, '4': 1, '5': 9, '10': 'accessToken'},
+  ],
+};
+
+/// Descriptor for `PublicServiceLogoutRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List publicServiceLogoutRequestDescriptor = $convert.base64Decode('ChpQdWJsaWNTZXJ2aWNlTG9nb3V0UmVxdWVzdBIgCgthY2Nlc3NUb2tlbhgBIAEoCVILYWNjZXNzVG9rZW4=');
+@$core.Deprecated('Use publicServiceLogoutResponseDescriptor instead')
+const PublicServiceLogoutResponse$json = const {
+  '1': 'PublicServiceLogoutResponse',
+};
+
+/// Descriptor for `PublicServiceLogoutResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List publicServiceLogoutResponseDescriptor = $convert.base64Decode('ChtQdWJsaWNTZXJ2aWNlTG9nb3V0UmVzcG9uc2U=');
 @$core.Deprecated('Use publicServiceGetRequestDescriptor instead')
 const PublicServiceGetRequest$json = const {
   '1': 'PublicServiceGetRequest',
@@ -221,6 +238,7 @@ const $core.Map<$core.String, $core.dynamic> PublicServiceBase$json = const {
   '2': const [
     const {'1': 'Ping', '2': '.nuntio.users.v1alpha1.PublicServicePingRequest', '3': '.nuntio.users.v1alpha1.PublicServicePingResponse', '4': const {}},
     const {'1': 'Login', '2': '.nuntio.users.v1alpha1.PublicServiceLoginRequest', '3': '.nuntio.users.v1alpha1.PublicServiceLoginResponse', '4': const {}},
+    const {'1': 'Logout', '2': '.nuntio.users.v1alpha1.PublicServiceLogoutRequest', '3': '.nuntio.users.v1alpha1.PublicServiceLogoutResponse', '4': const {}},
     const {'1': 'Get', '2': '.nuntio.users.v1alpha1.PublicServiceGetRequest', '3': '.nuntio.users.v1alpha1.PublicServiceGetResponse', '4': const {}},
     const {'1': 'Register', '2': '.nuntio.users.v1alpha1.PublicServiceRegisterRequest', '3': '.nuntio.users.v1alpha1.PublicServiceRegisterResponse', '4': const {}},
     const {'1': 'SendResetPasswordEmail', '2': '.nuntio.users.v1alpha1.PublicServiceSendResetPasswordEmailRequest', '3': '.nuntio.users.v1alpha1.PublicServiceSendResetPasswordEmailResponse', '4': const {}},
@@ -244,6 +262,8 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> PublicServ
   '.google.protobuf.Timestamp': $0.Timestamp$json,
   '.nuntio.users.v1alpha1.RefreshToken': $2.RefreshToken$json,
   '.nuntio.users.v1alpha1.TokenMeta': $2.TokenMeta$json,
+  '.nuntio.users.v1alpha1.PublicServiceLogoutRequest': PublicServiceLogoutRequest$json,
+  '.nuntio.users.v1alpha1.PublicServiceLogoutResponse': PublicServiceLogoutResponse$json,
   '.nuntio.users.v1alpha1.PublicServiceGetRequest': PublicServiceGetRequest$json,
   '.nuntio.users.v1alpha1.PublicServiceGetResponse': PublicServiceGetResponse$json,
   '.nuntio.users.v1alpha1.User': $2.User$json,
@@ -275,4 +295,4 @@ const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> PublicServ
 };
 
 /// Descriptor for `PublicService`. Decode as a `google.protobuf.ServiceDescriptorProto`.
-final $typed_data.Uint8List publicServiceDescriptor = $convert.base64Decode('Cg1QdWJsaWNTZXJ2aWNlEmsKBFBpbmcSLy5udW50aW8udXNlcnMudjFhbHBoYTEuUHVibGljU2VydmljZVBpbmdSZXF1ZXN0GjAubnVudGlvLnVzZXJzLnYxYWxwaGExLlB1YmxpY1NlcnZpY2VQaW5nUmVzcG9uc2UiABJuCgVMb2dpbhIwLm51bnRpby51c2Vycy52MWFscGhhMS5QdWJsaWNTZXJ2aWNlTG9naW5SZXF1ZXN0GjEubnVudGlvLnVzZXJzLnYxYWxwaGExLlB1YmxpY1NlcnZpY2VMb2dpblJlc3BvbnNlIgASaAoDR2V0Ei4ubnVudGlvLnVzZXJzLnYxYWxwaGExLlB1YmxpY1NlcnZpY2VHZXRSZXF1ZXN0Gi8ubnVudGlvLnVzZXJzLnYxYWxwaGExLlB1YmxpY1NlcnZpY2VHZXRSZXNwb25zZSIAEncKCFJlZ2lzdGVyEjMubnVudGlvLnVzZXJzLnYxYWxwaGExLlB1YmxpY1NlcnZpY2VSZWdpc3RlclJlcXVlc3QaNC5udW50aW8udXNlcnMudjFhbHBoYTEuUHVibGljU2VydmljZVJlZ2lzdGVyUmVzcG9uc2UiABKhAQoWU2VuZFJlc2V0UGFzc3dvcmRFbWFpbBJBLm51bnRpby51c2Vycy52MWFscGhhMS5QdWJsaWNTZXJ2aWNlU2VuZFJlc2V0UGFzc3dvcmRFbWFpbFJlcXVlc3QaQi5udW50aW8udXNlcnMudjFhbHBoYTEuUHVibGljU2VydmljZVNlbmRSZXNldFBhc3N3b3JkRW1haWxSZXNwb25zZSIAEp4BChVTZW5kUmVzZXRQYXNzd29yZFRleHQSQC5udW50aW8udXNlcnMudjFhbHBoYTEuUHVibGljU2VydmljZVNlbmRSZXNldFBhc3N3b3JkVGV4dFJlcXVlc3QaQS5udW50aW8udXNlcnMudjFhbHBoYTEuUHVibGljU2VydmljZVNlbmRSZXNldFBhc3N3b3JkVGV4dFJlc3BvbnNlIgAShgEKDVJlc2V0UGFzc3dvcmQSOC5udW50aW8udXNlcnMudjFhbHBoYTEuUHVibGljU2VydmljZVJlc2V0UGFzc3dvcmRSZXF1ZXN0GjkubnVudGlvLnVzZXJzLnYxYWxwaGExLlB1YmxpY1NlcnZpY2VSZXNldFBhc3N3b3JkUmVzcG9uc2UiABJxCgZEZWxldGUSMS5udW50aW8udXNlcnMudjFhbHBoYTEuUHVibGljU2VydmljZURlbGV0ZVJlcXVlc3QaMi5udW50aW8udXNlcnMudjFhbHBoYTEuUHVibGljU2VydmljZURlbGV0ZVJlc3BvbnNlIgASgwEKDFJlZnJlc2hUb2tlbhI3Lm51bnRpby51c2Vycy52MWFscGhhMS5QdWJsaWNTZXJ2aWNlUmVmcmVzaFRva2VuUmVxdWVzdBo4Lm51bnRpby51c2Vycy52MWFscGhhMS5QdWJsaWNTZXJ2aWNlUmVmcmVzaFRva2VuUmVzcG9uc2UiABKJAQoOSW5pdGlhbGl6ZUF1dGgSOS5udW50aW8udXNlcnMudjFhbHBoYTEuUHVibGljU2VydmljZUluaXRpYWxpemVBdXRoUmVxdWVzdBo6Lm51bnRpby51c2Vycy52MWFscGhhMS5QdWJsaWNTZXJ2aWNlSW5pdGlhbGl6ZUF1dGhSZXNwb25zZSIA');
+final $typed_data.Uint8List publicServiceDescriptor = $convert.base64Decode('Cg1QdWJsaWNTZXJ2aWNlEmsKBFBpbmcSLy5udW50aW8udXNlcnMudjFhbHBoYTEuUHVibGljU2VydmljZVBpbmdSZXF1ZXN0GjAubnVudGlvLnVzZXJzLnYxYWxwaGExLlB1YmxpY1NlcnZpY2VQaW5nUmVzcG9uc2UiABJuCgVMb2dpbhIwLm51bnRpby51c2Vycy52MWFscGhhMS5QdWJsaWNTZXJ2aWNlTG9naW5SZXF1ZXN0GjEubnVudGlvLnVzZXJzLnYxYWxwaGExLlB1YmxpY1NlcnZpY2VMb2dpblJlc3BvbnNlIgAScQoGTG9nb3V0EjEubnVudGlvLnVzZXJzLnYxYWxwaGExLlB1YmxpY1NlcnZpY2VMb2dvdXRSZXF1ZXN0GjIubnVudGlvLnVzZXJzLnYxYWxwaGExLlB1YmxpY1NlcnZpY2VMb2dvdXRSZXNwb25zZSIAEmgKA0dldBIuLm51bnRpby51c2Vycy52MWFscGhhMS5QdWJsaWNTZXJ2aWNlR2V0UmVxdWVzdBovLm51bnRpby51c2Vycy52MWFscGhhMS5QdWJsaWNTZXJ2aWNlR2V0UmVzcG9uc2UiABJ3CghSZWdpc3RlchIzLm51bnRpby51c2Vycy52MWFscGhhMS5QdWJsaWNTZXJ2aWNlUmVnaXN0ZXJSZXF1ZXN0GjQubnVudGlvLnVzZXJzLnYxYWxwaGExLlB1YmxpY1NlcnZpY2VSZWdpc3RlclJlc3BvbnNlIgASoQEKFlNlbmRSZXNldFBhc3N3b3JkRW1haWwSQS5udW50aW8udXNlcnMudjFhbHBoYTEuUHVibGljU2VydmljZVNlbmRSZXNldFBhc3N3b3JkRW1haWxSZXF1ZXN0GkIubnVudGlvLnVzZXJzLnYxYWxwaGExLlB1YmxpY1NlcnZpY2VTZW5kUmVzZXRQYXNzd29yZEVtYWlsUmVzcG9uc2UiABKeAQoVU2VuZFJlc2V0UGFzc3dvcmRUZXh0EkAubnVudGlvLnVzZXJzLnYxYWxwaGExLlB1YmxpY1NlcnZpY2VTZW5kUmVzZXRQYXNzd29yZFRleHRSZXF1ZXN0GkEubnVudGlvLnVzZXJzLnYxYWxwaGExLlB1YmxpY1NlcnZpY2VTZW5kUmVzZXRQYXNzd29yZFRleHRSZXNwb25zZSIAEoYBCg1SZXNldFBhc3N3b3JkEjgubnVudGlvLnVzZXJzLnYxYWxwaGExLlB1YmxpY1NlcnZpY2VSZXNldFBhc3N3b3JkUmVxdWVzdBo5Lm51bnRpby51c2Vycy52MWFscGhhMS5QdWJsaWNTZXJ2aWNlUmVzZXRQYXNzd29yZFJlc3BvbnNlIgAScQoGRGVsZXRlEjEubnVudGlvLnVzZXJzLnYxYWxwaGExLlB1YmxpY1NlcnZpY2VEZWxldGVSZXF1ZXN0GjIubnVudGlvLnVzZXJzLnYxYWxwaGExLlB1YmxpY1NlcnZpY2VEZWxldGVSZXNwb25zZSIAEoMBCgxSZWZyZXNoVG9rZW4SNy5udW50aW8udXNlcnMudjFhbHBoYTEuUHVibGljU2VydmljZVJlZnJlc2hUb2tlblJlcXVlc3QaOC5udW50aW8udXNlcnMudjFhbHBoYTEuUHVibGljU2VydmljZVJlZnJlc2hUb2tlblJlc3BvbnNlIgASiQEKDkluaXRpYWxpemVBdXRoEjkubnVudGlvLnVzZXJzLnYxYWxwaGExLlB1YmxpY1NlcnZpY2VJbml0aWFsaXplQXV0aFJlcXVlc3QaOi5udW50aW8udXNlcnMudjFhbHBoYTEuUHVibGljU2VydmljZUluaXRpYWxpemVBdXRoUmVzcG9uc2UiAA==');
